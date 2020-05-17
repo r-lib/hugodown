@@ -20,4 +20,11 @@ Imports:
     processx,
     rematch2,
     yaml,
-    fs
+    fs,
+    cli,
+    callr,
+    rmarkdown,
+    withr
+Suggests: 
+    testthat,
+    DiagrammeR

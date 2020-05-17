@@ -35,22 +35,4 @@ site_rmd <- function(path, hours = NULL, needs_rebuild = FALSE) {
   rmd
 }
 
-rmd_output <- function(path) {
-  ext_exists <- function(path, ext) file_exists(path_ext_set(path, ext))
 
-  out_ext <- rep(NA, length(path))
-
-  # In blogdown, Rmd's are converted to html and Rmarkdown to markdown
-  # most hugodown sites will have started as blogdown, so we don't want to
-  # touch existing directories
-  has_html <- ext_exists(path, "html")
-  out_ext[is.na(out_ext) & has_html] <- "html"
-
-  has_markdown <- ext_exists(path, "markdown")
-  out_ext[is.na(out_ext) & has_markdown] <- "markdown"
-
-  # In hugodown, everything converted to .md
-  out_ext[is.na(out_ext)] <- "md"
-
-  path_ext_set(path, out_ext)
-}
