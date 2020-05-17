@@ -18,4 +18,6 @@ RoxygenNote: 7.1.0
 Imports: 
     rlang,
     processx,
-    rematch2
+    rematch2,
+    yaml,
+    fs
