@@ -6,9 +6,9 @@
 \alias{hugodown-package}
 \title{hugodown: Make websites with hugo and RMarkdown}
 \description{
-hugodown is a minimal version of blogdown that only supports hugo, 
-  and more clearly delineates the roles of RMarkdown (turning .Rmd into .md) and 
-  hugo (turning .md into .html).
+hugodown is a minimal version of blogdown that
+    only supports hugo, and more clearly delineates the roles of RMarkdown
+    (turning .Rmd into .md) and hugo (turning .md into .html).
 }
 \author{
 \strong{Maintainer}: Hadley Wickham \email{hadley@rstudio.com}
