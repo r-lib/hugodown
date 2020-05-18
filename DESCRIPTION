@@ -1,5 +1,5 @@
 Package: hugodown
-Title: What the Package Does (One Line, Title Case)
+Title: Make websites with hugo and RMarkdown
 Version: 0.0.0.9000
 Authors@R: 
     c(person(given = "Hadley",
@@ -8,7 +8,9 @@ Authors@R:
              email = "hadley@rstudio.com"),
       person(given = "RStudio",
              role = "cph"))
-Description: What the package does (one paragraph).
+Description: hugodown is a minimal version of blogdown that only supports hugo, 
+  and more clearly delineates the roles of RMarkdown (turning .Rmd into .md) and 
+  hugo (turning .md into .html).
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

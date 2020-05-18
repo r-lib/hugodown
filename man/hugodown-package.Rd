@@ -4,9 +4,11 @@
 \name{hugodown-package}
 \alias{hugodown}
 \alias{hugodown-package}
-\title{hugodown: What the Package Does (One Line, Title Case)}
+\title{hugodown: Make websites with hugo and RMarkdown}
 \description{
-What the package does (one paragraph).
+hugodown is a minimal version of blogdown that only supports hugo, 
+  and more clearly delineates the roles of RMarkdown (turning .Rmd into .md) and 
+  hugo (turning .md into .html).
 }
 \author{
 \strong{Maintainer}: Hadley Wickham \email{hadley@rstudio.com}
