@@ -23,7 +23,9 @@ Imports:
     rlang,
     rmarkdown,
     withr,
-    yaml
+    yaml,
+    later,
+    rstudioapi
 Suggests: 
     DiagrammeR,
     testthat
