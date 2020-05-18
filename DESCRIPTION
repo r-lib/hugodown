@@ -25,7 +25,9 @@ Imports:
     cli,
     callr,
     rmarkdown,
-    withr
+    withr,
+    brio,
+    htmltools
 Suggests: 
     testthat,
     DiagrammeR
