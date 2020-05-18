@@ -10,6 +10,14 @@ hugodown is a minimal version of blogdown that
     only supports hugo, and more clearly delineates the roles of RMarkdown
     (turning .Rmd into .md) and hugo (turning .md into .html).
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/r-lib/hugodown}
+  \item Report bugs at \url{https://github.com/r-lib/hugodown/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Hadley Wickham \email{hadley@rstudio.com}
 
