@@ -42,21 +42,15 @@ rmd_build <- function(path, config = list(), quiet = FALSE) {
   local <- lapply(deps, htmltools::copyDependencyToDir, outputDir = base)
   local <- lapply(local, htmltools::makeDependencyRelative, base)
 
-  meta <- rmd_meta(path)
+  yaml <- rmd_yaml(path)
   if (length(local) > 0) {
     deps <- strsplit(htmltools::renderDependencies(local), "\n")[[1]]
-    yaml_deps <- list(html_dependencies = deps)
-
-    if (is.null(meta)) {
-      meta <- c("---", yaml::as.yaml(yaml_deps), "---")
-    } else {
-      n <- length(meta)
-      meta <- c(meta[-n], yaml::as.yaml(yaml_deps), meta[n])
-    }
+    yaml$html_dependencies <- deps
   }
 
-  if (!is.null(meta)) {
-    output_lines <- c(meta, "", brio::read_lines(pandoc_path))
+  if (!is.null(yaml)) {
+    meta <- yaml::as.yaml(yaml)
+    output_lines <- c("---", meta, "---", "", brio::read_lines(pandoc_path))
     brio::write_lines(output_lines, pandoc_path)
   }
 
@@ -83,9 +77,8 @@ rmd_format <- function(path, config = list()) {
   rmarkdown::output_format(knitr, pandoc)
 }
 
-rmd_meta <- function(path) {
-  input_lines <- brio::read_lines(path)
-  rmarkdown:::partition_yaml_front_matter(input_lines)$front_matter
+rmd_yaml <- function(path) {
+  rmarkdown::yaml_front_matter(path)
 }
 
 rmd_output <- function(path) {

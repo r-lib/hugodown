@@ -20,7 +20,7 @@ test_that("yaml header is preserved", {
   rmd <- local_rmd(test_path("meta.Rmd"))
   out <- rmd_build(rmd, quiet = TRUE)
 
-  expect_equal(rmd_meta(rmd), rmd_meta(out))
+  expect_equal(rmd_yaml(rmd), rmd_yaml(out))
 })
 
 test_that("html dependencies are captured", {
@@ -32,6 +32,7 @@ test_that("html dependencies are captured", {
   expect_true(dir_exists(widget_js))
 
   # And written in yaml metadata
-  expect_true("html_dependencies:" %in% rmd_meta(out))
+  yaml <- rmd_yaml(out)
+  expect_type(yaml$html_dependencies, "character")
+  expect_true(length(yaml$html_dependencies) > 1)
 })
-
