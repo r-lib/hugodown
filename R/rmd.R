@@ -53,6 +53,17 @@ rmd_build <- function(path, config = list(), quiet = FALSE) {
   output_lines <- c("---", meta, "---", "", brio::read_lines(pandoc_path))
   brio::write_lines(output_lines, pandoc_path)
 
+  if (!port_active(1313)) {
+    temp <- file_temp(ext = "html")
+    rmarkdown::pandoc_convert(
+      input = pandoc_path,
+      output = temp,
+      from = goldmark_format(),
+      to = "html"
+    )
+    message("\nOutput created: ", temp)
+  }
+
   pandoc_path
 }
 
