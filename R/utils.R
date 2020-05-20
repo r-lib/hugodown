@@ -25,3 +25,7 @@ active_file <- function(ext = NULL) {
 
   path
 }
+
+active_site <- function() {
+  site_root(active_file())
+}

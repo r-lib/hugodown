@@ -1,9 +1,16 @@
-site_config <- function(path) {
-  config <- path(path, "config.yml")
-  if (!file_exists(config)) {
-    abort("Can't find 'config.yml'")
+site_root <- function(path) {
+  while (!identical(path, path_dir(path))) {
+    path <- path_dir(path)
+    if (file_exists(path(path, "config.yml"))) {
+      return(path)
+    }
   }
 
+  abort("Can't find 'config.yml'")
+}
+
+site_config <- function(path) {
+  config <- path(site_root(path), "config.yml")
   yaml::read_yaml(config)
 }
 
