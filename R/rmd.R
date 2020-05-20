@@ -47,12 +47,11 @@ rmd_build <- function(path, config = list(), quiet = FALSE) {
     deps <- strsplit(htmltools::renderDependencies(local), "\n")[[1]]
     yaml$html_dependencies <- deps
   }
+  yaml$rmd_hash <- digest::digest(path, file = TRUE, algo = "xxhash64")
 
-  if (!is.null(yaml)) {
-    meta <- yaml::as.yaml(yaml)
-    output_lines <- c("---", meta, "---", "", brio::read_lines(pandoc_path))
-    brio::write_lines(output_lines, pandoc_path)
-  }
+  meta <- yaml::as.yaml(yaml)
+  output_lines <- c("---", meta, "---", "", brio::read_lines(pandoc_path))
+  brio::write_lines(output_lines, pandoc_path)
 
   pandoc_path
 }

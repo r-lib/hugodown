@@ -16,11 +16,14 @@ test_that("figures placed in figs/ directory", {
   expect_equal(length(dir_ls(figs)), 1L)
 })
 
-test_that("yaml header is preserved", {
+test_that("hash added to yaml header", {
   rmd <- local_rmd(test_path("meta.Rmd"))
   out <- rmd_build(rmd, quiet = TRUE)
 
-  expect_equal(rmd_yaml(rmd), rmd_yaml(out))
+  yaml <- rmd_yaml(rmd)
+  yaml$rmd_hash <- "03460a473ef14304"
+
+  expect_equal(rmd_yaml(out), yaml)
 })
 
 test_that("html dependencies are captured", {
