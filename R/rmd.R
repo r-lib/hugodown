@@ -33,7 +33,7 @@ rmd_build <- function(path, config = list(), quiet = FALSE) {
     input = path_abs(knit_path),
     output = path_rel(pandoc_path, base),
     from = format$pandoc$from,
-    to = "gfm"
+    to = goldmark_format()
   )
 
   # Capture dependencies, remove duplicates, save to directory, and render
@@ -101,3 +101,18 @@ rmd_output <- function(path) {
   path_ext_set(path, out_ext)
 }
 
+# https://github.com/rstudio/rstudio/blob/master/src/gwt/panmirror/src/editor/src/api/pandoc_format.ts#L335-L359
+goldmark_format <- function() {
+  paste(
+    "markdown_strict",
+    "pipe_tables",
+    "strikeout",
+    "autolink_bare_uris",
+    "task_lists",
+    "backtick_code_blocks",
+    "definition_lists",
+    "footnotes",
+    "smart",
+    sep = "+"
+  )
+}
