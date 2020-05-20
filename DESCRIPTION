@@ -25,7 +25,9 @@ Imports:
     withr,
     yaml,
     later,
-    rstudioapi
+    rstudioapi,
+    purrr,
+    usethis
 Suggests: 
     DiagrammeR,
     testthat
