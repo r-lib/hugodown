@@ -21,7 +21,7 @@ site_check <- function(path) {
     abort("`markup.defaultMarkdownHandler` must be 'goldmark'")
   }
 
-  if (!identical(config$markup$goldmark$renderer$unsafe, true)) {
+  if (!identical(config$markup$goldmark$renderer$unsafe, TRUE)) {
     abort("`markup.goldmark.rendered.unsafe` must be 'true'")
   }
 
