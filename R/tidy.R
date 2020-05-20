@@ -28,3 +28,24 @@ tidy_thumbnails <- function(path = NULL) {
 
   invisible()
 }
+
+tidy_pleased <- function() {
+  phrases <- tibble::tribble(
+    ~word, ~modifiers,
+    "chuffed",      c(""),
+    "pleased",      c("", "most", "very", "extremely", "well"),
+    "stoked",       c(""),
+    "chuffed",      c("", "very"),
+    "happy",        c("", "so", "very", "exceedingly"),
+    "thrilled",     c(""),
+    "delighted",    c(""),
+    "tickled pink", c(""),
+  )
+
+  i <- sample(nrow(phrases), 1)
+
+  word <- phrases$word[[i]]
+  modifier <- sample(phrases$modifiers[[i]], 1)
+
+  paste0(modifier, if (modifier != "") " ", word)
+}
