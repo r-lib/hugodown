@@ -22,18 +22,27 @@ server_start <- function(path, auto_navigate = TRUE) {
 
   # Swallow initial text
   init <- ""
-  repeat {
+  now <- proc.time()[[3]]
+  ok <- FALSE
+
+  while (proc.time()[[3]] - now < 5) {
     ps$poll_io(250)
     init <- paste0(init, ps$read_output())
 
     if (grepl("already in use", init, fixed = TRUE)) {
-      ps$kill()
-      abort("Port already in use")
+      break
     }
 
     if (grepl("Ctrl+C", init, fixed = TRUE)) {
+      ok <- TRUE
       break
     }
+  }
+
+  if (!ok) {
+    ps$kill()
+    cat(init)
+    abort("Failed to start blogdown")
   }
 
   # Ensure output pipe doesn't get swamped
@@ -63,10 +72,6 @@ server_view <- function() {
   }
 }
 
-server_running <- function() {
-  env_has(hugodown, "server") && hugodown$server$is_alive()
-}
-
 server_stop <- function() {
   if (!server_running()) {
     return(invisible())
@@ -77,4 +82,8 @@ server_stop <- function() {
   hugodown$server$kill()
   env_unbind(hugodown, "server")
   invisible()
+}
+
+server_running <- function() {
+  env_has(hugodown, "server") && hugodown$server$is_alive()
 }
