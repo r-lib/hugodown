@@ -19,8 +19,9 @@ tags: []
 TODO:
 * [ ] Pick category and tags (see existing with `post_tags()`)
 * [ ] Find photo & update yaml metadata
-* [ ] Create 300 x 300 `thumb-sq.jpg`
-* [ ] Create 200 x >1000 `thumb-wd.jpg`
+* [ ] Create `thumbnail-sq.jpg`; height and width should be equal
+* [ ] Create `thumbnail-wd.jpg`; width should be >5x height
+* [ ] `hugodown::tidy_thumbnail()`
 * [ ] `use_tidy_thanks("{{ github_org }}/{{ package }}")`
 -->
 

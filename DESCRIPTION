@@ -27,7 +27,8 @@ Imports:
     later,
     rstudioapi,
     purrr,
-    usethis
+    usethis,
+    magick
 Suggests: 
     DiagrammeR,
     testthat
