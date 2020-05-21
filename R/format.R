@@ -6,7 +6,7 @@
 #' get in the way of hugo's full-site preview when it is.
 #'
 #' @export
-#' @inheritParams rmarkdown::github_document
+#' @inheritParams rmarkdown::md_document
 #' @param fig_width Figure width (in inches).
 #' @param fig_asp Figure aspect ratio, defaults to the golden ratio.
 #' @param tidyverse_style Use tidyverse knitr conventions? This sets
