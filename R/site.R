@@ -2,6 +2,9 @@ site_root <- function(path = ".") {
   path <- path_abs(path)
 
   while (!identical(path, path_dir(path))) {
+    if (file_exists(path(path, "config.yaml"))) {
+      return(path)
+    }
     if (file_exists(path(path, "config.yml"))) {
       return(path)
     }
