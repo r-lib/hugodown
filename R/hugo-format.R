@@ -42,6 +42,11 @@ hugo_document <- function(fig_width = 7,
     ext = ".md"
   )
 
+  input_rmd <- NULL
+  pre_knit <- function(input, ...) {
+    input_rmd <<- input
+  }
+
   hack_always_allow_html <- function(...) {
     # This truly awful hack ensures that rmarkdown doesn't tell us we're
     # producing HTML widgets
@@ -65,7 +70,7 @@ hugo_document <- function(fig_width = 7,
       yaml$tags <- as.list(yaml$tags)
       yaml$categories <- as.list(yaml$categories)
     }
-    yaml$rmd_hash <- digest::digest(input_file, file = TRUE, algo = "xxhash64")
+    yaml$rmd_hash <- rmd_hash(input_rmd)
 
     if (length(knit_meta) > 0) {
       # Capture dependencies, remove duplicates, save to directory, and render
@@ -107,6 +112,7 @@ hugo_document <- function(fig_width = 7,
     pandoc = pandoc,
     pre_processor = preprocess,
     post_processor = postprocess,
+    pre_knit = pre_knit,
     post_knit = hack_always_allow_html,
   )
 }

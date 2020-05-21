@@ -19,7 +19,7 @@ test_that("hash added to yaml header", {
   out <- path(path_dir(rmd), "meta.md")
 
   yaml <- rmarkdown::yaml_front_matter(rmd)
-  yaml$rmd_hash <- "830128b82cad99ab"
+  yaml$rmd_hash <- rmd_hash(rmd)
 
   expect_equal(rmarkdown::yaml_front_matter(out), yaml)
 })

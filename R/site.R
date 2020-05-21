@@ -33,40 +33,37 @@ site_check <- function(path) {
   invisible()
 }
 
-site_rmd <- function(path, hours = NULL, needs_rebuild = FALSE) {
-  rmd <- dir_ls(path(path, "content"), recurse = TRUE, regexp = "\\.(Rmd|Rmarkdown)$")
+site_rmd <- function(path = ".", needs_render = FALSE) {
+  path <- site_root(path)
+  rmd <- dir_ls(path(path, "content"), recurse = TRUE, regexp = "\\.Rmd$")
 
-  if (!is.null(hours)) {
-    recent <- file_mtime(rmd) > (Sys.time() - hours * 3600)
-    rmd <- rmd[recent]
-  }
-
-  if (needs_rebuild) {
-    out <- rmd_output(rmd)
-
-    outdated <- file_mtime(out) < file_mtime(rmd)
-    rmd <- rmd[is.na(outdated) | outdated]
+  if (needs_render) {
+    rmd <- rmd[vapply(rmd, rmd_needs_render, logical(1))]
   }
 
   rmd
 }
 
-rmd_output <- function(path) {
-  ext_exists <- function(path, ext) file_exists(path_ext_set(path, ext))
+rmd_needs_render <- function(path) {
+  # Has .html, so must've been rendered by blogdown
+  if (file_exists(path_ext_set(path, "html"))) {
+    return(FALSE)
+  }
 
-  out_ext <- rep(NA, length(path))
+  md_path <- path_ext_set(path, "md")
+  if (!file_exists(md_path)) {
+    return(TRUE)
+  }
 
-  # In blogdown, Rmd's are converted to html and Rmarkdown to markdown
-  # most hugodown sites will have started as blogdown, so we don't want to
-  # touch existing directories
-  has_html <- ext_exists(path, "html")
-  out_ext[is.na(out_ext) & has_html] <- "html"
+  yaml <- rmarkdown::yaml_front_matter(md_path)
+  hash <- yaml$rmd_hash
+  if (is.null(hash)) {
+    return(FALSE)
+  }
 
-  has_markdown <- ext_exists(path, "markdown")
-  out_ext[is.na(out_ext) & has_markdown] <- "markdown"
+  hash != rmd_hash(path)
+}
 
-  # In hugodown, everything converted to .md
-  out_ext[is.na(out_ext)] <- "md"
-
-  path_ext_set(path, out_ext)
+rmd_hash <- function(path) {
+  digest::digest(path, file = TRUE, algo = "xxhash64")
 }
