@@ -1,4 +1,20 @@
-server_start <- function(path = ".", auto_navigate = TRUE) {
+#' Manage the hugo server
+#'
+#' @description
+#' `server_start()` starts a hugo server that will automatically re-generate
+#' the site whenever the input changes. You only need to execute this once
+#' per session; it continues to run in the background as you work on the site.
+#'
+#' `server_stop()` kills the server. This happens automatically when you exit
+#' R so you shouldn't normally need to run this.
+#'
+#' `server_browse()` opens the site in the RStudio viewer or your web browser.
+#' @export
+#' @param path Path to hugo site.
+#' @param auto_navigate Automatically navigate to the most recently changed
+#'   page?
+#' @param browse Automatically preview the site after the server starts?
+server_start <- function(path = ".", auto_navigate = TRUE, browse = TRUE) {
   path <- site_root(path)
   server_stop()
 
@@ -62,19 +78,15 @@ server_start <- function(path = ".", auto_navigate = TRUE) {
   poll_process()
 
   hugodown$server <- ps
-  server_view()
+  if (browse) {
+    server_browse()
+  }
 
   invisible(ps)
 }
 
-server_view <- function() {
-  if (rstudioapi::hasFun("viewer")) {
-    rstudioapi::viewer("http://localhost:1313")
-  } else {
-    utils::browseURL("http://localhost:1313")
-  }
-}
-
+#' @rdname server_start
+#' @export
 server_stop <- function() {
   if (!server_running()) {
     return(invisible())
@@ -85,6 +97,16 @@ server_stop <- function() {
   hugodown$server$kill()
   env_unbind(hugodown, "server")
   invisible()
+}
+
+#' @rdname server_start
+#' @export
+server_browse <- function() {
+  if (rstudioapi::hasFun("viewer")) {
+    rstudioapi::viewer("http://localhost:1313")
+  } else {
+    utils::browseURL("http://localhost:1313")
+  }
 }
 
 server_running <- function() {
