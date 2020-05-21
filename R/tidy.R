@@ -1,3 +1,21 @@
+tidy_post_create <- function(slug, site = ".") {
+  check_slug(slug)
+
+  post_slug <- paste0("blog/", strftime(Sys.Date(), "%Y-%m"), "-", tolower(slug))
+  data <- list(
+    title = unslug(slug),
+    pleased = tidy_pleased()
+  )
+
+  pieces <- strsplit(slug, "-")[[1]]
+  if (is_installed(pieces[[1]])) {
+    data$package <- package
+    data$version <- packageVersion(package)
+  }
+
+  post_create(post_slug, data = data, site = site)
+}
+
 tidy_thumbnails <- function(path = NULL) {
   path <- path %||% path_dir(active_file())
 
@@ -49,3 +67,24 @@ tidy_pleased <- function() {
 
   paste0(modifier, if (modifier != "") " ", word)
 }
+
+
+# helpers -----------------------------------------------------------------
+
+check_slug <- function(slug) {
+  if (!is.character(slug) || length(slug) != 1) {
+    abort("`slug` must be a single string")
+  }
+
+  if (grepl(" ", slug)) {
+    abort(c(
+      "`slug` must not contain any spaces",
+      i = "Separate words with -"
+    ))
+  }
+}
+
+unslug <- function(x) {
+  gsub("-", " ", x)
+}
+

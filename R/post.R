@@ -1,22 +1,37 @@
-post_create <- function(slug, date = Sys.Date()) {
-  check_slug(slug)
+post_create <- function(path, kind = NULL, data = list(), site = ".") {
+  site <- site_root()
 
-  post_slug <- paste0(strftime(Sys.Date(), "%Y-%m"), "-", tolower(slug))
-  post_dir <- path("content", "blog", post_slug)
-  dir_create(post_dir)
+  tld <- path_dir(path)
+  if (!dir_exists(path(site, "content", tld))) {
+    abort(paste0("Can't no '", tld, "' directory in 'content/'"))
+  }
 
-  data <- list(
+  dest <- path(site, "content", path)
+  if (file_exists(dest)) {
+    abort(paste0("`path` already exists"))
+  }
+
+  hugo_run(c(
+    "new", path,
+    if (!is.null(kind)) c("--kind", kind)
+  ))
+
+  rmds <- dir_ls(dest, glob = "*.Rmd")
+  defaults <- list(
     author = find_name(),
-    date = strftime(date, "%Y-%m-%d"),
-    title = unslug(slug)
+    date = strftime(Sys.Date(), "%Y-%m-%d")
   )
-  usethis::use_template(
-    "post.Rmd",
-    package = "hugodown",
-    save_as = path(post_dir, "index.Rmd"),
-    open = TRUE
-  )
-  invisible(TRUE)
+  data <- utils::modifyList(defaults, data)
+
+  lapply(rmds, rmd_template, data)
+
+  invisible(dest)
+}
+
+rmd_template <- function(path, data) {
+  file <- brio::read_file(path)
+  out <- whisker::whisker.render(file, data)
+  brio::write_lines(out, path)
 }
 
 post_tags <- function(path = ".", min = 1) {
@@ -38,23 +53,6 @@ post_categories <- function(path = ".", min = 1) {
 }
 
 # Helpers -----------------------------------------------------------------
-
-check_slug <- function(slug) {
-  if (!is.character(slug) || length(slug) != 1) {
-    abort("`slug` must be a single string")
-  }
-
-  if (grepl(" ", slug)) {
-    abort(c(
-      "`slug` must not contain any spaces",
-      i = "Separate words with -"
-    ))
-  }
-}
-
-unslug <- function(x) {
-  gsub("-", " ", x)
-}
 
 find_name <- function() {
   getOption("usethis.full_name") %||% getOption("devtools.name") %||% "Your name"
