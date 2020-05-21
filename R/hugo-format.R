@@ -129,6 +129,7 @@ goldmark_format <- function() {
     "definition_lists",
     "footnotes",
     "smart",
+    "tex_math_dollars",
     sep = "+"
   )
 }
