@@ -1,4 +1,5 @@
-server_start <- function(path, auto_navigate = TRUE) {
+server_start <- function(path = ".", auto_navigate = TRUE) {
+  path <- site_root(path)
   server_stop()
 
   port <- 1313L
@@ -61,6 +62,8 @@ server_start <- function(path, auto_navigate = TRUE) {
   poll_process()
 
   hugodown$server <- ps
+  server_view()
+
   invisible(ps)
 }
 
