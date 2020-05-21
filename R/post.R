@@ -42,6 +42,9 @@ post_create <- function(path, kind = NULL, data = list(), site = ".") {
 
   lapply(rmds, rmd_template, data)
 
+  index <- dir_ls(dest, pattern = "index")
+  usethis::edit_file(index)
+
   invisible(dest)
 }
 

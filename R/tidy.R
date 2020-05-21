@@ -1,3 +1,13 @@
+#' Various helpers for tidyverse.org and similar sites
+#'
+#' * `tidy_post_create()` makes a new post
+#' * `tidy_thumbnails()` resizes thumbnails to the correct size
+#' * `tidy_show_meta()` prints tags and categories used by existing posts.
+#'
+#' @export
+#' @param slug File name of new post. Year and month will be automatically
+#'   appended.
+#' @param site Path to hugo site
 tidy_post_create <- function(slug, site = ".") {
   check_slug(slug)
 
@@ -6,16 +16,18 @@ tidy_post_create <- function(slug, site = ".") {
     title = unslug(slug),
     pleased = tidy_pleased()
   )
-
   pieces <- strsplit(slug, "-")[[1]]
   if (is_installed(pieces[[1]])) {
-    data$package <- package
-    data$version <- packageVersion(package)
+    data$package <- pieces[[1]]
+    data$version <- utils::packageVersion(pieces[[1]])
   }
 
   post_create(post_slug, data = data, site = site)
 }
 
+#' @rdname tidy_post_create
+#' @export
+#' @param path Path to blog post
 tidy_thumbnails <- function(path = NULL) {
   path <- path %||% path_dir(active_file())
 
@@ -47,6 +59,62 @@ tidy_thumbnails <- function(path = NULL) {
   invisible()
 }
 
+#' @rdname tidy_post_create
+#' @export
+#' @param min Minimum number of uses
+tidy_show_meta <- function(min = 1, site = ".") {
+  site <- site_root(site)
+  rmd <- dir_ls(path(site, "content"), recurse = TRUE, regexp = "\\.(Rmd|Rmarkdown)$")
+
+  yaml <- purrr::map(rmd, rmarkdown::yaml_front_matter)
+
+  tags <- unlist(purrr::map(yaml, "tags"), use.names = FALSE)
+  tags_df <- as.data.frame(table(tags), responseName = "n")
+  tags_df <- tags_df[tags_df$n > min, , drop = FALSE]
+
+  cats <- unlist(purrr::map(yaml, "categories"), use.names = FALSE)
+  cats_df <- as.data.frame(table(cats), responseName = "n")
+  cats_df <- cats_df[cats_df$n > min, , drop = FALSE]
+
+  cli::cli_h2("Categories")
+  cli::cli_li(paste0(cats_df$cats, cli::col_grey(" (", cats_df$n, ")")))
+  cli::cli_end()
+
+  cli::cli_h2("Tags")
+  cli::cli_li(paste0(tags_df$tags, cli::col_grey(" (", tags_df$n, ")")))
+  cli::cli_end()
+
+  invisible()
+}
+
+
+# helpers -----------------------------------------------------------------
+
+check_slug <- function(slug) {
+  if (!is.character(slug) || length(slug) != 1) {
+    abort("`slug` must be a single string")
+  }
+
+  if (grepl(" ", slug)) {
+    abort(c(
+      "`slug` must not contain any spaces",
+      i = "Separate words with -"
+    ))
+  }
+
+  if (grepl("\\.", slug)) {
+    abort(c(
+      "`slug` must not contain any .",
+      i = "Separate words with -"
+    ))
+  }
+
+}
+
+unslug <- function(x) {
+  gsub("-", " ", x)
+}
+
 tidy_pleased <- function() {
   phrases <- tibble::tribble(
     ~word, ~modifiers,
@@ -67,42 +135,3 @@ tidy_pleased <- function() {
 
   paste0(modifier, if (modifier != "") " ", word)
 }
-
-post_tags <- function(path = ".", min = 1) {
-  md <- site_rmd(path)
-  yaml <- purrr::map(md, rmarkdown::yaml_front_matter)
-  tags <- unlist(purrr::map(yaml, "tags"), use.names = FALSE)
-
-  df <- as.data.frame(table(tags), responseName = "n")
-  df[df$n > min, , drop = FALSE]
-}
-
-post_categories <- function(path = ".", min = 1) {
-  md <- site_rmd(path)
-  yaml <- purrr::map(md, rmarkdown::yaml_front_matter)
-  tags <- unlist(purrr::map(yaml, "categories"), use.names = FALSE)
-
-  df <- as.data.frame(table(tags), responseName = "n")
-  df[df$n > min, , drop = FALSE]
-}
-
-
-# helpers -----------------------------------------------------------------
-
-check_slug <- function(slug) {
-  if (!is.character(slug) || length(slug) != 1) {
-    abort("`slug` must be a single string")
-  }
-
-  if (grepl(" ", slug)) {
-    abort(c(
-      "`slug` must not contain any spaces",
-      i = "Separate words with -"
-    ))
-  }
-}
-
-unslug <- function(x) {
-  gsub("-", " ", x)
-}
-

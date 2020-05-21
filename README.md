@@ -13,6 +13,9 @@ The key to using hugodown is to put `output: hugodown::hugo_document()` in the Y
 
 * `post_create()` will creates a new post (filling in default content from
   the hugo [archetype](https://gohugo.io/content-management/archetypes/)).
+  
+* `site_rmd()` lists all `.Rmd` files that need to be re-rendered (i.e. their
+  corresponding `.md` file is out of date).
 
 ## Installation
 

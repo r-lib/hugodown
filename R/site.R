@@ -36,9 +36,19 @@ site_check <- function(path) {
   invisible()
 }
 
-site_rmd <- function(path = ".", needs_render = FALSE) {
-  path <- site_root(path)
-  rmd <- dir_ls(path(path, "content"), recurse = TRUE, regexp = "\\.Rmd$")
+#' List all `.Rmd`s in a hugo site
+#'
+#' [hugo_document()] adds a hash of the input `.Rmd` in the YAML metdata of
+#' the `.md` file that it creates. This provides a reliable way to determine
+#'
+#'
+#' @param needs_render If set to `TRUE`, will only list `.Rmd`s that
+#'   need to be updated. If `FALSE`, lists all `.Rmds`.
+#' @param site Path to hugo site.
+#' @export
+site_rmd <- function(needs_render = TRUE, site = ".") {
+  site <- site_root(site)
+  rmd <- dir_ls(path(site, "content"), recurse = TRUE, regexp = "\\.Rmd$")
 
   if (needs_render) {
     rmd <- rmd[vapply(rmd, rmd_needs_render, logical(1))]
