@@ -25,17 +25,6 @@ TODO:
 * [ ] `use_tidy_thanks("{{ github_org }}/{{ package }}")`
 -->
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE, 
-  comment = "#>", 
-  fig.width = 7, 
-  fig.align = "center",
-  fig.asp = 0.618, # 1 / phi
-  out.width = "700px"
-)
-```
-
 We're {{ pleased }} to announce the release of [{{ package }}]({{ home }}) {{ version }}. {{ package }} is ... You can install it from CRAN with:
 
 ```{r, eval = FALSE}

@@ -7,19 +7,34 @@
 #'
 #' @export
 #' @inheritParams rmarkdown::github_document
-#' @param fig_width,fig_height Default figure dimensions (in inches).
+#' @param fig_width Figure width (in inches).
+#' @param fig_asp Figure aspect ratio, defaults to the golden ratio.
+#' @param tidyverse_style Use tidyverse knitr conventions? This sets
+#'   `collapse = TRUE`, `comment = "#>`, `fig.align = "center"`, and
+#'   `out.width = "700px"`.
 hugo_document <- function(fig_width = 7,
-                          fig_height = 5,
-                          fig_retina = NULL) {
+                          fig_asp = 0.618,
+                          fig_retina = NULL,
+                          tidyverse_style = TRUE)
+                          {
+
   knitr <- rmarkdown::knitr_options_html(
+    fig_height = NULL,
     fig_width = fig_width,
-    fig_height = fig_height,
     fig_retina = fig_retina,
-    keep_md = TRUE # do I still need this?
+    keep_md = FALSE
   )
+  knitr$opts_chunk$fig.asp <- fig_asp
   knitr$opts_chunk$fig.path <- "figs/"
   # Ensure knitr doesn't turn HTML widgets into pngs
   knitr$opts_chunk$screenshot.force <- FALSE
+
+  if (tidyverse_style) {
+    knitr$opts_chunk$collapse <- TRUE
+    knitr$opts_chunk$comment <- "#>"
+    knitr$opts_chunk$fig.align <- "center"
+    knitr$opts_chunk$out.width <- "700px"
+  }
 
   pandoc <- rmarkdown::pandoc_options(
     to = goldmark_format(),

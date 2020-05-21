@@ -4,10 +4,21 @@
 \alias{hugo_document}
 \title{Convert to Hugo-flavoured markdown}
 \usage{
-hugo_document(fig_width = 7, fig_height = 5, fig_retina = NULL)
+hugo_document(
+  fig_width = 7,
+  fig_asp = 0.618,
+  fig_retina = NULL,
+  tidyverse_style = TRUE
+)
 }
 \arguments{
-\item{fig_width, fig_height}{Default figure dimensions (in inches).}
+\item{fig_width}{Figure width (in inches).}
+
+\item{fig_asp}{Figure aspect ratio, defaults to the golden ratio.}
+
+\item{tidyverse_style}{Use tidyverse knitr conventions? This sets
+\code{collapse = TRUE}, \verb{comment = "#>}, \code{fig.align = "center"}, and
+\code{out.width = "700px"}.}
 }
 \description{
 This RMarkdown output format is designed to generate markdown that is
