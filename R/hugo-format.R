@@ -68,6 +68,8 @@ hugo_document <- function(fig_width = 7,
     # TODO: figure out how to preserve lists in YAML metadata
     if (has_name(yaml, "tags")) {
       yaml$tags <- as.list(yaml$tags)
+    }
+    if (has_name(yaml, "categories")) {
       yaml$categories <- as.list(yaml$categories)
     }
     yaml$rmd_hash <- rmd_hash(input_rmd)
