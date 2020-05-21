@@ -20,7 +20,7 @@ active_file <- function(ext = NULL) {
   path <- rstudioapi::getSourceEditorContext()$path
 
   if (!is.null(ext) && path_ext(path) != ext) {
-    abort(glue::glue("Open file must have extension ({ext})"))
+    abort(paste0("Open file must have extension (", ext, ")"))
   }
 
   path
