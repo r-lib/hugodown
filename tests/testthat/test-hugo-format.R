@@ -13,6 +13,15 @@ test_that("figures placed in figs/ directory", {
   expect_equal(length(dir_ls(figs)), 1L)
 })
 
+test_that("math is untransformed", {
+  rmd <- local_rmd(test_path("math.Rmd"))
+  rmarkdown::render(rmd, quiet = TRUE)
+  out <- path(path_dir(rmd), "math.md")
+
+  lines <- brio::read_lines(out)
+  expect_equal(lines[length(lines)], "$a_1 + b_2$")
+})
+
 test_that("hash added to yaml header", {
   rmd <- local_rmd(test_path("meta.Rmd"))
   rmarkdown::render(rmd, quiet = TRUE)

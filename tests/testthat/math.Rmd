@@ -1,0 +1,5 @@
+---
+output: hugo_document
+---
+
+$a_1 + b_2$
