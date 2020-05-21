@@ -42,20 +42,29 @@ hugo_document <- function(fig_width = 7,
     ext = ".md"
   )
 
+  hack_always_allow_html <- function(...) {
+    # This truly awful hack ensures that rmarkdown doesn't tell us we're
+    # producing HTML widgets
+    render_env <- env_parent(parent.frame())
+    render_env$front_matter$always_allow_html <- TRUE
+    NULL
+  }
+
   knit_meta <- NULL
   output_dir <- NULL
   preprocess <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir) {
     knit_meta <<- knit_meta
     output_dir <<- output_dir
-
     NULL
   }
 
   postprocess <- function(metadata, input_file, output_file, clean, verbose) {
     yaml <- rmd_yaml(input_file)
     # TODO: figure out how to preserve lists in YAML metadata
-    yaml$tags <- as.list(yaml$tags)
-    yaml$categories <- as.list(yaml$categories)
+    if (has_name(yaml, "tags")) {
+      yaml$tags <- as.list(yaml$tags)
+      yaml$categories <- as.list(yaml$categories)
+    }
     yaml$rmd_hash <- digest::digest(input_file, file = TRUE, algo = "xxhash64")
 
     if (length(knit_meta) > 0) {
@@ -97,7 +106,8 @@ hugo_document <- function(fig_width = 7,
     knitr = knitr,
     pandoc = pandoc,
     pre_processor = preprocess,
-    post_processor = postprocess
+    post_processor = postprocess,
+    post_knit = hack_always_allow_html,
   )
 }
 

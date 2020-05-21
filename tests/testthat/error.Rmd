@@ -1,4 +1,8 @@
+---
+output: hugo_document
+---
+
 ```{r}
-stop("Error")
+stop("Failure")
 ```
 

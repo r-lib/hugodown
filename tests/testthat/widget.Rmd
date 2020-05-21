@@ -1,3 +1,7 @@
+---
+output: hugo_document
+---
+
 ```{r}
 library(DiagrammeR)
 grViz("
