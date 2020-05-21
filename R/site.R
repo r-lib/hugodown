@@ -36,24 +36,20 @@ site_check <- function(path) {
   invisible()
 }
 
-#' List all `.Rmd`s in a hugo site
+#' Find `.Rmd`s that need to be re-rendered.
 #'
 #' [hugo_document()] adds a hash of the input `.Rmd` in the YAML metdata of
 #' the `.md` file that it creates. This provides a reliable way to determine
+#' whether or not a `.Rmd` has been changed since the last time the `.md`
+#' was rendered.
 #'
-#'
-#' @param needs_render If set to `TRUE`, will only list `.Rmd`s that
-#'   need to be updated. If `FALSE`, lists all `.Rmds`.
 #' @param site Path to hugo site.
 #' @export
-site_rmd <- function(needs_render = TRUE, site = ".") {
+site_outdated <- function(site = ".") {
   site <- site_root(site)
+
   rmd <- dir_ls(path(site, "content"), recurse = TRUE, regexp = "\\.Rmd$")
-
-  if (needs_render) {
-    rmd <- rmd[vapply(rmd, rmd_needs_render, logical(1))]
-  }
-
+  rmd <- rmd[vapply(rmd, rmd_needs_render, logical(1))]
   rmd
 }
 
