@@ -14,13 +14,3 @@ hugo_version <- function() {
 hugo_run <- function(args, ...) {
   processx::run(hugo_locate(), args = args, ...)
 }
-
-hugo_serve <- function(path, ...) {
-  args <- c(
-    "serve",
-    "--buildFuture",
-    "--watch",
-    "--quiet"
-  )
-  hugo_run(args, ..., wd = path, echo = TRUE)
-}
