@@ -2,9 +2,20 @@
 # hugodown
 
 <!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-The goal of hugodown is to make it easy to use RMarkdown within a [hugo](http://gohugo.io/) website. It's similar to [blogdown](https://bookdown.org/yihui/blogdown/), but is focussed purely on hugo websites, and enforces a stricter partitioning of roles: hugodown is responsible for transforming `.Rmd` to `.md`, and is hugo responsible for transforming `.md` to `.html`.
+hugodown is an experimental package that aims to faciliate the use of [RMarkdown](http://rmarkdown.rstudio.com/) and [hugo](http://gohugo.io/) together. It's similar to [blogdown](https://bookdown.org/yihui/blogdown/), but is focussed purely on Hugo websites, and enforces a stricter partitioning of roles: hugodown is responsible for transforming `.Rmd` to `.md`, and is hugo responsible for transforming `.md` to `.html`.
+
+## Installation
+
+hugodown isn't available from CRAN yet (and might never be), but you can install the development version from GitHub with:
+
+``` r
+devtools::install_github("r-lib/hugodown")
+```
+
+## Usage
 
 The key to using hugodown is to put `output: hugodown::hugo_document()` in the YAML metadata of your `.Rmd` files. Then knitting the file will generate a `.md` file designed to work well with hugo. The rest of hugodown just makes your life a little easier:
 
@@ -17,28 +28,28 @@ The key to using hugodown is to put `output: hugodown::hugo_document()` in the Y
 * `site_outdated()` lists all `.Rmd` files that need to be re-rendered 
   (i.e. they have changed since the last time their `.md` was rendered).
 
-## Installation
-
-hugodown isn't available from CRAN yet, but you can install the development version from GitHub with:
-
-``` r
-devtools::install_github("r-lib/hugodown")
-```
-
 ## Configuration
 
-We recommend using a `config.yaml` (rather than `config.toml` or `config.json`). You must use the goldmark markdown renderer, and we recommend ignoring knitr intermediates:
+hugodown does not work with every possible hugo site. There is some config that we assume:
 
-```yaml
-ignoreFiles: ['\.Rmd$', '_files$', '_cache$', '\.knit\.md$', '\.utf8\.md$']
+*   You must use the goldmark markdown renderer, and set `unsafe: true`
 
-markup:
-  defaultMarkdownHandler: goldmark
-  goldmark:
-    renderer:
-      unsafe: true
-  highlight:
-    style: pygments
-```
+    ```yaml
+    markup:
+      defaultMarkdownHandler: goldmark
+      goldmark:
+        renderer:
+          unsafe: true
+      highlight:
+        style: pygments
+    ```
 
-To use html widgets, you must **TODO**.
+* We recommend ignoring knitr intermediates:
+
+  ```yaml
+  ignoreFiles: ['\.Rmd$', '_files$', '_cache$', '\.knit\.md$', '\.utf8\.md$']
+  ```
+
+* To use html widgets, you must **TODO**.
+
+* To use mathjax, you must **TODO**.
