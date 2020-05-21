@@ -28,7 +28,9 @@ Imports:
     rstudioapi,
     purrr,
     usethis,
-    magick
+    magick,
+    tibble,
+    digest
 Suggests: 
     DiagrammeR,
     testthat
