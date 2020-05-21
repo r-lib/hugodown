@@ -18,6 +18,10 @@ server_start <- function(path = ".", auto_navigate = TRUE, browse = TRUE) {
   path <- site_root(path)
   server_stop()
 
+  if (port_active(1313)) {
+    abort("`hugo` already launched elsewhere.")
+  }
+
   port <- 1313L
   args <- c(
     "server",
@@ -45,10 +49,6 @@ server_start <- function(path = ".", auto_navigate = TRUE, browse = TRUE) {
   while (proc.time()[[3]] - now < 5) {
     ps$poll_io(250)
     init <- paste0(init, ps$read_output())
-
-    if (grepl("already in use", init, fixed = TRUE)) {
-      break
-    }
 
     if (grepl("Ctrl+C", init, fixed = TRUE)) {
       ok <- TRUE
