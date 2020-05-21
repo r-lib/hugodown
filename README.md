@@ -6,6 +6,11 @@
 
 The goal of hugodown is to make it easy to use RMarkdown within a [hugo](http://gohugo.io/) website. It's similar to [blogdown](https://bookdown.org/yihui/blogdown/), but is focussed purely on hugo websites, and enforces a stricter partitioning of roles: hugodown is responsible for transforming `.Rmd` to `.md`, and is hugo responsible for transforming `.md` to `.html`.
 
+The key to using hugodown is to put `output: hugodown::hugo_document()` in the YAML metadata of your `.Rmd` files. Then knitting the file will generate a `.md` file designed to work well with hugo. The rest of hugodown just makes your life a little easier:
+
+* `server_start()` will automatically start a hugo server in the background,
+  automatically preivewing your site as you update it.
+
 ## Installation
 
 hugodown isn't available from CRAN yet, but you can install the development version from GitHub with:
@@ -14,12 +19,20 @@ hugodown isn't available from CRAN yet, but you can install the development vers
 devtools::install_github("r-lib/hugodown")
 ```
 
-## Configuation
+## Configuration
 
-In order to make the implementation of hugodown simpler, it enforces a few restrictions on your hugo site:
+We recommend using a `config.yaml` (rather than `config.toml` or `config.json`). You must use the goldmark markdown renderer, and we recommend ignoring knitr intermediates:
 
-* You must use a yaml config file.
+```yaml
+ignoreFiles: ['\.Rmd$', '_files$', '_cache$', '\.knit\.md$', '\.utf8\.md$']
 
-* You must use the goldmark markdown renderer with `unsafe: true`.
+markup:
+  defaultMarkdownHandler: goldmark
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    style: pygments
+```
 
-* If you want to support html widgets, you must TBA.
+To use html widgets, you must **TODO**.
