@@ -30,7 +30,8 @@ Imports:
     usethis,
     magick,
     tibble,
-    digest
+    digest,
+    whisker
 Suggests: 
     DiagrammeR,
     testthat
