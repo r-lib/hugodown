@@ -18,10 +18,10 @@ test_that("hash added to yaml header", {
   rmarkdown::render(rmd, quiet = TRUE)
   out <- path(path_dir(rmd), "meta.md")
 
-  yaml <- rmd_yaml(rmd)
+  yaml <- rmarkdown::yaml_front_matter(rmd)
   yaml$rmd_hash <- "830128b82cad99ab"
 
-  expect_equal(rmd_yaml(out), yaml)
+  expect_equal(rmarkdown::yaml_front_matter(out), yaml)
 })
 
 test_that("html dependencies are captured", {
@@ -34,7 +34,7 @@ test_that("html dependencies are captured", {
   expect_true(dir_exists(widget_js))
 
   # And written in yaml metadata
-  yaml <- rmd_yaml(out)
+  yaml <- rmarkdown::yaml_front_matter(out)
   expect_type(yaml$html_dependencies, "character")
   expect_true(length(yaml$html_dependencies) > 1)
 })

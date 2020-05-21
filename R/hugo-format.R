@@ -59,7 +59,7 @@ hugo_document <- function(fig_width = 7,
   }
 
   postprocess <- function(metadata, input_file, output_file, clean, verbose) {
-    yaml <- rmd_yaml(input_file)
+    yaml <- rmarkdown::yaml_front_matter(input_file)
     # TODO: figure out how to preserve lists in YAML metadata
     if (has_name(yaml, "tags")) {
       yaml$tags <- as.list(yaml$tags)
@@ -111,6 +111,22 @@ hugo_document <- function(fig_width = 7,
   )
 }
 
+# https://github.com/rstudio/rstudio/blob/master/src/gwt/panmirror/src/editor/src/api/pandoc_format.ts#L335-L359
+goldmark_format <- function() {
+  paste(
+    "markdown_strict",
+    "pipe_tables",
+    "strikeout",
+    "autolink_bare_uris",
+    "task_lists",
+    "backtick_code_blocks",
+    "definition_lists",
+    "footnotes",
+    "smart",
+    sep = "+"
+  )
+}
+
 preview_pandoc_args <- function() {
   template_path <- path_package(
     "rmarkdown/templates/github_document/resources/preview.html",
@@ -137,4 +153,11 @@ preview_dir <- function() {
 }
 preview_path <- function() {
   file_temp("preview-", preview_dir(), ext = "html")
+}
+
+local_rmd <- function(path, env = parent.frame()) {
+  tmp <- dir_create(file_temp())
+  withr::defer(dir_delete(tmp), envir = env)
+
+  file_copy(path, tmp)
 }
