@@ -62,7 +62,7 @@ hugo_document <- function(fig_width = 7,
       # Capture dependencies, remove duplicates, save to directory, and render
       deps <- htmltools::resolveDependencies(knit_meta)
       local <- lapply(deps, htmltools::copyDependencyToDir, outputDir = output_dir)
-      local <- lapply(local, htmltools::makeDependencyRelative, base)
+      local <- lapply(local, htmltools::makeDependencyRelative, output_dir)
       deps <- strsplit(htmltools::renderDependencies(local), "\n")[[1]]
       yaml$html_dependencies <- deps
     }
