@@ -11,6 +11,9 @@ The key to using hugodown is to put `output: hugodown::hugo_document()` in the Y
 * `server_start()` will automatically start a hugo server in the background,
   automatically preivewing your site as you update it.
 
+* `post_create()` will creates a new post (filling in default content from
+  the hugo [archetype](https://gohugo.io/content-management/archetypes/)).
+
 ## Installation
 
 hugodown isn't available from CRAN yet, but you can install the development version from GitHub with:

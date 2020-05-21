@@ -1,3 +1,20 @@
+#' Create a new post
+#'
+#' Post creation takes advantage of Hugo's
+#' [archetypes](https://gohugo.io/content-management/archetypes/) or templates,
+#' with an extension for `.Rmd` files. `post_create()` first calls `hugo new`
+#' (which will apply go templating to `.md` files in the archetype),
+#' and then uses [whisker](https://github.com/edwindj/whisker) to template
+#' any `.Rmd` files.
+#'
+#' @param path Directory to create, like `blog/2020-my-favourite-package`.
+#' @param kind Kind of archetype of use; usually automatically derived
+#'   from the base directory of `path`.
+#' @param data Any additional data to be used when templating `.Rmd` files.
+#'   The default set `date` to today's date (in YYYY-MM-DD format), and
+#'   author to your name (if set in the `usethis.full_name` option).
+#' @param site Path to the hugo site.
+#' @export
 post_create <- function(path, kind = NULL, data = list(), site = ".") {
   site <- site_root()
 
@@ -34,23 +51,6 @@ rmd_template <- function(path, data) {
   brio::write_lines(out, path)
 }
 
-post_tags <- function(path = ".", min = 1) {
-  md <- site_rmd(path)
-  yaml <- purrr::map(md, rmarkdown::yaml_front_matter)
-  tags <- unlist(purrr::map(yaml, "tags"), use.names = FALSE)
-
-  df <- as.data.frame(table(tags), responseName = "n")
-  df[df$n > min, , drop = FALSE]
-}
-
-post_categories <- function(path = ".", min = 1) {
-  md <- site_rmd(path)
-  yaml <- purrr::map(md, rmarkdown::yaml_front_matter)
-  tags <- unlist(purrr::map(yaml, "categories"), use.names = FALSE)
-
-  df <- as.data.frame(table(tags), responseName = "n")
-  df[df$n > min, , drop = FALSE]
-}
 
 # Helpers -----------------------------------------------------------------
 

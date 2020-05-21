@@ -68,6 +68,24 @@ tidy_pleased <- function() {
   paste0(modifier, if (modifier != "") " ", word)
 }
 
+post_tags <- function(path = ".", min = 1) {
+  md <- site_rmd(path)
+  yaml <- purrr::map(md, rmarkdown::yaml_front_matter)
+  tags <- unlist(purrr::map(yaml, "tags"), use.names = FALSE)
+
+  df <- as.data.frame(table(tags), responseName = "n")
+  df[df$n > min, , drop = FALSE]
+}
+
+post_categories <- function(path = ".", min = 1) {
+  md <- site_rmd(path)
+  yaml <- purrr::map(md, rmarkdown::yaml_front_matter)
+  tags <- unlist(purrr::map(yaml, "categories"), use.names = FALSE)
+
+  df <- as.data.frame(table(tags), responseName = "n")
+  df[df$n > min, , drop = FALSE]
+}
+
 
 # helpers -----------------------------------------------------------------
 
