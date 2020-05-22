@@ -61,7 +61,7 @@ hugodown does not work with every possible hugo site. There is some config that 
     {{ end }}
     ```
 
-* To use mathjax, you to use a series of [small hacks][yihui-mathjax]. The 
+* To use mathjax, you will need to use a series of [small hacks][yihui-mathjax]. The 
   easiest way is to copy from an existing template, like [tourmaline].
   Take note of the [`footer_mathjax.html`][footer_mathjax] partial, which
   is then included in the [`footer.html`][footer]. You'll also need to include
