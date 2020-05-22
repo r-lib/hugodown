@@ -25,6 +25,8 @@ The key to using hugodown is to put `output: hugodown::hugo_document()` in the Y
 * `post_create()` will creates a new post (filling in default content from
   the hugo [archetype](https://gohugo.io/content-management/archetypes/)).
   
+* To knit an `.Rmd` post, you can use the Knit button to knit to the correct output format. You can also use the keyboard shortcut `Cmd+Shift+K` (Mac) or `Ctrl+Shift+K` (Windows/Linux).
+  
 * `site_outdated()` lists all `.Rmd` files that need to be re-rendered 
   (i.e. they have changed since the last time their `.md` was rendered).
 
