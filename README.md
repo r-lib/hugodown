@@ -53,7 +53,7 @@ hugodown does not work with every possible hugo site. There is some config that 
   ```
 
 *   To use html widgets, you must include the following Go template somewhere
-    in the `<head>`
+    in the `<head>` layout file for your theme. This will help Hugo find the HTML dependencies needed to render the widget in a post. You may find this [blog post](https://zwbetz.com/override-a-hugo-theme/) helpful for overriding Hugo layouts.
   
     ```
     {{ range .Params.html_dependencies }}
