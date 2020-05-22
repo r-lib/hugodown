@@ -50,6 +50,32 @@ hugodown does not work with every possible hugo site. There is some config that 
   ignoreFiles: ['\.Rmd$', '_files$', '_cache$', '\.knit\.md$', '\.utf8\.md$']
   ```
 
-* To use html widgets, you must **TODO**.
+*   To use html widgets, you must include the following Go template somewhere
+    in the `<head>`
+  
+    ```
+    {{ range .Params.html_dependencies }}
+      {{ . | safeHTML }}
+    {{ end }}
+    ```
 
-* To use mathjax, you must **TODO**.
+* To use mathjax, you to use a series of [small hacks][yihui-mathjax]. The 
+  easiest way is to copy from an existing template, like [tourmaline].
+  Take note of the [`footer_mathjax.html`][footer_mathjax] partial, which
+  is then included in the [`footer.html`][footer]. You'll also need to include
+  [`math_code.js`][math_code] in your `static/` directory. Once that's done
+  you can use inline math like `$math$`, and display math like 
+  `` `$$ math $$` `` (note the extra backtick compared to usual).
+
+## Converting from blogdown
+
+* Make sure your post archetype has extension `.Rmd` and includes
+  `output: hugodown::hugo_document`
+  
+* Delete `index.Rmd` from the root of your site.
+
+[yihui-mathjax]: https://yihui.org/en/2018/07/latex-math-markdown/ 
+[tourmaline]: https://github.com/rstudio/hugo-tourmaline
+[footer_mathjax]: https://github.com/rstudio/hugo-tourmaline/blob/master/layouts/partials/footer_mathjax.html
+[footer]: https://github.com/rstudio/hugo-tourmaline/blob/master/layouts/partials/footer.html#L22
+[math_code]: https://github.com/rstudio/hugo-tourmaline/blob/master/static/js/math-code.js
