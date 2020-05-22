@@ -17,25 +17,6 @@ site_root <- function(path = ".") {
   abort("Can't find 'config.yml' or 'config.toml'")
 }
 
-site_config <- function(path) {
-  config <- path(site_root(path), "config.yml")
-  yaml::read_yaml(config)
-}
-
-site_check <- function(path) {
-  config <- site_config(path)
-
-  if (!identical(config$markup$defaultMarkdownHandler, "goldmark")) {
-    abort("`markup.defaultMarkdownHandler` must be 'goldmark'")
-  }
-
-  if (!identical(config$markup$goldmark$renderer$unsafe, TRUE)) {
-    abort("`markup.goldmark.rendered.unsafe` must be 'true'")
-  }
-
-  invisible()
-}
-
 #' Find `.Rmd`s that need to be re-rendered.
 #'
 #' [hugo_document()] adds a hash of the input `.Rmd` in the YAML metdata of
