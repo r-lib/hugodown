@@ -30,7 +30,7 @@ The key to using hugodown is to put `output: hugodown::hugo_document()` in the Y
 * `site_outdated()` lists all `.Rmd` files that need to be re-rendered 
   (i.e. they have changed since the last time their `.md` was rendered).
   
-With hugodown, knitting an individual post and building the site are two separate processes. A good workflow when working with an existing Hugo site in RStudio is to open the site's `.Rproj` file, use `server_start()`, then add or edit your posts. Because the server will only add `.Rmd` content to your site preview after knitting, you'll need to use the keyboard shortcut to knit. If you have already used `server_start()`, the knitted output will be previewable; if not, you can start the server after knitting to preview the full site.
+With hugodown, knitting an individual post and building the site are two separate processes. A good workflow when working with an existing Hugo site in RStudio is to open the site's `.Rproj` file, use `server_start()`, then add or edit your posts. Because the hugo server will only add `.Rmd` content to your site preview after knitting, you'll need to use the keyboard shortcut to knit first. If you have already used `server_start()`, the knitted output will be previewable; if not, you can start the server after knitting to preview the full site.
 
 ## Configuration
 
