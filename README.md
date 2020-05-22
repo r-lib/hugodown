@@ -20,13 +20,17 @@ devtools::install_github("r-lib/hugodown")
 The key to using hugodown is to put `output: hugodown::hugo_document()` in the YAML metadata of your `.Rmd` files. Then knitting the file will generate a `.md` file designed to work well with hugo. The rest of hugodown just makes your life a little easier:
 
 * `server_start()` will automatically start a hugo server in the background,
-  automatically preivewing your site as you update it.
+  automatically previewing your site as you update it.
 
 * `post_create()` will creates a new post (filling in default content from
   the hugo [archetype](https://gohugo.io/content-management/archetypes/)).
   
+* To knit an `.Rmd` post, you can use the Knit button to knit to the correct output format. You can also use the keyboard shortcut `Cmd+Shift+K` (Mac) or `Ctrl+Shift+K` (Windows/Linux).
+  
 * `site_outdated()` lists all `.Rmd` files that need to be re-rendered 
   (i.e. they have changed since the last time their `.md` was rendered).
+  
+With hugodown, knitting an individual post and building the site are two separate processes. A good workflow when working with an existing Hugo site in RStudio is to open the site's `.Rproj` file, use `server_start()`, then add or edit your posts. Because the hugo server will only add `.Rmd` content to your site preview after knitting, you'll need to use the keyboard shortcut to knit first. If you have already used `server_start()`, the knitted output will be previewable; if not, you can start the server after knitting to preview the full site.
 
 ## Configuration
 
@@ -51,7 +55,7 @@ hugodown does not work with every possible hugo site. There is some config that 
   ```
 
 *   To use html widgets, you must include the following Go template somewhere
-    in the `<head>`
+    in the `<head>` layout file for your theme. This will help Hugo find the HTML dependencies needed to render the widget in a post. You may find this [blog post](https://zwbetz.com/override-a-hugo-theme/) helpful for overriding Hugo layouts.
   
     ```
     {{ range .Params.html_dependencies }}
@@ -59,7 +63,7 @@ hugodown does not work with every possible hugo site. There is some config that 
     {{ end }}
     ```
 
-* To use mathjax, you to use a series of [small hacks][yihui-mathjax]. The 
+* To use mathjax, you will need to use a series of [small hacks][yihui-mathjax]. The 
   easiest way is to copy from an existing template, like [tourmaline].
   Take note of the [`footer_mathjax.html`][footer_mathjax] partial, which
   is then included in the [`footer.html`][footer]. You'll also need to include
@@ -70,7 +74,7 @@ hugodown does not work with every possible hugo site. There is some config that 
 ## Converting from blogdown
 
 * Make sure your post archetype has extension `.Rmd` and includes
-  `output: hugodown::hugo_document`
+  `output: hugodown::hugo_document` in the YAML.
   
 * Delete `index.Rmd` from the root of your site.
 
