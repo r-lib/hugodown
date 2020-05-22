@@ -72,7 +72,7 @@ hugodown does not work with every possible hugo site. There is some config that 
 ## Converting from blogdown
 
 * Make sure your post archetype has extension `.Rmd` and includes
-  `output: hugodown::hugo_document`
+  `output: hugodown::hugo_document` in the YAML.
   
 * Delete `index.Rmd` from the root of your site.
 
