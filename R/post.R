@@ -35,6 +35,7 @@ post_create <- function(path, kind = NULL, data = list(), site = ".") {
 
   rmds <- dir_ls(dest, glob = "*.Rmd")
   defaults <- list(
+    slug = path_name(path),
     author = find_name(),
     date = strftime(Sys.Date(), "%Y-%m-%d")
   )
