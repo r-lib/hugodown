@@ -26,6 +26,8 @@ server_start <- function(path = ".", auto_navigate = TRUE, browse = TRUE) {
   args <- c(
     "server",
     "--port", port,
+    "--buildDrafts",
+    "--buildFuture",
     if (auto_navigate) "--navigateToChanged"
   )
 
