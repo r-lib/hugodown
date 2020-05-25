@@ -11,7 +11,7 @@
 tidy_post_create <- function(slug, site = ".") {
   check_slug(slug)
 
-  post_slug <- paste0("blog/", strftime(Sys.Date(), "%Y-%m"), "-", tolower(slug))
+  post_slug <- paste0("blog/", tolower(slug))
   data <- list(
     title = unslug(slug),
     pleased = tidy_pleased()
