@@ -1,0 +1,8 @@
+---
+output: hugo_document
+---
+
+                 mpg   cyl 
+--------------  ----  ---- 
+Mazda RX4         21     6 
+Mazda RX4 Wag     21     6 

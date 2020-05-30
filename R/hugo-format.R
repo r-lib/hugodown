@@ -85,9 +85,7 @@ hugo_document <- function(fig_width = 7,
 
     meta <- yaml::as.yaml(yaml)
 
-    input <- brio::read_lines(input_file)
-    body <- input[-(1:grep("-{3,}", input)[2])]
-
+    body <- brio::read_lines(output_file)
     output_lines <- c("---", meta, "---", "", body)
     brio::write_lines(output_lines, output_file)
 

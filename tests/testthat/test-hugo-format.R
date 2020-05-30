@@ -13,6 +13,15 @@ test_that("figures placed in figs/ directory", {
   expect_equal(length(dir_ls(figs)), 1L)
 })
 
+test_that("tables use pipes", {
+  rmd <- local_rmd(test_path("table.Rmd"))
+  rmarkdown::render(rmd, quiet = TRUE)
+  out <- path(path_dir(rmd), "table.md")
+
+  lines <- brio::read_lines(out)
+  expect_equal(sum(grepl("|", lines, fixed = TRUE)), 4)
+})
+
 test_that("math is untransformed", {
   rmd <- local_rmd(test_path("math.Rmd"))
   rmarkdown::render(rmd, quiet = TRUE)
