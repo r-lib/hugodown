@@ -47,8 +47,11 @@ test_that("hash added to yaml header", {
 
   yaml <- rmarkdown::yaml_front_matter(rmd)
   yaml$rmd_hash <- rmd_hash(rmd)
-
   expect_equal(rmarkdown::yaml_front_matter(out), yaml)
+
+  # Test that yaml is preserved as is (i.e. no round-tripping)
+  lines <- brio::read_lines(out)
+  expect_equal(lines[[4]], "# this is a comment")
 })
 
 test_that("html dependencies are captured", {

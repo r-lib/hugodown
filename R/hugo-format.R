@@ -64,29 +64,20 @@ hugo_document <- function(fig_width = 7,
   }
 
   postprocess <- function(metadata, input_file, output_file, clean, verbose) {
-    yaml <- rmarkdown::yaml_front_matter(input_file)
-    # TODO: figure out how to preserve lists in YAML metadata
-    if (has_name(yaml, "tags")) {
-      yaml$tags <- as.list(yaml$tags)
-    }
-    if (has_name(yaml, "categories")) {
-      yaml$categories <- as.list(yaml$categories)
-    }
-    yaml$rmd_hash <- rmd_hash(input_rmd)
+    old_yaml <- extract_yaml(brio::read_lines(input_file))
 
+    new_yaml <- list(rmd_hash = rmd_hash(input_rmd))
     if (length(knit_meta) > 0) {
       # Capture dependencies, remove duplicates, save to directory, and render
       deps <- htmltools::resolveDependencies(knit_meta)
       local <- lapply(deps, htmltools::copyDependencyToDir, outputDir = output_dir)
       local <- lapply(local, htmltools::makeDependencyRelative, output_dir)
       deps <- strsplit(htmltools::renderDependencies(local), "\n")[[1]]
-      yaml$html_dependencies <- deps
+      new_yaml$html_dependencies <- deps
     }
 
-    meta <- yaml::as.yaml(yaml)
-
     body <- brio::read_lines(output_file)
-    output_lines <- c("---", meta, "---", "", body)
+    output_lines <- c("---", old_yaml, yaml::as.yaml(new_yaml), "---", "", body)
     brio::write_lines(output_lines, output_file)
 
     # If server not running, and RStudio is rendering the doc, generate
@@ -168,4 +159,13 @@ local_rmd <- function(path, env = parent.frame()) {
   withr::defer(dir_delete(tmp), envir = env)
 
   file_copy(path, tmp)
+}
+
+extract_yaml <- function(lines) {
+  delim <- grep("^---\\s*$", lines)
+  if (length(delim) < 2) {
+    return(character())
+  }
+
+  lines[(delim[[1]] + 1):(delim[[2]] - 1)]
 }
