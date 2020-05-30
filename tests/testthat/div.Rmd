@@ -1,0 +1,7 @@
+---
+output: hugo_document
+---
+
+:::special
+This is special
+:::

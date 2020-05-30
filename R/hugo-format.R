@@ -130,6 +130,7 @@ goldmark_format <- function() {
     "footnotes",
     "smart",
     "tex_math_dollars",
+    "native_divs",
     sep = "+"
   )
 }

@@ -22,6 +22,15 @@ test_that("tables use pipes", {
   expect_equal(sum(grepl("|", lines, fixed = TRUE)), 4)
 })
 
+test_that("markdown div syntax is converted to native divs", {
+  rmd <- local_rmd(test_path("div.Rmd"))
+  rmarkdown::render(rmd, quiet = TRUE)
+  out <- path(path_dir(rmd), "div.md")
+
+  lines <- brio::read_lines(out)
+  expect_equal(sum(grepl("div", lines, fixed = TRUE)), 2)
+})
+
 test_that("math is untransformed", {
   rmd <- local_rmd(test_path("math.Rmd"))
   rmarkdown::render(rmd, quiet = TRUE)
