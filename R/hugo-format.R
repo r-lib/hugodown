@@ -9,13 +9,18 @@
 #' @inheritParams rmarkdown::md_document
 #' @param fig_width Figure width (in inches).
 #' @param fig_asp Figure aspect ratio, defaults to the golden ratio.
+#' @param downlit If `TRUE`, uses [downlit](http://github.com/r-lib/downlit)
+#'   for syntax highlighting. This converts code blocks to `<pre>` blocks
+#'   and adds links around inline code. If `FALSE`, syntax highlighting
+#'   will be done by hugo.
 #' @param tidyverse_style Use tidyverse knitr conventions? This sets
 #'   `collapse = TRUE`, `comment = "#>`, `fig.align = "center"`, and
 #'   `out.width = "700px"`.
 hugo_document <- function(fig_width = 7,
                           fig_asp = 0.618,
                           fig_retina = NULL,
-                          tidyverse_style = TRUE)
+                          tidyverse_style = TRUE,
+                          downlit = FALSE)
                           {
 
   knitr <- rmarkdown::knitr_options_html(
@@ -76,7 +81,17 @@ hugo_document <- function(fig_width = 7,
       new_yaml$html_dependencies <- deps
     }
 
-    body <- brio::read_lines(output_file)
+    if (downlit) {
+      md_path <- downlit::downlit_md_path(
+        in_path = output_file,
+        out_path = tempfile(),
+        format = goldmark_format()
+      )
+      body <- brio::read_lines(md_path)
+    } else {
+      body <- brio::read_lines(output_file)
+    }
+
     output_lines <- c("---", old_yaml, yaml::as.yaml(new_yaml), "---", "", body)
     brio::write_lines(output_lines, output_file)
 

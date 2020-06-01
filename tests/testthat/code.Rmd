@@ -1,0 +1,11 @@
+---
+output: 
+  hugo_document:
+    downlit: true
+---
+
+```{r}
+1 + 1
+```
+
+`stats::median()`

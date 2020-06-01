@@ -22,6 +22,16 @@ test_that("tables use pipes", {
   expect_equal(sum(grepl("|", lines, fixed = TRUE)), 4)
 })
 
+test_that("code is linked/highlighted", {
+  rmd <- local_rmd(test_path("code.Rmd"))
+  rmarkdown::render(rmd, quiet = TRUE)
+  out <- path(path_dir(rmd), "code.md")
+
+  lines <- brio::read_lines(out)
+  expect_equal(sum(grepl("<pre", lines, fixed = TRUE)), 1)
+  expect_equal(sum(grepl("[`stats::median()`]", lines, fixed = TRUE)), 1)
+})
+
 test_that("markdown div syntax is converted to native divs", {
   rmd <- local_rmd(test_path("div.Rmd"))
   rmarkdown::render(rmd, quiet = TRUE)
