@@ -3,6 +3,8 @@
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![R build status](https://github.com/r-lib/hugodown/workflows/R-CMD-check/badge.svg)](https://github.com/r-lib/hugodown/actions)
+[![Codecov test coverage](https://codecov.io/gh/r-lib/hugodown/branch/master/graph/badge.svg)](https://codecov.io/gh/r-lib/hugodown?branch=master)
 <!-- badges: end -->
 
 hugodown is an experimental package that aims to facilitate the use of [RMarkdown](http://rmarkdown.rstudio.com/) and [hugo](http://gohugo.io/) together. It's similar to [blogdown](https://bookdown.org/yihui/blogdown/), but is focussed purely on Hugo websites, and enforces a stricter partitioning of roles: hugodown is responsible for transforming `.Rmd` to `.md`, and is hugo responsible for transforming `.md` to `.html`.
