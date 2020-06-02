@@ -4,7 +4,13 @@
 \alias{post_create}
 \title{Create a new post}
 \usage{
-post_create(path, kind = NULL, data = list(), site = ".")
+post_create(
+  path,
+  kind = NULL,
+  data = list(),
+  site = ".",
+  open = is_interactive()
+)
 }
 \arguments{
 \item{path}{Directory to create, like \code{blog/2020-my-favourite-package}.}
@@ -17,6 +23,8 @@ The default set \code{date} to today's date (in YYYY-MM-DD format), and
 author to your name (if set in the \code{usethis.full_name} option).}
 
 \item{site}{Path to the hugo site.}
+
+\item{open}{Open file for interactive editing?}
 }
 \description{
 Post creation takes advantage of Hugo's

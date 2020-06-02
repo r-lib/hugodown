@@ -14,13 +14,14 @@
 #'   The default set `date` to today's date (in YYYY-MM-DD format), and
 #'   author to your name (if set in the `usethis.full_name` option).
 #' @param site Path to the hugo site.
+#' @param open Open file for interactive editing?
 #' @export
-post_create <- function(path, kind = NULL, data = list(), site = ".") {
-  site <- site_root()
+post_create <- function(path, kind = NULL, data = list(), site = ".", open = is_interactive()) {
+  site <- site_root(site)
 
   tld <- path_dir(path)
   if (!dir_exists(path(site, "content", tld))) {
-    abort(paste0("Can't no '", tld, "' directory in 'content/'"))
+    abort(paste0("Can't find '", tld, "' directory in 'content/'"))
   }
 
   dest <- path(site, "content", path)
@@ -28,10 +29,11 @@ post_create <- function(path, kind = NULL, data = list(), site = ".") {
     abort(paste0("`path` already exists"))
   }
 
-  hugo_run(c(
+  args <- c(
     "new", path,
     if (!is.null(kind)) c("--kind", kind)
-  ))
+  )
+  hugo_run(args, wd = site)
 
   rmds <- dir_ls(dest, glob = "*.Rmd")
   defaults <- list(
@@ -44,7 +46,7 @@ post_create <- function(path, kind = NULL, data = list(), site = ".") {
   lapply(rmds, rmd_template, data)
 
   index <- dir_ls(dest, pattern = "index")
-  usethis::edit_file(index)
+  usethis::edit_file(index, open = open)
 
   invisible(dest)
 }
