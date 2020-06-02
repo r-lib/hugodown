@@ -28,8 +28,8 @@ test_that("code is linked/highlighted", {
   out <- path(path_dir(rmd), "code.md")
 
   lines <- brio::read_lines(out)
-  expect_equal(sum(grepl("<pre", lines, fixed = TRUE)), 1)
-  # expect_equal(sum(grepl("[`stats::median()`]", lines, fixed = TRUE)), 1)
+  expect_equal(sum(grepl("<pre", lines, fixed = TRUE)), 2)
+  expect_equal(sum(grepl("[`stats::median()`]", lines, fixed = TRUE)), 1)
 })
 
 test_that("markdown div syntax is converted to native divs", {
@@ -91,4 +91,9 @@ test_that("link_inline() works with an nubmer of links", {
     link_inline("`stats::median`"),
     "[`stats::median`](https://rdrr.io/r/stats/median.html)"
   )
+})
+
+test_that("link_inline() doesn't link within links or headers", {
+  expect_equal(link_inline("# `stats::median`"), "# `stats::median`")
+  expect_equal(link_inline("[`stats::median`]()"), "[`stats::median`]()")
 })

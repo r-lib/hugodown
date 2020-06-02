@@ -8,8 +8,7 @@ hugo_document(
   fig_width = 7,
   fig_asp = 0.618,
   fig_retina = NULL,
-  tidyverse_style = TRUE,
-  downlit = FALSE
+  tidyverse_style = TRUE
 )
 }
 \arguments{
@@ -26,11 +25,6 @@ width of the image explicitly.}
 \item{tidyverse_style}{Use tidyverse knitr conventions? This sets
 \code{collapse = TRUE}, \verb{comment = "#>}, \code{fig.align = "center"}, and
 \code{out.width = "700px"}.}
-
-\item{downlit}{If \code{TRUE}, uses \href{http://github.com/r-lib/downlit}{downlit}
-for syntax highlighting. This converts code blocks to \verb{<pre>} blocks
-and adds links around inline code. If \code{FALSE}, syntax highlighting
-will be done by hugo.}
 }
 \description{
 This RMarkdown output format is designed to generate markdown that is
@@ -38,3 +32,12 @@ maximally compatible with Hugo. It intelligently generates a preview so
 that you see something useful when Hugo isn't running, but it doesn't
 get in the way of hugo's full-site preview when it is.
 }
+\section{Syntax highlighting}{
+
+
+\code{hugo_document()} uses a hybrid system for syntax highlighting.
+For R code it uses \href{http://github.com/r-lib/downlit}{downlit}. For
+other languages, it relies on Chroma, the syntax highlighter built into
+hugo.
+}
+

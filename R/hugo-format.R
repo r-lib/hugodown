@@ -98,7 +98,7 @@ hugo_document <- function(fig_width = 7,
     output_lines <- c(
       "---", old_yaml, yaml::as.yaml(new_yaml), "---",
       "",
-      body
+      link_inline(body)
     )
     brio::write_lines(output_lines, output_file)
 
@@ -219,13 +219,28 @@ indent <- function(x, indent) {
 # inline code -------------------------------------------------------------
 
 link_inline <- function(x) {
-  loc <- gregexpr("(?<!``)`([^`]+)`", x, perl = TRUE)
+  link_re <- "\\[[^\\]]+\\]\\([^\\)]*\\)"
+  header_re <- "(?m)^\\s*#{1,}.*$"
+  danger <- paste0("(", header_re, ")|(", link_re, ")")
 
-  match <- regmatches(x, loc)[[1]]
-  code <- gsub("^`|`$", "", match)
-  href <- vapply(code, downlit::autolink_url, character(1))
-  out <- ifelse(is.na(href), match, paste0("[", match, "](", href, ")"))
+  protect_code <- function(x) gsub("`", "\u241E", x)
+  restore_code <- function(x) gsub("\u241E", "`", x)
 
-  regmatches(x, loc) <- list(out)
+  x <- str_replace(x, danger, protect_code)
+  x <- str_replace(x, "(?<!``)`([^`]+)`", function(match) {
+    code <- gsub("^`|`$", "", match)
+    href <- vapply(code, downlit::autolink_url, character(1))
+    ifelse(is.na(href), match, paste0("[", match, "](", href, ")"))
+  })
+  x <- str_replace(x, danger, restore_code)
+  x
+}
+
+str_replace <- function(x, pattern, fun, ...) {
+  loc <- gregexpr(pattern, x, perl = TRUE)
+  matches <- regmatches(x, loc)
+  out <- lapply(matches, fun, ...)
+
+  regmatches(x, loc) <- out
   x
 }
