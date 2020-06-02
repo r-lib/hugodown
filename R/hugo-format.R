@@ -176,13 +176,6 @@ preview_path <- function() {
   file_temp("preview-", preview_dir(), ext = "html")
 }
 
-local_rmd <- function(path, env = parent.frame()) {
-  tmp <- dir_create(file_temp())
-  withr::defer(dir_delete(tmp), envir = env)
-
-  file_copy(path, tmp)
-}
-
 extract_yaml <- function(lines) {
   delim <- grep("^---\\s*$", lines)
   if (length(delim) < 2) {
