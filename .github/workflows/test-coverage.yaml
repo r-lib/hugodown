@@ -16,6 +16,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Install hugo
+        run: brew install hugo
+
       - uses: r-lib/actions/setup-r@master
 
       - uses: r-lib/actions/setup-pandoc@master
