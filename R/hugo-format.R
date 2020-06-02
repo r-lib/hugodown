@@ -201,7 +201,8 @@ hook_output <- function(type, x, options) {
 }
 hook_source <- function(x, options) {
   x <- paste0(x, "\n", collapse = "")
-  downlit::highlight(x, pre_class = NULL)
+  out <- downlit::highlight(x, pre_class = NULL)
+  paste0(out, "\n")
 }
 hook_chunk <- function(x, options, ...) {
   x <- indent(x, options$indent)
