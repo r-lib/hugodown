@@ -43,14 +43,27 @@ hugodown does not work with every possible hugo site. There is some config that 
       defaultMarkdownHandler = "goldmark"
       [markup.goldmark.renderer]
         unsafe = true
-      [markup.highlight]
-        style = "pygments"    
     ```
+
+*   For best syntax hightling results, you'll must classes:
+
+    ```toml
+    pygmentsUseClasses = true
+    ```
+    
+    And then ensure that your stylesheet defines styles for the appropriate 
+    classes. You can generate starter css with (e.g):
+    
+    ```
+    hugo gen chromastyles --style=monokai
+    ```
+    
+    Substitute `monokai` for the [style of your choice][styles].
 
 *   We recommend ignoring knitr intermediates:
 
     ```toml
-    ignoreFiles: ['\.Rmd$', '_files$', '_cache$', '\.knit\.md$', '\.utf8\.md$']
+    ignoreFiles = ['\.Rmd$', '_files$', '_cache$', '\.knit\.md$', '\.utf8\.md$']
     ```
 
 *   To use html widgets, you must include the following Go template somewhere
@@ -86,3 +99,4 @@ hugodown does not work with every possible hugo site. There is some config that 
 [footer_mathjax]: https://github.com/rstudio/hugo-tourmaline/blob/master/layouts/partials/footer_mathjax.html
 [footer]: https://github.com/rstudio/hugo-tourmaline/blob/master/layouts/partials/footer.html#L22
 [math_code]: https://github.com/rstudio/hugo-tourmaline/blob/master/static/js/math-code.js
+[styles]: https://xyproto.github.io/splash/docs/all.html

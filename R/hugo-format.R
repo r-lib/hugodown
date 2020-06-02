@@ -5,22 +5,24 @@
 #' that you see something useful when Hugo isn't running, but it doesn't
 #' get in the way of hugo's full-site preview when it is.
 #'
+#' @section Syntax highlighting:
+#'
+#' `hugo_document()` uses a hybrid system for syntax highlighting.
+#' For R code it uses [downlit](http://github.com/r-lib/downlit). For
+#' other languages, it relies on Chroma, the syntax highlighter built into
+#' hugo.
+#'
 #' @export
 #' @inheritParams rmarkdown::md_document
 #' @param fig_width Figure width (in inches).
 #' @param fig_asp Figure aspect ratio, defaults to the golden ratio.
-#' @param downlit If `TRUE`, uses [downlit](http://github.com/r-lib/downlit)
-#'   for syntax highlighting. This converts code blocks to `<pre>` blocks
-#'   and adds links around inline code. If `FALSE`, syntax highlighting
-#'   will be done by hugo.
 #' @param tidyverse_style Use tidyverse knitr conventions? This sets
 #'   `collapse = TRUE`, `comment = "#>`, `fig.align = "center"`, and
 #'   `out.width = "700px"`.
 hugo_document <- function(fig_width = 7,
                           fig_asp = 0.618,
                           fig_retina = NULL,
-                          tidyverse_style = TRUE,
-                          downlit = FALSE)
+                          tidyverse_style = TRUE)
                           {
 
   knitr <- rmarkdown::knitr_options_html(
@@ -33,6 +35,16 @@ hugo_document <- function(fig_width = 7,
   knitr$opts_chunk$fig.path <- "figs/"
   # Ensure knitr doesn't turn HTML widgets into pngs
   knitr$opts_chunk$screenshot.force <- FALSE
+
+  knitr$knit_hooks <- list(
+    chunk   = hook_chunk,
+    output  = hook_output,
+    source  = hook_source,
+    output  = function(x, opts) hook_output("output", x, opts),
+    warning = function(x, opts) hook_output("warning", x, opts),
+    error   = function(x, opts) hook_output("error", x, opts),
+    message = function(x, opts) hook_output("message", x, opts)
+  )
 
   if (tidyverse_style) {
     knitr$opts_chunk$collapse <- TRUE
@@ -81,18 +93,13 @@ hugo_document <- function(fig_width = 7,
       new_yaml$html_dependencies <- deps
     }
 
-    if (downlit) {
-      md_path <- downlit::downlit_md_path(
-        in_path = output_file,
-        out_path = tempfile(),
-        format = goldmark_format()
-      )
-      body <- brio::read_lines(md_path)
-    } else {
-      body <- brio::read_lines(output_file)
-    }
+    body <- brio::read_file(output_file)
 
-    output_lines <- c("---", old_yaml, yaml::as.yaml(new_yaml), "---", "", body)
+    output_lines <- c(
+      "---", old_yaml, yaml::as.yaml(new_yaml), "---",
+      "",
+      body
+    )
     brio::write_lines(output_lines, output_file)
 
     # If server not running, and RStudio is rendering the doc, generate
@@ -183,4 +190,41 @@ extract_yaml <- function(lines) {
   }
 
   lines[(delim[[1]] + 1):(delim[[2]] - 1)]
+}
+
+
+# knitr hooks -------------------------------------------------------------
+
+hook_output <- function(type, x, options) {
+  x <- paste0(x, "\n", collapse = "")
+  downlit::highlight(x, pre_class = NULL)
+}
+hook_source <- function(x, options) {
+  x <- paste0(x, "\n", collapse = "")
+  downlit::highlight(x, pre_class = NULL)
+}
+hook_chunk <- function(x, options, ...) {
+  x <- indent(x, options$indent)
+  paste0("<pre class='chroma'>", x, "</pre>")
+}
+
+indent <- function(x, indent) {
+  if (is.null(indent)) {
+    return(x)
+  }
+  paste0(indent, gsub("\n", paste0("\n", indent), x))
+}
+
+# inline code -------------------------------------------------------------
+
+link_inline <- function(x) {
+  loc <- gregexpr("(?<!``)`([^`]+)`", x, perl = TRUE)
+
+  match <- regmatches(x, loc)[[1]]
+  code <- gsub("^`|`$", "", match)
+  href <- vapply(code, downlit:::href_string, character(1))
+  out <- ifelse(is.na(href), match, paste0("[", match, "](", href, ")"))
+
+  regmatches(x, loc) <- list(out)
+  x
 }

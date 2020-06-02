@@ -1,7 +1,5 @@
 ---
-output: 
-  hugo_document:
-    downlit: true
+output: hugo_document
 ---
 
 ```{r}
@@ -9,3 +7,12 @@ output:
 ```
 
 `stats::median()`
+
+```{r, error = TRUE}
+print("print")
+message("message")
+# comment
+warning("warning")
+stop("error!")
+plot(1 + 1)
+```
