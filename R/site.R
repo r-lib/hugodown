@@ -1,5 +1,5 @@
 site_root <- function(path = ".") {
-  path <- path_abs(path)
+  path <- as.character(path_abs(path))
 
   while (!identical(path, path_dir(path))) {
     if (file_exists(path(path, "config.yaml"))) {
