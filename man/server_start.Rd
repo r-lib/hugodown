@@ -6,7 +6,12 @@
 \alias{server_browse}
 \title{Manage the hugo server}
 \usage{
-server_start(path = ".", auto_navigate = TRUE, browse = TRUE)
+server_start(
+  path = ".",
+  auto_navigate = TRUE,
+  browse = TRUE,
+  render_to_disk = FALSE
+)
 
 server_stop()
 
@@ -19,6 +24,9 @@ server_browse()
 page?}
 
 \item{browse}{Automatically preview the site after the server starts?}
+
+\item{render_to_disk}{Render site to disk? The default is to serve the
+site from memory, but rendering to disk can be helpful for debugging.}
 }
 \description{
 \code{server_start()} starts a hugo server that will automatically re-generate

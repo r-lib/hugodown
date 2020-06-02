@@ -14,7 +14,12 @@
 #' @param auto_navigate Automatically navigate to the most recently changed
 #'   page?
 #' @param browse Automatically preview the site after the server starts?
-server_start <- function(path = ".", auto_navigate = TRUE, browse = TRUE) {
+#' @param render_to_disk Render site to disk? The default is to serve the
+#'   site from memory, but rendering to disk can be helpful for debugging.
+server_start <- function(path = ".",
+                         auto_navigate = TRUE,
+                         browse = TRUE,
+                         render_to_disk = FALSE) {
   path <- site_root(path)
   server_stop()
 
@@ -28,7 +33,8 @@ server_start <- function(path = ".", auto_navigate = TRUE, browse = TRUE) {
     "--port", port,
     "--buildDrafts",
     "--buildFuture",
-    if (auto_navigate) "--navigateToChanged"
+    if (auto_navigate) "--navigateToChanged",
+    if (render_to_disk) "--renderToDisk"
   )
 
   message("Starting server on port ", port)
