@@ -220,9 +220,9 @@ indent <- function(x, indent) {
 
 link_inline <- function(x) {
   regexps <- c(
-    "\\[[^\\]]+\\]\\([^\\)]*\\)", # link
+    "\\[[^\\]]+\\]\\([^\\)]*\\)" , # link
     "(?m)^\\s*#{1,}.*$", # heading
-    "(?s)<pre.*</pre>" # code block
+    "(?s)<pre.*?</pre>" # code block
   )
   danger <- paste0("(", regexps, ")", collapse = "|")
 
