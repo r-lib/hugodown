@@ -219,9 +219,12 @@ indent <- function(x, indent) {
 # inline code -------------------------------------------------------------
 
 link_inline <- function(x) {
-  link_re <- "\\[[^\\]]+\\]\\([^\\)]*\\)"
-  header_re <- "(?m)^\\s*#{1,}.*$"
-  danger <- paste0("(", header_re, ")|(", link_re, ")")
+  regexps <- c(
+    "\\[[^\\]]+\\]\\([^\\)]*\\)", # link
+    "(?m)^\\s*#{1,}.*$", # heading
+    "(?s)<pre.*</pre>" # code block
+  )
+  danger <- paste0("(", regexps, ")", collapse = "|")
 
   protect_code <- function(x) gsub("`", "\u241E", x)
   restore_code <- function(x) gsub("\u241E", "`", x)

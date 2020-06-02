@@ -94,6 +94,7 @@ test_that("link_inline() works with an nubmer of links", {
 })
 
 test_that("link_inline() doesn't link within links or headers", {
-  expect_equal(link_inline("# `stats::median`"), "# `stats::median`")
-  expect_equal(link_inline("[`stats::median`]()"), "[`stats::median`]()")
+  expect_equal(link_inline("# `base::t`"), "# `base::t`")
+  expect_equal(link_inline("[`base::t`]()"), "[`base::t`]()")
+  expect_equal(link_inline("<pre>\n`base::t`</pre>"), "<pre>\n`base::t`</pre>")
 })
