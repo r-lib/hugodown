@@ -223,7 +223,7 @@ link_inline <- function(x) {
 
   match <- regmatches(x, loc)[[1]]
   code <- gsub("^`|`$", "", match)
-  href <- vapply(code, downlit:::href_string, character(1))
+  href <- vapply(code, downlit::autolink_url, character(1))
   out <- ifelse(is.na(href), match, paste0("[", match, "](", href, ")"))
 
   regmatches(x, loc) <- list(out)
