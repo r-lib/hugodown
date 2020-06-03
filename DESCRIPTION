@@ -31,9 +31,9 @@ Suggests:
     covr,
     DiagrammeR,
     htmltools,
-    testthat,
     magick,
     rstudioapi,
+    testthat
 Remotes: 
     r-lib/downlit
 Encoding: UTF-8
