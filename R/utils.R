@@ -1,11 +1,3 @@
-port_active <- function(port) {
-  tryCatch({
-    suppressWarnings(con <- socketConnection("127.0.0.1", port, timeout = 1))
-    close(con)
-    TRUE
-  }, error = function(e) FALSE)
-}
-
 active_file <- function(ext = NULL) {
   if (!rstudioapi::isAvailable()) {
     abort("Must supply `path` outside of RSuudio")

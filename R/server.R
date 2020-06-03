@@ -10,17 +10,17 @@
 #'
 #' `server_browse()` opens the site in the RStudio viewer or your web browser.
 #' @export
-#' @param path Path to hugo site.
+#' @param site Path to hugo site.
 #' @param auto_navigate Automatically navigate to the most recently changed
 #'   page?
 #' @param browse Automatically preview the site after the server starts?
 #' @param render_to_disk Render site to disk? The default is to serve the
 #'   site from memory, but rendering to disk can be helpful for debugging.
-server_start <- function(path = ".",
+server_start <- function(site = ".",
                          auto_navigate = TRUE,
                          browse = TRUE,
                          render_to_disk = FALSE) {
-  path <- site_root(path)
+  path <- site_root(site)
   server_stop()
 
   if (port_active(1313)) {
@@ -119,4 +119,12 @@ server_browse <- function() {
 
 server_running <- function() {
   env_has(hugodown, "server") && hugodown$server$is_alive()
+}
+
+port_active <- function(port) {
+  tryCatch({
+    suppressWarnings(con <- socketConnection("127.0.0.1", port, timeout = 1))
+    close(con)
+    TRUE
+  }, error = function(e) FALSE)
 }

@@ -7,7 +7,7 @@
 \title{Manage the hugo server}
 \usage{
 server_start(
-  path = ".",
+  site = ".",
   auto_navigate = TRUE,
   browse = TRUE,
   render_to_disk = FALSE
@@ -18,7 +18,7 @@ server_stop()
 server_browse()
 }
 \arguments{
-\item{path}{Path to hugo site.}
+\item{site}{Path to hugo site.}
 
 \item{auto_navigate}{Automatically navigate to the most recently changed
 page?}
