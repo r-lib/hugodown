@@ -23,7 +23,6 @@ Imports:
     processx,
     rlang,
     rmarkdown,
-    tibble,
     usethis,
     whisker,
     withr,
