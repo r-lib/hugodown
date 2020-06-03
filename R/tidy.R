@@ -7,8 +7,8 @@
 #' @export
 #' @param slug File name of new post. Year and month will be automatically
 #'   appended.
-#' @param site Path to hugo site
-tidy_post_create <- function(slug, site = ".") {
+#' @inheritParams post_create
+tidy_post_create <- function(slug, site = ".", open = is_interactive()) {
   check_slug(slug)
 
   post_slug <- paste0("blog/", tolower(slug))
@@ -22,7 +22,7 @@ tidy_post_create <- function(slug, site = ".") {
     data$version <- utils::packageVersion(pieces[[1]])
   }
 
-  post_create(post_slug, data = data, site = site)
+  post_create(post_slug, data = data, site = site, open = open)
 }
 
 #' @rdname tidy_post_create

@@ -6,7 +6,7 @@
 \alias{tidy_show_meta}
 \title{Various helpers for tidyverse.org and similar sites}
 \usage{
-tidy_post_create(slug, site = ".")
+tidy_post_create(slug, site = ".", open = is_interactive())
 
 tidy_thumbnails(path = NULL)
 
@@ -16,7 +16,9 @@ tidy_show_meta(min = 1, site = ".")
 \item{slug}{File name of new post. Year and month will be automatically
 appended.}
 
-\item{site}{Path to hugo site}
+\item{site}{Path to the hugo site.}
+
+\item{open}{Open file for interactive editing?}
 
 \item{path}{Path to blog post}
 

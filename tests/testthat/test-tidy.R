@@ -1,3 +1,13 @@
+test_that("tidy_post() adds additional data", {
+  skip_if_no_hugo()
+
+  site <- local_site(test_path("archetypes"))
+  dir_create(path(site, "content", "blog"))
+  test_Rmd <- tidy_post_create("testthat-1-0-0", site = site, open = FALSE)
+
+  rmd <- brio::read_lines(path(test_Rmd, "index.Rmd"))
+  expect_equal(rmd[[3]], "package: testthat")
+})
 
 test_that("tidy_thumnail() complains about bad inputs", {
   skip_if_not_installed("magick")
