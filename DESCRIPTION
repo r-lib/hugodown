@@ -21,7 +21,6 @@ Imports:
     fs,
     later,
     processx,
-    purrr,
     rematch2,
     rlang,
     rmarkdown,

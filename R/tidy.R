@@ -70,13 +70,13 @@ tidy_show_meta <- function(min = 1, site = ".") {
   site <- site_root(site)
   rmd <- dir_ls(path(site, "content"), recurse = TRUE, regexp = "\\.(Rmd|Rmarkdown)$")
 
-  yaml <- purrr::map(rmd, rmarkdown::yaml_front_matter)
+  yaml <- lapply(rmd, rmarkdown::yaml_front_matter)
 
-  tags <- unlist(purrr::map(yaml, "tags"), use.names = FALSE)
+  tags <- unlist(lapply(yaml, "[[", "tags"), use.names = FALSE)
   tags_df <- as.data.frame(table(tags), responseName = "n")
   tags_df <- tags_df[tags_df$n > min, , drop = FALSE]
 
-  cats <- unlist(purrr::map(yaml, "categories"), use.names = FALSE)
+  cats <- unlist(lapply(yaml, "[[", "categories"), use.names = FALSE)
   cats_df <- as.data.frame(table(cats), responseName = "n")
   cats_df <- cats_df[cats_df$n > min, , drop = FALSE]
 
