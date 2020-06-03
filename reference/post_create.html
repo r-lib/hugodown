@@ -53,7 +53,7 @@ with an extension for .Rmd files. post_create() first calls hugo new
 (which will apply go templating to .md files in the archetype),
 and then uses whisker to template
 any .Rmd files." />
-<meta property="og:image" content="/logo.png" />
+<meta property="og:image" content="https://hugodown.r-lib.org/logo.png" />
 
 
 
@@ -67,6 +67,16 @@ any .Rmd files." />
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115082821-1');
+</script>
 
 
   </head>
@@ -135,7 +145,13 @@ and then uses <a href='https://github.com/edwindj/whisker'>whisker</a> to templa
 any <code>.Rmd</code> files.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>post_create</span>(<span class='no'>path</span>, <span class='kw'>kind</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(), <span class='kw'>site</span> <span class='kw'>=</span> <span class='st'>"."</span>)</pre>
+    <pre class="usage"><span class='fu'>post_create</span>(
+  <span class='no'>path</span>,
+  <span class='kw'>kind</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(),
+  <span class='kw'>site</span> <span class='kw'>=</span> <span class='st'>"."</span>,
+  <span class='kw'>open</span> <span class='kw'>=</span> <span class='fu'>is_interactive</span>()
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -158,6 +174,10 @@ author to your name (if set in the <code>usethis.full_name</code> option).</p></
     <tr>
       <th>site</th>
       <td><p>Path to the hugo site.</p></td>
+    </tr>
+    <tr>
+      <th>open</th>
+      <td><p>Open file for interactive editing?</p></td>
     </tr>
     </table>
 

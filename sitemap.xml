@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://hugodown.r-lib.org/index.html</loc>
+  </url>
+  <url>
+    <loc>https://hugodown.r-lib.org/reference/hugo_document.html</loc>
+  </url>
+  <url>
+    <loc>https://hugodown.r-lib.org/reference/hugodown-package.html</loc>
+  </url>
+  <url>
+    <loc>https://hugodown.r-lib.org/reference/post_create.html</loc>
+  </url>
+  <url>
+    <loc>https://hugodown.r-lib.org/reference/server_start.html</loc>
+  </url>
+  <url>
+    <loc>https://hugodown.r-lib.org/reference/site_outdated.html</loc>
+  </url>
+  <url>
+    <loc>https://hugodown.r-lib.org/reference/tidy_post_create.html</loc>
+  </url>
+</urlset>
