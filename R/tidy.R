@@ -80,13 +80,11 @@ tidy_show_meta <- function(min = 1, site = ".") {
   cats_df <- as.data.frame(table(cats), responseName = "n")
   cats_df <- cats_df[cats_df$n > min, , drop = FALSE]
 
-  cli::cli_h2("Categories")
-  cli::cli_li(paste0(cats_df$cats, cli::col_grey(" (", cats_df$n, ")")))
-  cli::cli_end()
-
-  cli::cli_h2("Tags")
-  cli::cli_li(paste0(tags_df$tags, cli::col_grey(" (", tags_df$n, ")")))
-  cli::cli_end()
+  cat_line("## Categories")
+  cat_line("* ", cats_df$cats, " (", cats_df$n, ")")
+  cat_line()
+  cat_line("## Tags")
+  cat_line("* ", tags_df$tags, " (", tags_df$n, ")")
 
   invisible()
 }
@@ -145,3 +143,5 @@ active_file <- function(ext = NULL) {
 
   path
 }
+
+cat_line <- function(...) cat(paste0(..., "\n", collapse = ""))
