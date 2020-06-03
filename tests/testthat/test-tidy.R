@@ -33,6 +33,8 @@ test_that("check_slug ensures name ok", {
 })
 
 test_that("tidy_pleased() generates random phrases", {
+  skip_if(getRversion() < "3.6") # RNG changed
+
   verify_output(test_path("test-tidy-pleased.txt"), {
     set.seed(1014)
     writeLines(replicate(20, tidy_pleased()))
