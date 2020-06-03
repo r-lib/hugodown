@@ -29,6 +29,10 @@ tidy_post_create <- function(slug, site = ".") {
 #' @export
 #' @param path Path to blog post
 tidy_thumbnails <- function(path = NULL) {
+  if (!is_installed("magick")) {
+    abort("Need to install magick package")
+  }
+
   path <- path %||% path_dir(active_file())
 
   path_sq <- path(path, "thumbnail-sq.jpg")

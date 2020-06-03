@@ -23,7 +23,6 @@ Imports:
     fs,
     htmltools,
     later,
-    magick,
     processx,
     purrr,
     rematch2,
@@ -38,7 +37,8 @@ Imports:
 Suggests: 
     covr,
     DiagrammeR,
-    testthat
+    testthat,
+    magick,
 Remotes: 
     r-lib/downlit
 Encoding: UTF-8
