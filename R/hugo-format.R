@@ -85,6 +85,10 @@ hugo_document <- function(fig_width = 7,
 
     new_yaml <- list(rmd_hash = rmd_hash(input_rmd))
     if (length(knit_meta) > 0) {
+      if (!is_installed("htmltools")) {
+        abort("htmltools package required for posts that include HTML widgets")
+      }
+
       # Capture dependencies, remove duplicates, save to directory, and render
       deps <- htmltools::resolveDependencies(knit_meta)
       local <- lapply(deps, htmltools::copyDependencyToDir, outputDir = output_dir)

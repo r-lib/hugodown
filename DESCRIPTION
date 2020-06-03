@@ -19,7 +19,6 @@ Imports:
     digest,
     downlit,
     fs,
-    htmltools,
     later,
     processx,
     purrr,
@@ -35,6 +34,7 @@ Imports:
 Suggests: 
     covr,
     DiagrammeR,
+    htmltools,
     testthat,
     magick,
 Remotes: 
