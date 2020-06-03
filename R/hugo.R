@@ -12,7 +12,9 @@ hugo_path <- function() {
 
 hugo_version <- function() {
   out <- hugo_run("version")$stdout
-  package_version(rematch2::re_match(out, "v([0-9.]+)")[[1]])
+  loc <- regexpr("v([0-9.]+)", out)
+  version <- gsub("v", "", regmatches(out, loc))
+  package_version(version)
 }
 
 hugo_run <- function(args, wd = NULL, ...) {
