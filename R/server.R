@@ -110,7 +110,7 @@ server_stop <- function() {
 #' @rdname server_start
 #' @export
 server_browse <- function() {
-  if (rstudioapi::hasFun("viewer")) {
+  if (is_installed("rstudioapi") && rstudioapi::hasFun("viewer")) {
     rstudioapi::viewer("http://localhost:1313")
   } else {
     utils::browseURL("http://localhost:1313")

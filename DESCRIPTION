@@ -23,7 +23,6 @@ Imports:
     processx,
     rlang,
     rmarkdown,
-    rstudioapi,
     tibble,
     usethis,
     whisker,
@@ -35,6 +34,7 @@ Suggests:
     htmltools,
     testthat,
     magick,
+    rstudioapi,
 Remotes: 
     r-lib/downlit
 Encoding: UTF-8

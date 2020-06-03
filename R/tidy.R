@@ -131,7 +131,7 @@ tidy_pleased <- function() {
 }
 
 active_file <- function(ext = NULL) {
-  if (!rstudioapi::isAvailable()) {
+  if (!is_installed("rstudioapi") || !rstudioapi::isAvailable()) {
     abort("Must supply `path` outside of RSuudio")
   }
 
