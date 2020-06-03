@@ -1,11 +1,11 @@
 test_that("errors are handled gracefully", {
-  rmd <- local_rmd(test_path("error.Rmd"))
+  rmd <- local_file(test_path("error.Rmd"))
   expect_message(expect_error(rmarkdown::render(rmd, quiet = TRUE), "Failure"))
   expect_equal(length(dir_ls(path_dir(rmd))), 1L)
 })
 
 test_that("figures placed in figs/ directory", {
-  rmd <- local_rmd(test_path("plot.Rmd"))
+  rmd <- local_file(test_path("plot.Rmd"))
   rmarkdown::render(rmd, quiet = TRUE)
 
   figs <- path(path_dir(rmd), "figs")
@@ -14,7 +14,7 @@ test_that("figures placed in figs/ directory", {
 })
 
 test_that("tables use pipes", {
-  rmd <- local_rmd(test_path("table.Rmd"))
+  rmd <- local_file(test_path("table.Rmd"))
   rmarkdown::render(rmd, quiet = TRUE)
   out <- path(path_dir(rmd), "table.md")
 
@@ -23,7 +23,7 @@ test_that("tables use pipes", {
 })
 
 test_that("code is linked/highlighted", {
-  rmd <- local_rmd(test_path("code.Rmd"))
+  rmd <- local_file(test_path("code.Rmd"))
   rmarkdown::render(rmd, quiet = TRUE)
   out <- path(path_dir(rmd), "code.md")
 
@@ -33,7 +33,7 @@ test_that("code is linked/highlighted", {
 })
 
 test_that("markdown div syntax is converted to native divs", {
-  rmd <- local_rmd(test_path("div.Rmd"))
+  rmd <- local_file(test_path("div.Rmd"))
   rmarkdown::render(rmd, quiet = TRUE)
   out <- path(path_dir(rmd), "div.md")
 
@@ -42,7 +42,7 @@ test_that("markdown div syntax is converted to native divs", {
 })
 
 test_that("math is untransformed", {
-  rmd <- local_rmd(test_path("math.Rmd"))
+  rmd <- local_file(test_path("math.Rmd"))
   rmarkdown::render(rmd, quiet = TRUE)
   out <- path(path_dir(rmd), "math.md")
 
@@ -51,7 +51,7 @@ test_that("math is untransformed", {
 })
 
 test_that("hash added to yaml header", {
-  rmd <- local_rmd(test_path("meta.Rmd"))
+  rmd <- local_file(test_path("meta.Rmd"))
   rmarkdown::render(rmd, quiet = TRUE)
   out <- path(path_dir(rmd), "meta.md")
 
@@ -65,7 +65,7 @@ test_that("hash added to yaml header", {
 })
 
 test_that("html dependencies are captured", {
-  rmd <- local_rmd(test_path("widget.Rmd"))
+  rmd <- local_file(test_path("widget.Rmd"))
   rmarkdown::render(rmd, quiet = TRUE)
   out <- path(path_dir(rmd), "widget.md")
 

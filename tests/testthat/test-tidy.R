@@ -1,7 +1,7 @@
 test_that("tidy_post() adds additional data", {
   skip_if_no_hugo()
 
-  site <- local_site(test_path("archetypes"))
+  site <- local_dir(test_path("archetypes"))
   dir_create(path(site, "content", "blog"))
   test_Rmd <- tidy_post_create("testthat-1-0-0", site = site, open = FALSE)
 
@@ -20,7 +20,7 @@ test_that("tidy_thumnail() complains about bad inputs", {
 
 test_that("tidy_thumbnail() modifies images", {
   skip_if_not_installed("magick")
-  path <- local_site(test_path("thumbs", "ok"))
+  path <- local_dir(test_path("thumbs", "ok"))
 
   tidy_thumbnails(path)
 
