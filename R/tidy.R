@@ -95,20 +95,12 @@ check_slug <- function(slug) {
     abort("`slug` must be a single string")
   }
 
-  if (grepl(" ", slug)) {
+  if (grepl("[ ._]", slug)) {
     abort(c(
-      "`slug` must not contain any spaces",
+      "`slug` must not contain any spaces, `.`, or `_`",
       i = "Separate words with -"
     ))
   }
-
-  if (grepl("\\.", slug)) {
-    abort(c(
-      "`slug` must not contain any .",
-      i = "Separate words with -"
-    ))
-  }
-
 }
 
 unslug <- function(x) {

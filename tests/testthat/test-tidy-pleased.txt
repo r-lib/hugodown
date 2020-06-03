@@ -1,0 +1,23 @@
+> set.seed(1014)
+> writeLines(replicate(20, tidy_pleased()))
+very happy
+chuffed
+so happy
+delighted
+delighted
+thrilled
+happy
+delighted
+delighted
+very pleased
+thrilled
+happy
+chuffed
+extremely pleased
+tickled pink
+stoked
+thrilled
+delighted
+so happy
+chuffed
+
