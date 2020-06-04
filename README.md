@@ -9,6 +9,22 @@
 
 hugodown is an experimental package that aims to facilitate the use of [RMarkdown](http://rmarkdown.rstudio.com/) and [hugo](http://gohugo.io/) together. It's similar to [blogdown](https://bookdown.org/yihui/blogdown/), but is focussed purely on Hugo websites, and enforces a stricter partitioning of roles: hugodown is responsible for transforming `.Rmd` to `.md`, and is hugo responsible for transforming `.md` to `.html`.
 
+## Compared to blogdown
+
+Probably the biggest advantage of hugodown over blogdown is that it only re-runs your R code when you explicitly ask for it (by knitting the post). This makes hugodown considerably easy to use for long-running blogs and blogs with multiple contributors. Otherwise, it provides the best of blogdown's [two Rmarkdown variants](https://bookdown.org/yihui/blogdown/output-format.html): `.Rmd` and `.Rmarkdown`. 
+
+| Feature               | hugodown `.Rmd` | blogdown `.Rmd` | blogdown `.Rmarkdown` |
+|-----------------------|-----------------|-----------------|-----------------------|
+| Output                | `.md`           | `.html`         | `.markdown`           |
+| Runs R code           | y               | y               | y                     |
+| Table of contents     | y               | n               | y                     |
+| Bibliography          | y               | y               | n                     |
+| MathJax               | y               | y               | ?                     |
+| HTML widgets          | y               | y               | n                     |
+| Cross-references      | n               | y               | y                     |
+
+The only current limitation is that it does not support within page cross-references to figures, tables, and equations.
+
 ## Installation
 
 hugodown isn't available from CRAN yet (and might never be), but you can install the development version from GitHub with:
