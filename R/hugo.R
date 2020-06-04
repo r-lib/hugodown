@@ -7,13 +7,7 @@ hugo_locate <- function(version = hugo_default_get()) {
     ))
   }
 
-  if (.Platform$OS.type == "windows") {
-    name <- "hugo.exe"
-  } else {
-    name <- "hugo"
-  }
-
-  path(path, name)
+  path(path, "hugo")
 }
 
 hugo_path <- function(version) {
