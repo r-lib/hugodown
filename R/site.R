@@ -18,6 +18,15 @@ site_root <- function(path = ".") {
 }
 
 site_hugo_version <- function(site) {
+  netlify <- path(site, "netlify.toml")
+  if (file_exists(netlify)) {
+    toml <- RcppTOML::parseTOML(netlify)
+    version <- toml$context$production$environment$HUGO_VERSION
+    if (!is.null(version)) {
+      return(version)
+    }
+  }
+
   # For now, just use the default version
   hugo_default_get()
 }
