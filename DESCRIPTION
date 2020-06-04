@@ -21,6 +21,7 @@ Imports:
     fs,
     later,
     processx,
+    rappdirs,
     rlang,
     rmarkdown,
     usethis,
@@ -30,6 +31,7 @@ Imports:
 Suggests: 
     covr,
     DiagrammeR,
+    gh,
     htmltools,
     magick,
     rstudioapi,

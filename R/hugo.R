@@ -1,22 +1,32 @@
-hugo_locate <- function() {
-  path <- hugo_path()
-  if (identical(path, "")) {
-    abort("Can't find hugo")
+hugo_locate <- function(version = hugo_default_get()) {
+  path <- hugo_home(version)
+  if (!file_exists(path)) {
+    abort(c(
+      paste0("hugo ", version, " not installed"),
+      i = "Do you need to call `hugo_install()`?"
+    ))
   }
-  path
+
+  if (.Platform$OS.type == "windows") {
+    name <- "hugo.exe"
+  } else {
+    name <- "hugo"
+  }
+
+  path(path, name)
 }
 
-hugo_path <- function() {
+hugo_path <- function(version) {
   path <- unname(Sys.which("hugo"))
 }
 
-hugo_version <- function() {
-  out <- hugo_run("version")$stdout
+hugo_version <- function(version) {
+  out <- hugo_run(version, "version")$stdout
   loc <- regexpr("v([0-9.]+)", out)
   version <- gsub("v", "", regmatches(out, loc))
   package_version(version)
 }
 
-hugo_run <- function(args, wd = NULL, ...) {
-  processx::run(hugo_locate(), args = args, wd = wd, ...)
+hugo_run <- function(version, args, wd = NULL, ...) {
+  processx::run(hugo_locate(version), args = args, wd = wd, ...)
 }

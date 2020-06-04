@@ -17,6 +17,11 @@ site_root <- function(path = ".") {
   abort("Can't find 'config.yml' or 'config.toml'")
 }
 
+site_hugo_version <- function(site) {
+  # For now, just use the default version
+  hugo_default_get()
+}
+
 #' Find `.Rmd`s that need to be re-rendered.
 #'
 #' [hugo_document()] adds a hash of the input `.Rmd` in the YAML metdata of

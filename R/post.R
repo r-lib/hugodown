@@ -33,7 +33,7 @@ post_create <- function(path, kind = NULL, data = list(), site = ".", open = is_
     "new", path,
     if (!is.null(kind)) c("--kind", kind)
   )
-  hugo_run(args, wd = site)
+  hugo_run(site_hugo_version(site), args, wd = site)
 
   rmds <- dir_ls(dest, glob = "*.Rmd")
   defaults <- list(

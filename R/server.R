@@ -39,7 +39,7 @@ server_start <- function(site = ".",
 
   message("Starting server on port ", port)
   ps <- processx::process$new(
-    hugo_locate(),
+    hugo_locate(site_hugo_version(site)),
     args,
     wd = path,
     stdout = "|",
