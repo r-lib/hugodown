@@ -33,7 +33,10 @@ test_that("can get, set, and increment version", {
   old <- hugo_default_get()
   on.exit(hugo_default_set(old))
 
-  file_delete(hugo_default_path())
+  if (file_exists(hugo_default_path())) {
+    file_delete(hugo_default_path())
+  }
+
   expect_equal(hugo_default_get(), NA)
   hugo_default_inc("0.1.0")
   expect_equal(hugo_default_get(), package_version("0.1.0"))
