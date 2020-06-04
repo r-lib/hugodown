@@ -50,6 +50,16 @@ The key to using hugodown is to put `output: hugodown::hugo_document()` in the Y
   
 With hugodown, knitting an individual post and building the site are two separate processes. A good workflow when working with an existing Hugo site in RStudio is to open the site's `.Rproj` file, use `server_start()`, then add or edit your posts. Because the hugo server will only add `.Rmd` content to your site preview after knitting, you'll need to use the keyboard shortcut to knit first. If you have already used `server_start()`, the knitted output will be previewable; if not, you can start the server after knitting to preview the full site.
 
+### Citations
+
+To use citations in a blog post, just provide a `bibliography` in the YAML metadata. If you want to use footnotes for citations (a style that generally works well in blogs), you'll need to find a footnote style CSL file (e.g. [`chicago-fullnote-bibliography.csl`][footnote-csl], and use the following YAML header.
+
+```yaml
+bibliography: refs.bib
+suppress-bibliography: true
+csl: chicago-fullnote-bibliography.csl
+```
+
 ## Configuration
 
 hugodown does not work with every possible hugo site. There is some config that we assume (typically in `config.toml`, but hugo has a bewildering array of places that this might live instead.)
@@ -118,3 +128,4 @@ hugodown does not work with every possible hugo site. There is some config that 
 [footer]: https://github.com/rstudio/hugo-tourmaline/blob/master/layouts/partials/footer.html#L22
 [math_code]: https://github.com/rstudio/hugo-tourmaline/blob/master/static/js/math-code.js
 [styles]: https://xyproto.github.io/splash/docs/all.html
+[footnote-csl]: https://github.com/citation-style-language/styles/blob/master/chicago-fullnote-bibliography.csl)
