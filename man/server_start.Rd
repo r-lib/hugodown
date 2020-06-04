@@ -38,3 +38,8 @@ R so you shouldn't normally need to run this.
 
 \code{server_browse()} opens the site in the RStudio viewer or your web browser.
 }
+\details{
+If you deploy with netlify, hugodown will automatically pick the same
+version of hugo as used on the server (prompting you to call
+\code{\link[=hugo_install]{hugo_install()}} if needed).
+}

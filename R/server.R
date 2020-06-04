@@ -1,5 +1,9 @@
 #' Manage the hugo server
 #'
+#' If you deploy with netlify, hugodown will automatically pick the same
+#' version of hugo as used on the server (prompting you to call
+#' [hugo_install()] if needed).
+#'
 #' @description
 #' `server_start()` starts a hugo server that will automatically re-generate
 #' the site whenever the input changes. You only need to execute this once

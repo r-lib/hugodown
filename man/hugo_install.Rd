@@ -20,3 +20,8 @@ to current operating system.}
 \description{
 Downloads binary from hugo releases, and installs in system wide cache.
 }
+\examples{
+\dontrun{
+hugo_install()
+}
+}

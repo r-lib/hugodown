@@ -9,6 +9,7 @@
 #' @param arch Architecture
 #' @param extended Installed hugo-extended which also includes SCSS etc?
 #' @export
+#' @examples
 #' \dontrun{
 #' hugo_install()
 #' }
