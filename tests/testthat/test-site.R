@@ -17,6 +17,10 @@ test_that("walks up path to find root", {
   expect_error(site_root(test_path(".")), "config")
 })
 
+test_that("can find hugodown config", {
+  expect_equal(site_config(test_path("config-hugodown")), list(test = TRUE))
+})
+
 # out of date -------------------------------------------------------------
 
 test_that("old blogdown posts don't need render", {

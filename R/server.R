@@ -1,8 +1,16 @@
 #' Manage the hugo server
 #'
-#' If you deploy with netlify, hugodown will automatically pick the same
-#' version of hugo as used on the server (prompting you to call
-#' [hugo_install()] if needed).
+#' @section Hugo version:
+#' hugodown will attempt to automatically use the correct version of hugo for
+#' your site (prompting you to call [hugo_install()] if needed). It looks in
+#' two places:
+#'
+#' * If `_hugodown.yml` is present, it looks for the `hugo_version` key.
+#' * If `netlify.toml` is present, it looks in
+#'   `context$production$environment$HUGO_VERSION`
+#'
+#' This means if you already use netlify, hugodown will automatically match
+#' the version of hugo that you're using for deployment.
 #'
 #' @description
 #' `server_start()` starts a hugo server that will automatically re-generate

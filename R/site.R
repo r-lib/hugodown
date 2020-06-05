@@ -17,7 +17,25 @@ site_root <- function(path = ".") {
   abort("Can't find 'config.yml' or 'config.toml'")
 }
 
-site_hugo_version <- function(site) {
+site_config <- function(path = ".") {
+  site <- site_root(path)
+  site_yaml <- path(site, "_hugodown.yaml")
+
+  if (!file_exists(site_yaml)) {
+    NULL
+  } else {
+    yaml::read_yaml(site_yaml)
+  }
+}
+
+site_hugo_version <- function(path = ".") {
+  site <- site_root(path)
+
+  config <- site_config(site)
+  if (!is.null(config$hugo_version)) {
+    return(config$hugo_version)
+  }
+
   netlify <- path(site, "netlify.toml")
   if (file_exists(netlify)) {
     toml <- RcppTOML::parseTOML(netlify)

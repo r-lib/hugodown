@@ -38,8 +38,18 @@ R so you shouldn't normally need to run this.
 
 \code{server_browse()} opens the site in the RStudio viewer or your web browser.
 }
-\details{
-If you deploy with netlify, hugodown will automatically pick the same
-version of hugo as used on the server (prompting you to call
-\code{\link[=hugo_install]{hugo_install()}} if needed).
+\section{Hugo version}{
+
+hugodown will attempt to automatically use the correct version of hugo for
+your site (prompting you to call \code{\link[=hugo_install]{hugo_install()}} if needed). It looks in
+two places:
+\itemize{
+\item If \verb{_hugodown.yml} is present, it looks for the \code{hugo_version} key.
+\item If \code{netlify.toml} is present, it looks in
+\code{context$production$environment$HUGO_VERSION}
 }
+
+This means if you already use netlify, hugodown will automatically match
+the version of hugo that you're using for deployment.
+}
+
