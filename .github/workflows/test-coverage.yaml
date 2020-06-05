@@ -16,9 +16,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install hugo
-        run: brew install hugo
-
       - uses: r-lib/actions/setup-r@master
 
       - uses: r-lib/actions/setup-pandoc@master
@@ -42,6 +39,8 @@ jobs:
           install.packages(c("remotes"))
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("covr")
+          remotes::install_local()
+          hugodown::hugo_install("0.72.0")
         shell: Rscript {0}
 
       - name: Test coverage
