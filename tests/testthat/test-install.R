@@ -11,7 +11,7 @@ test_that("can retrieve download urls", {
 })
 
 test_that("can install specified linux/mac version", {
-  skip_if_not(getRversion() > "3.3.0")
+  skip_if_not(getRversion() >= "3.4.0")
   skip_on_cran()
 
   home <- hugo_home("0.55.0", "Linux")
@@ -24,7 +24,7 @@ test_that("can install specified linux/mac version", {
 })
 
 test_that("can install specified windows version", {
-  skip_if_not(getRversion() > "3.3.0")
+  skip_if_not(getRversion() >= "3.4.0")
 
   home <- hugo_home("0.55.0", "Windows")
   if (dir_exists(home)) dir_delete(home)
