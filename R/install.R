@@ -59,7 +59,9 @@ hugo_default_get <- function() {
 hugo_default_set <- function(version) {
   path <- hugo_default_path()
   if (is.na(version)) {
-    file_delete(path)
+    if (file_exists(path)) {
+      file_delete(path)
+    }
   } else {
     brio::write_lines(version, path)
   }

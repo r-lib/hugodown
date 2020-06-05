@@ -13,7 +13,7 @@ local_dir <- function(path, env = parent.frame()) {
 }
 
 skip_if_no_hugo <- function() {
-  if (hugo_path() == "") {
+  if (is.na(hugo_default_get())) {
     testthat::skip("hugo not installed")
   }
 }
