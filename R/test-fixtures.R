@@ -16,4 +16,7 @@ skip_if_no_hugo <- function() {
   if (is.na(hugo_default_get())) {
     testthat::skip("hugo not installed")
   }
+  if (hugo_default_get() < "0.72") {
+    testthat::skip("need at least hugo 0.72")
+  }
 }
