@@ -87,11 +87,11 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>hugodown is an experimental package that aims to facilitate the use of <a href="http://rmarkdown.rstudio.com/">RMarkdown</a> and <a href="http://gohugo.io/">hugo</a> together. It’s similar to <a href="https://bookdown.org/yihui/blogdown/">blogdown</a>, but is focussed purely on Hugo websites, and enforces a stricter partitioning of roles: hugodown is responsible for transforming <code>.Rmd</code> to <code>.md</code>, and is hugo responsible for transforming <code>.md</code> to <code>.html</code>.</p>
+<p>hugodown is an experimental package that aims to facilitate the use of <a href="http://rmarkdown.rstudio.com/">RMarkdown</a> and <a href="http://gohugo.io/">hugo</a> together. It’s similar to <a href="https://bookdown.org/yihui/blogdown/">blogdown</a>, but is focussed purely on Hugo websites, and enforces a stricter partitioning of roles: hugodown is responsible for transforming <code>.Rmd</code> to <code>.md</code>, and hugo is responsible for transforming <code>.md</code> to <code>.html</code>.</p>
 <div id="compared-to-blogdown" class="section level2">
 <h2 class="hasAnchor">
 <a href="#compared-to-blogdown" class="anchor"></a>Compared to blogdown</h2>
-<p>Probably the biggest advantage of hugodown over blogdown is that it only re-runs your R code when you explicitly ask for it (by knitting the post). This makes hugodown considerably easy to use for long-running blogs and blogs with multiple contributors. Otherwise, it provides the best of blogdown’s <a href="https://bookdown.org/yihui/blogdown/output-format.html">two Rmarkdown variants</a>: <code>.Rmd</code> and <code>.Rmarkdown</code>.</p>
+<p>Probably the biggest advantage of hugodown over blogdown is that it only re-runs your R code when you explicitly ask for it (by knitting the post). This makes hugodown considerably easier to use for long-running blogs and blogs with multiple contributors. Otherwise, it provides the best of blogdown’s <a href="https://bookdown.org/yihui/blogdown/output-format.html">two Rmarkdown variants</a>: <code>.Rmd</code> and <code>.Rmarkdown</code>.</p>
 <table class="table">
 <thead><tr class="header">
 <th>Feature</th>
@@ -161,7 +161,7 @@
 <p>The key to using hugodown is to put <code>output: hugodown::hugo_document()</code> in the YAML metadata of your <code>.Rmd</code> files. Then knitting the file will generate a <code>.md</code> file designed to work well with hugo. The rest of hugodown just makes your life a little easier:</p>
 <ul>
 <li><p><code><a href="reference/server_start.html">server_start()</a></code> will automatically start a hugo server in the background, automatically previewing your site as you update it.</p></li>
-<li><p><code><a href="reference/post_create.html">post_create()</a></code> will creates a new post (filling in default content from the hugo <a href="https://gohugo.io/content-management/archetypes/">archetype</a>).</p></li>
+<li><p><code><a href="reference/post_create.html">post_create()</a></code> will create a new post (filling in default content from the hugo <a href="https://gohugo.io/content-management/archetypes/">archetype</a>).</p></li>
 <li><p>To knit an <code>.Rmd</code> post, you can use the Knit button to knit to the correct output format. You can also use the keyboard shortcut <code>Cmd+Shift+K</code> (Mac) or <code>Ctrl+Shift+K</code> (Windows/Linux).</p></li>
 <li><p><code><a href="reference/site_outdated.html">site_outdated()</a></code> lists all <code>.Rmd</code> files that need to be re-rendered (i.e. they have changed since the last time their <code>.md</code> was rendered).</p></li>
 </ul>
@@ -188,7 +188,7 @@
     unsafe = true</code></pre>
 </li>
 <li>
-<p>For best syntax hightling results, you’ll must classes:</p>
+<p>For best syntax hightling results, you must use classes:</p>
 <pre class="toml"><code>pygmentsUseClasses = true</code></pre>
 <p>And then ensure that your stylesheet defines styles for the appropriate classes. You can generate starter css with (e.g):</p>
 <pre><code>hugo gen chromastyles --style=monokai</code></pre>
