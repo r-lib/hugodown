@@ -57,7 +57,12 @@ hugo_default_get <- function() {
   }
 }
 hugo_default_set <- function(version) {
-  brio::write_lines(version, hugo_default_path())
+  path <- hugo_default_path()
+  if (is.na(version)) {
+    file_delete(path)
+  } else {
+    brio::write_lines(version, path)
+  }
 }
 
 hugo_installed <- function() {
