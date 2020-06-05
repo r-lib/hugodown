@@ -24,6 +24,7 @@ hugo_install <- function(version = NULL, os = hugo_os(), arch = "64bit", extende
   home <- hugo_home(release$version, os, arch, extended)
   if (file.exists(home)) {
     message("hugo " , release$version, " already installed")
+    hugo_default_inc(release$version)
     return(invisible())
   }
 
@@ -36,6 +37,7 @@ hugo_install <- function(version = NULL, os = hugo_os(), arch = "64bit", extende
     "gz" = utils::untar(temp, exdir = home),
     "zip" = utils::unzip(temp, exdir = home)
   )
+  hugo_default_inc(release$version)
 
   invisible()
 }
