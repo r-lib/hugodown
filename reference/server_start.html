@@ -179,11 +179,20 @@ site from memory, but rendering to disk can be helpful for debugging.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <h2 class="hasAnchor" id="hugo-version"><a class="anchor" href="#hugo-version"></a>Hugo version</h2>
 
-    <p>If you deploy with netlify, hugodown will automatically pick the same
-version of hugo as used on the server (prompting you to call
-<code><a href='hugo_install.html'>hugo_install()</a></code> if needed).</p>
+    
+
+<p>hugodown will attempt to automatically use the correct version of hugo for
+your site (prompting you to call <code><a href='hugo_install.html'>hugo_install()</a></code> if needed). It looks in
+two places:</p><ul>
+<li><p>If <code>_hugodown.yml</code> is present, it looks for the <code>hugo_version</code> key.</p></li>
+<li><p>If <code>netlify.toml</code> is present, it looks in
+<code>context$production$environment$HUGO_VERSION</code></p></li>
+</ul>
+
+<p>This means if you already use netlify, hugodown will automatically match
+the version of hugo that you're using for deployment.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
