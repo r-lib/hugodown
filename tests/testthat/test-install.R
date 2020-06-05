@@ -12,6 +12,8 @@ test_that("can retrieve download urls", {
 
 test_that("can install specified linux/mac version", {
   skip_on_cran()
+  old <- hugo_default_get()
+  on.exit(hugo_default_set(old))
 
   home <- hugo_home("0.55.0", "Linux")
   if (dir_exists(home)) dir_delete(home)
@@ -23,6 +25,10 @@ test_that("can install specified linux/mac version", {
 })
 
 test_that("can install specified windows version", {
+  skip_on_cran()
+  old <- hugo_default_get()
+  on.exit(hugo_default_set(old))
+
   home <- hugo_home("0.55.0", "Windows")
   if (dir_exists(home)) dir_delete(home)
   hugo_install("0.55.0", "Windows")
