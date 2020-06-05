@@ -128,4 +128,4 @@ hugodown does not work with every possible hugo site. There is some config that 
 [footer]: https://github.com/rstudio/hugo-tourmaline/blob/master/layouts/partials/footer.html#L22
 [math_code]: https://github.com/rstudio/hugo-tourmaline/blob/master/static/js/math-code.js
 [styles]: https://xyproto.github.io/splash/docs/all.html
-[footnote-csl]: https://github.com/citation-style-language/styles/blob/master/chicago-fullnote-bibliography.csl)
+[footnote-csl]: https://github.com/citation-style-language/styles/blob/master/chicago-fullnote-bibliography.csl
