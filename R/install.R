@@ -29,7 +29,7 @@ hugo_install <- function(version = NULL, os = hugo_os(), arch = "64bit", extende
 
   message("Downloading ", path_file(release$url), "...")
   temp <- tempfile()
-  utils::download.file(release$url, temp, quiet = TRUE)
+  curl::curl_download(release$url, temp)
 
   message("Installing to ", path_dir(home), "...")
   switch(path_ext(release$url),
