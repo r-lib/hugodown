@@ -7,11 +7,11 @@
 [![Codecov test coverage](https://codecov.io/gh/r-lib/hugodown/branch/master/graph/badge.svg)](https://codecov.io/gh/r-lib/hugodown?branch=master)
 <!-- badges: end -->
 
-hugodown is an experimental package that aims to facilitate the use of [RMarkdown](http://rmarkdown.rstudio.com/) and [hugo](http://gohugo.io/) together. It's similar to [blogdown](https://bookdown.org/yihui/blogdown/), but is focussed purely on Hugo websites, and enforces a stricter partitioning of roles: hugodown is responsible for transforming `.Rmd` to `.md`, and is hugo responsible for transforming `.md` to `.html`.
+hugodown is an experimental package that aims to facilitate the use of [RMarkdown](http://rmarkdown.rstudio.com/) and [hugo](http://gohugo.io/) together. It's similar to [blogdown](https://bookdown.org/yihui/blogdown/), but is focussed purely on Hugo websites, and enforces a stricter partitioning of roles: hugodown is responsible for transforming `.Rmd` to `.md`, and hugo is responsible for transforming `.md` to `.html`.
 
 ## Compared to blogdown
 
-Probably the biggest advantage of hugodown over blogdown is that it only re-runs your R code when you explicitly ask for it (by knitting the post). This makes hugodown considerably easy to use for long-running blogs and blogs with multiple contributors. Otherwise, it provides the best of blogdown's [two Rmarkdown variants](https://bookdown.org/yihui/blogdown/output-format.html): `.Rmd` and `.Rmarkdown`. 
+Probably the biggest advantage of hugodown over blogdown is that it only re-runs your R code when you explicitly ask for it (by knitting the post). This makes hugodown considerably easier to use for long-running blogs and blogs with multiple contributors. Otherwise, it provides the best of blogdown's [two Rmarkdown variants](https://bookdown.org/yihui/blogdown/output-format.html): `.Rmd` and `.Rmarkdown`. 
 
 | Feature               | hugodown `.Rmd` | blogdown `.Rmd` | blogdown `.Rmarkdown` |
 |-----------------------|-----------------|-----------------|-----------------------|
@@ -40,7 +40,7 @@ The key to using hugodown is to put `output: hugodown::hugo_document()` in the Y
 * `server_start()` will automatically start a hugo server in the background,
   automatically previewing your site as you update it.
 
-* `post_create()` will creates a new post (filling in default content from
+* `post_create()` will create a new post (filling in default content from
   the hugo [archetype](https://gohugo.io/content-management/archetypes/)).
   
 * To knit an `.Rmd` post, you can use the Knit button to knit to the correct output format. You can also use the keyboard shortcut `Cmd+Shift+K` (Mac) or `Ctrl+Shift+K` (Windows/Linux).
@@ -73,7 +73,7 @@ hugodown does not work with every possible hugo site. There is some config that 
         unsafe = true
     ```
 
-*   For best syntax hightling results, you'll must classes:
+*   For best syntax hightling results, you must use classes:
 
     ```toml
     pygmentsUseClasses = true
