@@ -101,8 +101,7 @@ academic_patch_params <- function(path) {
 
 academic_write_hugodown <- function(path) {
   opts <- list(
-    hugo_version = "0.66.0",
-    math = "raw"
+    hugo_version = "0.66.0"
   )
   yaml::write_yaml(opts, path(path, "_hugodown.yaml"))
 }
