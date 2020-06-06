@@ -56,6 +56,7 @@ server_start <- function(site = ".",
     wd = path,
     stdout = "|",
     stderr = "2>&1",
+    echo_cmd = TRUE
   )
   if (!ps$is_alive()) {
     abort(ps$read_error())
