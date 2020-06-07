@@ -2,7 +2,7 @@
 % Please edit documentation in R/hugo-format.R
 \name{hugo_document}
 \alias{hugo_document}
-\title{Convert to Hugo-flavoured markdown}
+\title{Deprecated: please use \code{md_document()}}
 \usage{
 hugo_document(
   fig_width = 7,
@@ -11,33 +11,7 @@ hugo_document(
   tidyverse_style = TRUE
 )
 }
-\arguments{
-\item{fig_width}{Figure width (in inches).}
-
-\item{fig_asp}{Figure aspect ratio, defaults to the golden ratio.}
-
-\item{fig_retina}{Scaling to perform for retina displays. Defaults to
-\code{NULL} which performs no scaling. A setting of 2 will work for all
-widely used retina displays, but will also result in the output of
-\code{<img>} tags rather than markdown images due to the need to set the
-width of the image explicitly.}
-
-\item{tidyverse_style}{Use tidyverse knitr conventions? This sets
-\code{collapse = TRUE}, \verb{comment = "#>}, \code{fig.align = "center"}, and
-\code{out.width = "700px"}.}
-}
 \description{
-This RMarkdown output format is designed to generate markdown that is
-maximally compatible with Hugo. It intelligently generates a preview so
-that you see something useful when Hugo isn't running, but it doesn't
-get in the way of hugo's full-site preview when it is.
+Deprecated: please use \code{md_document()}
 }
-\section{Syntax highlighting}{
-
-
-\code{hugo_document()} uses a hybrid system for syntax highlighting.
-For R code it uses \href{http://github.com/r-lib/downlit}{downlit}. For
-other languages, it relies on Chroma, the syntax highlighter built into
-hugo.
-}
-
+\keyword{internal}

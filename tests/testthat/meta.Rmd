@@ -1,5 +1,5 @@
 ---
 author: Hadley
-output: hugo_document
+output: hugodown::md_document
 # this is a comment
 ---

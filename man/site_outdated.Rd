@@ -10,7 +10,7 @@ site_outdated(site = ".")
 \item{site}{Path to hugo site.}
 }
 \description{
-\code{\link[=hugo_document]{hugo_document()}} adds a hash of the input \code{.Rmd} in the YAML metdata of
+\code{\link[=md_document]{md_document()}} adds a hash of the input \code{.Rmd} in the YAML metdata of
 the \code{.md} file that it creates. This provides a reliable way to determine
 whether or not a \code{.Rmd} has been changed since the last time the \code{.md}
 was rendered.

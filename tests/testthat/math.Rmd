@@ -1,5 +1,5 @@
 ---
-output: hugo_document
+output: hugodown::md_document
 ---
 
 $a_1 + b_2$

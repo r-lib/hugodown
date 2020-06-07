@@ -1,4 +1,4 @@
-#' Convert to Hugo-flavoured markdown
+#' An Rmd output format that produces Hugo-flavoured markdown
 #'
 #' This RMarkdown output format is designed to generate markdown that is
 #' maximally compatible with Hugo. It intelligently generates a preview so
@@ -7,7 +7,7 @@
 #'
 #' @section Syntax highlighting:
 #'
-#' `hugo_document()` uses a hybrid system for syntax highlighting.
+#' `md_document()` uses a hybrid system for syntax highlighting.
 #' For R code it uses [downlit](http://github.com/r-lib/downlit). For
 #' other languages, it relies on Chroma, the syntax highlighter built into
 #' hugo.
@@ -19,7 +19,7 @@
 #' @param tidyverse_style Use tidyverse knitr conventions? This sets
 #'   `collapse = TRUE`, `comment = "#>`, `fig.align = "center"`, and
 #'   `out.width = "700px"`.
-hugo_document <- function(fig_width = 7,
+md_document <- function(fig_width = 7,
                           fig_asp = 0.618,
                           fig_retina = NULL,
                           tidyverse_style = TRUE)
@@ -244,3 +244,8 @@ str_replace <- function(x, pattern, fun, ...) {
   regmatches(x, loc) <- out
   x
 }
+
+#' Deprecated: please use `md_document()`
+#' @export
+#' @keywords internal
+hugo_document <- md_document

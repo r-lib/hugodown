@@ -1,5 +1,5 @@
 ---
 title: This post is out of date
-output: hugodown::hugo_document
+output: hugodown::md_document
 ---
 

@@ -109,7 +109,7 @@ academic_write_hugodown <- function(path) {
 academic_patch_post_archetype <- function(path) {
   lines <- brio::read_lines(path)
   lines <- c(lines[1],
-    "output: hugodown::hugo_document",
+    "output: hugodown::md_document",
     lines[-1]
   )
   lines <- line_replace(lines,

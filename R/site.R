@@ -51,7 +51,7 @@ site_hugo_version <- function(path = ".") {
 
 #' Find `.Rmd`s that need to be re-rendered.
 #'
-#' [hugo_document()] adds a hash of the input `.Rmd` in the YAML metdata of
+#' [md_document()] adds a hash of the input `.Rmd` in the YAML metdata of
 #' the `.md` file that it creates. This provides a reliable way to determine
 #' whether or not a `.Rmd` has been changed since the last time the `.md`
 #' was rendered.

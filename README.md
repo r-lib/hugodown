@@ -35,7 +35,7 @@ devtools::install_github("r-lib/hugodown")
 
 ## Usage
 
-The key to using hugodown is to put `output: hugodown::hugo_document()` in the YAML metadata of your `.Rmd` files. Then knitting the file will generate a `.md` file designed to work well with hugo. The rest of hugodown just makes your life a little easier:
+The key to using hugodown is to put `output: hugodown::md_document()` in the YAML metadata of your `.Rmd` files. Then knitting the file will generate a `.md` file designed to work well with hugo. The rest of hugodown just makes your life a little easier:
 
 * `hugo_start()` will automatically start a hugo server in the background,
   automatically previewing your site as you update it.
@@ -117,7 +117,7 @@ hugodown does not work with every possible hugo site. There is some config that 
 ## Converting from blogdown
 
 * Make sure your post archetype has extension `.Rmd` and includes
-  `output: hugodown::hugo_document` in the YAML. The post archetype
+  `output: hugodown::md_document` in the YAML. The post archetype
   should typically be `archetypes/blog/index.Rmd`.
   
 * Delete `index.Rmd` from the root of your site.
