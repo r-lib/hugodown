@@ -37,7 +37,7 @@ devtools::install_github("r-lib/hugodown")
 
 The key to using hugodown is to put `output: hugodown::hugo_document()` in the YAML metadata of your `.Rmd` files. Then knitting the file will generate a `.md` file designed to work well with hugo. The rest of hugodown just makes your life a little easier:
 
-* `server_start()` will automatically start a hugo server in the background,
+* `hugo_start()` will automatically start a hugo server in the background,
   automatically previewing your site as you update it.
 
 * `post_create()` will create a new post (filling in default content from

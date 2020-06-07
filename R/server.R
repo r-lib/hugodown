@@ -13,14 +13,14 @@
 #' the version of hugo that you're using for deployment.
 #'
 #' @description
-#' `server_start()` starts a hugo server that will automatically re-generate
+#' `hugo_start()` starts a hugo server that will automatically re-generate
 #' the site whenever the input changes. You only need to execute this once
 #' per session; it continues to run in the background as you work on the site.
 #'
-#' `server_stop()` kills the server. This happens automatically when you exit
+#' `hugo_stop()` kills the server. This happens automatically when you exit
 #' R so you shouldn't normally need to run this.
 #'
-#' `server_browse()` opens the site in the RStudio viewer or your web browser.
+#' `hugo_browse()` opens the site in the RStudio viewer or your web browser.
 #' @export
 #' @param site Path to hugo site.
 #' @param auto_navigate Automatically navigate to the most recently changed
@@ -29,13 +29,13 @@
 #' @param render_to_disk Render site to disk? The default is to serve the
 #'   site from memory, but rendering to disk can be helpful for debugging.
 #' @param port Port to run server on. For advanced use only.
-server_start <- function(site = ".",
+hugo_start <- function(site = ".",
                          auto_navigate = TRUE,
                          browse = TRUE,
                          render_to_disk = FALSE,
                          port = 1313) {
   path <- site_root(site)
-  server_stop()
+  hugo_stop()
 
   if (port_active(port)) {
     abort("`hugo` already launched elsewhere.")
@@ -93,16 +93,16 @@ server_start <- function(site = ".",
 
   hugodown$server <- ps
   if (browse) {
-    server_browse()
+    hugo_browse()
   }
 
   invisible(ps)
 }
 
-#' @rdname server_start
+#' @rdname hugo_start
 #' @export
-server_stop <- function() {
-  if (!server_running()) {
+hugo_stop <- function() {
+  if (!hugo_running()) {
     return(invisible())
   }
 
@@ -113,9 +113,9 @@ server_stop <- function() {
   invisible()
 }
 
-#' @rdname server_start
+#' @rdname hugo_start
 #' @export
-server_browse <- function() {
+hugo_browse <- function() {
   if (is_installed("rstudioapi") && rstudioapi::hasFun("viewer")) {
     rstudioapi::viewer("http://localhost:1313")
   } else {
@@ -123,7 +123,7 @@ server_browse <- function() {
   }
 }
 
-server_running <- function() {
+hugo_running <- function() {
   env_has(hugodown, "server") && hugodown$server$is_alive()
 }
 
@@ -141,7 +141,7 @@ port_active <- function(port) {
 #' Build hugo site into `public/` directory. Useful for debugging and some
 #' deployment scenarios
 #'
-#' @inheritParams server_start
+#' @inheritParams hugo_start
 #' @param build_drafts,build_future Should drafts and future posts be included
 #'   in the built site?
 #' @export
