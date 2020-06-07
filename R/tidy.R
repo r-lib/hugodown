@@ -1,14 +1,14 @@
 #' Various helpers for tidyverse.org and similar sites
 #'
-#' * `tidy_post_create()` makes a new post
-#' * `tidy_thumbnails()` resizes thumbnails to the correct size
+#' * `use_tidy_post()` makes a new post
+#' * `use_tidy_thumbnails()` resizes thumbnails to the correct size
 #' * `tidy_show_meta()` prints tags and categories used by existing posts.
 #'
 #' @export
 #' @param slug File name of new post. Year and month will be automatically
 #'   appended.
-#' @inheritParams post_create
-tidy_post_create <- function(slug, site = ".", open = is_interactive()) {
+#' @inheritParams use_post
+use_tidy_post <- function(slug, site = ".", open = is_interactive()) {
   check_slug(slug)
 
   post_slug <- paste0("blog/", tolower(slug))
@@ -22,13 +22,13 @@ tidy_post_create <- function(slug, site = ".", open = is_interactive()) {
     data$version <- utils::packageVersion(pieces[[1]])
   }
 
-  post_create(post_slug, data = data, site = site, open = open)
+  use_post(post_slug, data = data, site = site, open = open)
 }
 
-#' @rdname tidy_post_create
+#' @rdname use_tidy_post
 #' @export
 #' @param path Path to blog post
-tidy_thumbnails <- function(path = NULL) {
+use_tidy_thumbnails <- function(path = NULL) {
   if (!is_installed("magick")) {
     abort("Need to install magick package")
   }
@@ -63,7 +63,7 @@ tidy_thumbnails <- function(path = NULL) {
   invisible()
 }
 
-#' @rdname tidy_post_create
+#' @rdname use_tidy_post
 #' @export
 #' @param min Minimum number of uses
 tidy_show_meta <- function(min = 1, site = ".") {

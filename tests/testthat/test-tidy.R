@@ -3,7 +3,7 @@ test_that("tidy_post() adds additional data", {
 
   site <- local_dir(test_path("archetypes"))
   dir_create(path(site, "content", "blog"))
-  test_Rmd <- tidy_post_create("testthat-1-0-0", site = site, open = FALSE)
+  test_Rmd <- use_tidy_post("testthat-1-0-0", site = site, open = FALSE)
 
   rmd <- brio::read_lines(path(test_Rmd, "index.Rmd"))
   expect_equal(rmd[[3]], "package: testthat")
@@ -13,16 +13,16 @@ test_that("tidy_thumnail() complains about bad inputs", {
   skip_if_not_installed("magick")
 
   thumb_path <- function(x) test_path("thumbs", x)
-  expect_error(tidy_thumbnails(thumb_path("missing")), "Can't find")
-  expect_error(tidy_thumbnails(thumb_path("not-square")), "not square")
-  expect_error(tidy_thumbnails(thumb_path("too-narrow")), "too narrow")
+  expect_error(use_tidy_thumbnails(thumb_path("missing")), "Can't find")
+  expect_error(use_tidy_thumbnails(thumb_path("not-square")), "not square")
+  expect_error(use_tidy_thumbnails(thumb_path("too-narrow")), "too narrow")
 })
 
 test_that("tidy_thumbnail() modifies images", {
   skip_if_not_installed("magick")
   path <- local_dir(test_path("thumbs", "ok"))
 
-  tidy_thumbnails(path)
+  use_tidy_thumbnails(path)
 
   sq <- magick::image_info(magick::image_read(file.path(path, "thumbnail-sq.jpg")))
   expect_equal(sq$width, 300)

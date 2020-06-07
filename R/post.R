@@ -2,7 +2,7 @@
 #'
 #' Post creation takes advantage of Hugo's
 #' [archetypes](https://gohugo.io/content-management/archetypes/) or templates,
-#' with an extension for `.Rmd` files. `post_create()` first calls `hugo new`
+#' with an extension for `.Rmd` files. `use_post()` first calls `hugo new`
 #' (which will apply go templating to `.md` files in the archetype),
 #' and then uses [whisker](https://github.com/edwindj/whisker) to template
 #' any `.Rmd` files.
@@ -16,7 +16,7 @@
 #' @param site Path to the hugo site.
 #' @param open Open file for interactive editing?
 #' @export
-post_create <- function(path, kind = NULL, data = list(), site = ".", open = is_interactive()) {
+use_post <- function(path, kind = NULL, data = list(), site = ".", open = is_interactive()) {
   site <- site_root(site)
 
   tld <- path_dir(path)
