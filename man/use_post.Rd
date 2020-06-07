@@ -13,8 +13,13 @@ use_post(path, kind = NULL, data = list(), site = ".", open = is_interactive())
 from the base directory of \code{path}.}
 
 \item{data}{Any additional data to be used when templating \code{.Rmd} files.
-The default set \code{date} to today's date (in YYYY-MM-DD format), and
-author to your name (if set in the \code{usethis.full_name} option).}
+
+The default data includes:
+\itemize{
+\item \code{date}: today's date (in YYYY-MM-DD format).
+\item \code{author}: \code{\link[whoami:fullname]{whoami::fullname()}}.
+\item \code{slug}: taken from the file name of \code{path}.
+}}
 
 \item{site}{Path to the hugo site.}
 

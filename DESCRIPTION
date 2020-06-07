@@ -29,6 +29,7 @@ Imports:
     usethis,
     whisker,
     withr,
+    whoami,
     yaml
 Suggests: 
     covr,
