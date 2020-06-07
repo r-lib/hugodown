@@ -25,6 +25,8 @@ Probably the biggest advantage of hugodown over blogdown is that it only re-runs
 
 The only current limitation is that it does not support within page cross-references to figures, tables, and equations.
 
+hugodown expects certain hugo configuration; see `vignette("config")` for details.
+
 ## Installation
 
 hugodown isn't available from CRAN yet (and might never be), but you can install the development version from GitHub with:
@@ -60,60 +62,6 @@ suppress-bibliography: true
 csl: chicago-fullnote-bibliography.csl
 ```
 
-## Configuration
-
-hugodown does not work with every possible hugo site. There is some config that we assume (typically in `config.toml`, but hugo has a bewildering array of places that this might live instead.)
-
-*   You must use the goldmark markdown renderer, and set `unsafe: true`
-
-    ```toml
-    [markup]
-      defaultMarkdownHandler = "goldmark"
-      [markup.goldmark.renderer]
-        unsafe = true
-    ```
-
-*   For best syntax hightling results, you must use classes:
-
-    ```toml
-    pygmentsUseClasses = true
-    ```
-    
-    And then ensure that your stylesheet defines styles for the appropriate 
-    classes. You can generate starter css with (e.g):
-    
-    ```
-    hugo gen chromastyles --style=monokai
-    ```
-    
-    Substitute `monokai` for the [style of your choice][styles].
-
-*   We recommend ignoring knitr intermediates:
-
-    ```toml
-    ignoreFiles = ['\.Rmd$', '_files$', '_cache$', '\.knit\.md$', '\.utf8\.md$']
-    ```
-
-*   To use html widgets, you must include the following Go template somewhere
-    in the `<head>` layout file for your theme. This will help Hugo find the 
-    HTML dependencies needed to render the widget in a post. You may find this 
-    [blog post](https://zwbetz.com/override-a-hugo-theme/) helpful for 
-    overriding Hugo layouts.
-  
-    ```
-    {{ range .Params.html_dependencies }}
-      {{ . | safeHTML }}
-    {{ end }}
-    ```
-
-*   To use mathjax, you will need to use a series of [small hacks][yihui-mathjax]. 
-    The easiest way is to copy from an existing template, like [tourmaline].
-    Take note of the [`footer_mathjax.html`][footer_mathjax] partial, which
-    is then included in the [`footer.html`][footer]. You'll also need to include
-    [`math_code.js`][math_code] in your `static/` directory. Once that's done
-    you can use inline math like `$math$`, and display math like 
-    `` `$$ math $$` `` (note the extra backtick compared to usual).
-
 ## Converting from blogdown
 
 * Make sure your post archetype has extension `.Rmd` and includes
@@ -121,6 +69,8 @@ hugodown does not work with every possible hugo site. There is some config that 
   should typically be `archetypes/blog/index.Rmd`.
   
 * Delete `index.Rmd` from the root of your site.
+
+* Ensure that hugo is configured as described in `vignette("config")`.
 
 [yihui-mathjax]: https://yihui.org/en/2018/07/latex-math-markdown/ 
 [tourmaline]: https://github.com/rstudio/hugo-tourmaline
