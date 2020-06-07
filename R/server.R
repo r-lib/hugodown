@@ -28,18 +28,20 @@
 #' @param browse Automatically preview the site after the server starts?
 #' @param render_to_disk Render site to disk? The default is to serve the
 #'   site from memory, but rendering to disk can be helpful for debugging.
+#' @param port Port to run server on. For advanced use only.
 server_start <- function(site = ".",
                          auto_navigate = TRUE,
                          browse = TRUE,
-                         render_to_disk = FALSE) {
+                         render_to_disk = FALSE,
+                         port = 1313) {
   path <- site_root(site)
   server_stop()
 
-  if (port_active(1313)) {
+  if (port_active(port)) {
     abort("`hugo` already launched elsewhere.")
   }
 
-  port <- 1313L
+  message("Starting server on port ", port)
   args <- c(
     "server",
     "--port", port,
@@ -48,16 +50,7 @@ server_start <- function(site = ".",
     if (auto_navigate) "--navigateToChanged",
     if (render_to_disk) "--renderToDisk"
   )
-
-  message("Starting server on port ", port)
-  ps <- processx::process$new(
-    hugo_locate(site_hugo_version(path)),
-    args,
-    wd = path,
-    stdout = "|",
-    stderr = "2>&1",
-    echo_cmd = TRUE
-  )
+  ps <- hugo_run_bg(path, args, stdout = "|", stderr = "2>&1")
   if (!ps$is_alive()) {
     abort(ps$read_error())
   }
@@ -162,6 +155,6 @@ hugo_build <- function(site = ".",
     if (build_drafts) "--buildDrafts",
     if (build_future) "--buildFuture"
   )
-  hugo_run(site_hugo_version(path), args, wd = path)
+  hugo_run(path, args)
   invisible()
 }

@@ -10,7 +10,8 @@ server_start(
   site = ".",
   auto_navigate = TRUE,
   browse = TRUE,
-  render_to_disk = FALSE
+  render_to_disk = FALSE,
+  port = 1313
 )
 
 server_stop()
@@ -27,6 +28,8 @@ page?}
 
 \item{render_to_disk}{Render site to disk? The default is to serve the
 site from memory, but rendering to disk can be helpful for debugging.}
+
+\item{port}{Port to run server on. For advanced use only.}
 }
 \description{
 \code{server_start()} starts a hugo server that will automatically re-generate

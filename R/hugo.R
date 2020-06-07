@@ -10,17 +10,14 @@ hugo_locate <- function(version = hugo_default_get()) {
   path(path, "hugo")
 }
 
-hugo_path <- function(version) {
-  path <- unname(Sys.which("hugo"))
+hugo_run <- function(site, args, ...) {
+  path <- site_root(site)
+  hugo <- hugo_locate(site_hugo_version(path))
+  processx::run(hugo, args, wd = path, ...)
 }
 
-hugo_version <- function(version) {
-  out <- hugo_run(version, "version")$stdout
-  loc <- regexpr("v([0-9.]+)", out)
-  version <- gsub("v", "", regmatches(out, loc))
-  package_version(version)
-}
-
-hugo_run <- function(version, args, wd = NULL, ...) {
-  processx::run(hugo_locate(version), args = args, wd = wd, ...)
+hugo_run_bg <- function(site, args, ...) {
+  path <- site_root(site)
+  hugo <- hugo_locate(site_hugo_version(path))
+  processx::process$new(hugo, args, wd = path, ...)
 }
