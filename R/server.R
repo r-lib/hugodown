@@ -141,3 +141,27 @@ port_active <- function(port) {
     TRUE
   }, error = function(e) FALSE)
 }
+
+
+#' Build site
+#'
+#' Build hugo site into `public/` directory. Useful for debugging and some
+#' deployment scenarios
+#'
+#' @inheritParams server_start
+#' @param build_drafts,build_future Should drafts and future posts be included
+#'   in the built site?
+#' @export
+hugo_build <- function(site = ".",
+                       build_drafts = FALSE,
+                       build_future = FALSE) {
+  path <- site_root(site)
+
+  args <- c(
+    character(),
+    if (build_drafts) "--buildDrafts",
+    if (build_future) "--buildFuture"
+  )
+  hugo_run(site_hugo_version(path), args, wd = path)
+  invisible()
+}
