@@ -186,7 +186,7 @@ extract_yaml <- function(lines) {
 
 knit_hooks <- function() {
   in_code <- FALSE
-  needs_code <- function(val, x) {
+  needs_code <- function(val, x, before = TRUE) {
     if (val == in_code) {
       return(x)
     }
@@ -194,10 +194,24 @@ knit_hooks <- function() {
     in_code <<- val
     if (val) {
       html <- "<pre class='chroma'><code class='language-r' data-lang='r'>"
+      ws <- ""
     } else {
       html <- "</code></pre>"
+
+      # move trailing newline after code
+      if (grepl("\n$", x)) {
+        x <- gsub("\n$", "", x)
+        ws <- "\n"
+      } else {
+        ws <- ""
+      }
     }
-    paste0(html, x)
+
+    if (before) {
+      paste0(html, x, ws)
+    } else {
+      paste0(x, html, ws)
+    }
   }
 
   hook_output <- function(type, x, options) {
@@ -221,7 +235,7 @@ knit_hooks <- function() {
   }
 
   hook_chunk <- function(x, options, ...) {
-    x <- paste(x, needs_code(FALSE, "")) # reset for next chunk
+    x <- needs_code(FALSE, x, before = FALSE) # reset for next chunk
     x <- indent(x, options$indent)
     paste0("<div class='highlight'>", x, "</div>")
   }

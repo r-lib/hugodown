@@ -35,8 +35,7 @@ All code/output
 <span class='nf'>message</span>(<span class='s'>"message"</span>)
 <span class='c'>#&gt; message</span>
 <span class='nf'>warning</span>(<span class='s'>"warning"</span>)
-<span class='c'>#&gt; Warning: warning</span>
- </code></pre>
+<span class='c'>#&gt; Warning: warning</span></code></pre>
 
 </div>
 
