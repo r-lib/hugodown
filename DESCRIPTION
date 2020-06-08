@@ -19,6 +19,7 @@ Imports:
     curl,
     digest,
     downlit,
+    evaluate,
     fs,
     later,
     processx,

@@ -1,0 +1,28 @@
+---
+output: hugodown::md_document
+---
+
+## Mixed as_is and coode
+
+```{r}
+df <- data.frame(x = 1)
+df
+
+knitr::kable(df)
+```
+
+
+## All code/output
+
+```{r}
+# comment
+print("print")
+message("message")
+warning("warning")
+```
+
+## Chunk with only a figure
+
+```{r, echo = FALSE}
+plot(1:5)
+```

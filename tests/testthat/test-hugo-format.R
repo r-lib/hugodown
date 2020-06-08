@@ -32,6 +32,13 @@ test_that("code is linked/highlighted", {
   expect_equal(sum(grepl("[`stats::median()`]", lines, fixed = TRUE)), 1)
 })
 
+test_that("interweaving of code and output generates correct html", {
+  rmd <- local_file(test_path("knit-hooks.Rmd"))
+  rmarkdown::render(rmd, quiet = TRUE)
+  out <- brio::read_lines(path(path_dir(rmd), "knit-hooks.md"))
+  verify_output(test_path("test-hugo-format-hooks.txt"), cat_line(out))
+})
+
 test_that("markdown div syntax is converted to native divs", {
   rmd <- local_file(test_path("div.Rmd"))
   rmarkdown::render(rmd, quiet = TRUE)

@@ -36,15 +36,7 @@ md_document <- function(fig_width = 7,
   # Ensure knitr doesn't turn HTML widgets into pngs
   knitr$opts_chunk$screenshot.force <- FALSE
 
-  knitr$knit_hooks <- list(
-    chunk   = hook_chunk,
-    output  = hook_output,
-    source  = hook_source,
-    output  = function(x, opts) hook_output("output", x, opts),
-    warning = function(x, opts) hook_output("warning", x, opts),
-    error   = function(x, opts) hook_output("error", x, opts),
-    message = function(x, opts) hook_output("message", x, opts)
-  )
+  knitr$knit_hooks <- knit_hooks()
 
   if (tidyverse_style) {
     knitr$opts_chunk$collapse <- TRUE
@@ -192,19 +184,65 @@ extract_yaml <- function(lines) {
 
 # knitr hooks -------------------------------------------------------------
 
-hook_output <- function(type, x, options) {
-  x <- paste0(x, "\n", collapse = "")
-  downlit::highlight(x, pre_class = NULL)
+knit_hooks <- function() {
+  in_code <- FALSE
+  needs_code <- function(val) {
+    if (val == in_code) {
+      return()
+    }
+
+    in_code <<- val
+    if (val) {
+      "<pre class='chroma'><code class='language-r' data-lang='r'>"
+    } else {
+      "</code></pre>"
+    }
+  }
+
+  hook_output <- function(type, x, options) {
+    if (options$results == "asis") {
+      paste0(needs_code(FALSE), x)
+    } else {
+      x <- paste0(x, "\n", collapse = "")
+      x <- downlit::highlight(x, pre_class = NULL)
+      paste0(needs_code(TRUE), x)
+    }
+  }
+  hook_source <- function(x, options) {
+    x <- paste0(x, "\n", collapse = "")
+    x <- downlit::highlight(x, pre_class = NULL)
+    paste0(needs_code(TRUE), x, "\n")
+  }
+  hook_plot <- function(x, options) {
+    x <- knitr::hook_plot_md(x, options)
+    paste0(needs_code(FALSE), x)
+  }
+
+  hook_chunk <- function(x, options, ...) {
+    x <- paste(x, needs_code(FALSE)) # reset for next chunk
+    x <- indent(x, options$indent)
+    paste0("<div class='highlight'>", x, "</div>")
+  }
+
+  evaluate <- function(...) {
+    # Setting output format to latex ensures that asis outputs are still
+    # passed to hook_output
+    knitr::opts_knit$set(out.format = "latex")
+    evaluate::evaluate(...)
+  }
+
+  list(
+    chunk   = hook_chunk,
+    evaluate = evaluate,
+    source  = hook_source,
+    plot    = hook_plot,
+    output  = function(x, opts) hook_output("output", x, opts),
+    warning = function(x, opts) hook_output("warning", x, opts),
+    error   = function(x, opts) hook_output("error", x, opts),
+    message = function(x, opts) hook_output("message", x, opts)
+  )
 }
-hook_source <- function(x, options) {
-  x <- paste0(x, "\n", collapse = "")
-  out <- downlit::highlight(x, pre_class = NULL)
-  paste0(out, "\n")
-}
-hook_chunk <- function(x, options, ...) {
-  x <- indent(x, options$indent)
-  paste0("<pre class='chroma'>", x, "</pre>")
-}
+
 
 indent <- function(x, indent) {
   if (is.null(indent)) {
