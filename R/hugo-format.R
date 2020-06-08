@@ -186,40 +186,42 @@ extract_yaml <- function(lines) {
 
 knit_hooks <- function() {
   in_code <- FALSE
-  needs_code <- function(val) {
+  needs_code <- function(val, x) {
     if (val == in_code) {
-      return()
+      return(x)
     }
 
     in_code <<- val
     if (val) {
-      "<pre class='chroma'><code class='language-r' data-lang='r'>"
+      html <- "<pre class='chroma'><code class='language-r' data-lang='r'>"
     } else {
-      "</code></pre>"
+      html <- "</code></pre>"
     }
+    paste0(html, x)
   }
 
   hook_output <- function(type, x, options) {
     if (options$results == "asis") {
-      paste0(needs_code(FALSE), x)
+      needs_code(FALSE, x)
     } else {
       x <- paste0(x, "\n", collapse = "")
       x <- downlit::highlight(x, pre_class = NULL)
-      paste0(needs_code(TRUE), x)
+      needs_code(TRUE, x)
     }
   }
   hook_source <- function(x, options) {
     x <- paste0(x, "\n", collapse = "")
     x <- downlit::highlight(x, pre_class = NULL)
-    paste0(needs_code(TRUE), x, "\n")
+    x <- paste0(x, "\n")
+    needs_code(TRUE, x)
   }
   hook_plot <- function(x, options) {
     x <- knitr::hook_plot_md(x, options)
-    paste0(needs_code(FALSE), x)
+    needs_code(FALSE, x)
   }
 
   hook_chunk <- function(x, options, ...) {
-    x <- paste(x, needs_code(FALSE)) # reset for next chunk
+    x <- paste(x, needs_code(FALSE, "")) # reset for next chunk
     x <- indent(x, options$indent)
     paste0("<div class='highlight'>", x, "</div>")
   }
