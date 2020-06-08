@@ -7,7 +7,7 @@
 hugo_document(
   fig_width = 7,
   fig_asp = 0.618,
-  fig_retina = NULL,
+  fig_retina = 2,
   tidyverse_style = TRUE
 )
 }
