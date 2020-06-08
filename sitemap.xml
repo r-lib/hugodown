@@ -4,24 +4,36 @@
     <loc>https://hugodown.r-lib.org/index.html</loc>
   </url>
   <url>
+    <loc>https://hugodown.r-lib.org/reference/create_site_academic.html</loc>
+  </url>
+  <url>
+    <loc>https://hugodown.r-lib.org/reference/hugo_build.html</loc>
+  </url>
+  <url>
     <loc>https://hugodown.r-lib.org/reference/hugo_document.html</loc>
   </url>
   <url>
     <loc>https://hugodown.r-lib.org/reference/hugo_install.html</loc>
   </url>
   <url>
+    <loc>https://hugodown.r-lib.org/reference/hugo_start.html</loc>
+  </url>
+  <url>
     <loc>https://hugodown.r-lib.org/reference/hugodown-package.html</loc>
   </url>
   <url>
-    <loc>https://hugodown.r-lib.org/reference/post_create.html</loc>
-  </url>
-  <url>
-    <loc>https://hugodown.r-lib.org/reference/server_start.html</loc>
+    <loc>https://hugodown.r-lib.org/reference/md_document.html</loc>
   </url>
   <url>
     <loc>https://hugodown.r-lib.org/reference/site_outdated.html</loc>
   </url>
   <url>
-    <loc>https://hugodown.r-lib.org/reference/tidy_post_create.html</loc>
+    <loc>https://hugodown.r-lib.org/reference/use_post.html</loc>
+  </url>
+  <url>
+    <loc>https://hugodown.r-lib.org/reference/use_tidy_post.html</loc>
+  </url>
+  <url>
+    <loc>https://hugodown.r-lib.org/articles/config.html</loc>
   </url>
 </urlset>

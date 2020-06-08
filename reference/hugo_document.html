@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Convert to Hugo-flavoured markdown — hugo_document • hugodown</title>
+<title>Deprecated: please use <code>md_document()</code> — hugo_document • hugodown</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,11 +46,8 @@
 
 
 
-<meta property="og:title" content="Convert to Hugo-flavoured markdown — hugo_document" />
-<meta property="og:description" content="This RMarkdown output format is designed to generate markdown that is
-maximally compatible with Hugo. It intelligently generates a preview so
-that you see something useful when Hugo isn't running, but it doesn't
-get in the way of hugo's full-site preview when it is." />
+<meta property="og:title" content="Deprecated: please use <code>md_document()</code> — hugo_document" />
+<meta property="og:description" content="Deprecated: please use md_document()" />
 <meta property="og:image" content="https://hugodown.r-lib.org/logo.png" />
 
 
@@ -108,6 +105,18 @@ get in the way of hugo's full-site preview when it is." />
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/config.html">hugodown configuration</a>
+    </li>
+  </ul>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -129,16 +138,13 @@ get in the way of hugo's full-site preview when it is." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Convert to Hugo-flavoured markdown</h1>
+    <h1>Deprecated: please use <code>md_document()</code></h1>
     <small class="dont-index">Source: <a href='https://github.com/r-lib/hugodown/blob/master/R/hugo-format.R'><code>R/hugo-format.R</code></a></small>
     <div class="hidden name"><code>hugo_document.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This RMarkdown output format is designed to generate markdown that is
-maximally compatible with Hugo. It intelligently generates a preview so
-that you see something useful when Hugo isn't running, but it doesn't
-get in the way of hugo's full-site preview when it is.</p>
+    <p>Deprecated: please use <code><a href='md_document.html'>md_document()</a></code></p>
     </div>
 
     <pre class="usage"><span class='fu'>hugo_document</span>(
@@ -148,42 +154,7 @@ get in the way of hugo's full-site preview when it is.</p>
   <span class='kw'>tidyverse_style</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
 )</pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>fig_width</th>
-      <td><p>Figure width (in inches).</p></td>
-    </tr>
-    <tr>
-      <th>fig_asp</th>
-      <td><p>Figure aspect ratio, defaults to the golden ratio.</p></td>
-    </tr>
-    <tr>
-      <th>fig_retina</th>
-      <td><p>Scaling to perform for retina displays. Defaults to
-<code>NULL</code> which performs no scaling. A setting of 2 will work for all
-widely used retina displays, but will also result in the output of
-<code>&lt;img&gt;</code> tags rather than markdown images due to the need to set the
-width of the image explicitly.</p></td>
-    </tr>
-    <tr>
-      <th>tidyverse_style</th>
-      <td><p>Use tidyverse knitr conventions? This sets
-<code>collapse = TRUE</code>, <code>comment = "#&gt;</code>, <code>fig.align = "center"</code>, and
-<code>out.width = "700px"</code>.</p></td>
-    </tr>
-    </table>
 
-    <h2 class="hasAnchor" id="syntax-highlighting"><a class="anchor" href="#syntax-highlighting"></a>Syntax highlighting</h2>
-
-    
-
-
-<p><code>hugo_document()</code> uses a hybrid system for syntax highlighting.
-For R code it uses <a href='http://github.com/r-lib/downlit'>downlit</a>. For
-other languages, it relies on Chroma, the syntax highlighter built into
-hugo.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
