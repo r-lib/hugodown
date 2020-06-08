@@ -39,6 +39,12 @@ use_post <- function(path, kind = NULL, data = list(), site = ".", open = is_int
   )
   hugo_run(site, args)
 
+
+  # Not a bundle
+  if (!file_exists(dest)) {
+    return()
+  }
+
   rmds <- dir_ls(dest, glob = "*.Rmd")
   defaults <- list(
     slug = path_file(path),
