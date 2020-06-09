@@ -35,20 +35,23 @@ hugodown does not work with every possible hugo site. There is some config that 
         unsafe = true
     ```
 
-*   For best syntax hightling results, you must use classes:
+*   For best syntax hightlighting results, you must use classes:
 
     ```toml
     pygmentsUseClasses = true
     ```
     
-    And then ensure that your stylesheet defines styles for the appropriate 
-    classes. You can generate starter css with (e.g):
+    You then must ensure that your stylesheet defines styles for the
+    CSS classes. You can generate starter css with (e.g):
     
     ```
-    hugo gen chromastyles --style=monokai
+    hugo gen chromastyles --style=pygments
     ```
     
-    Substitute `monokai` for the [style of your choice][styles].
+    Substitute `pygments` for the [style of your choice][styles], and 
+    copy the resulting code into the appropriate CSS file. Unfortunately,
+    the correct location varies by theme, so you'll need to do a little 
+    detective work to figure out the best place to put it.
 
 *   We recommend ignoring knitr intermediates:
 
