@@ -53,6 +53,7 @@ md_document <- function(fig_width = 7,
 
   input_rmd <- NULL
   old_options <- NULL
+  old_env <- NULL
 
   pre_knit <- function(input, ...) {
     input_rmd <<- input
@@ -60,9 +61,11 @@ md_document <- function(fig_width = 7,
       cli.unicode = TRUE,
       crayon.enabled = TRUE
     )
+    old_env <- set_envvar(c(RSTUDIO = 0))
   }
   on_exit <- function(...) {
     options(old_options)
+    set_envvar(old_env)
   }
 
   hack_always_allow_html <- function(...) {

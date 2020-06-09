@@ -8,7 +8,7 @@ rmd_hash: d484af5893ff5f57
 <div class="highlight">
 
 <pre class='chroma'><code class='language-r' data-lang='r'><span class='c'>#&gt; <span style='color: #0000BB;'>blue</span></span>
-<span class='c'>#&gt; ✓</span></code></pre>
+<span class='c'>#&gt; ✔</span></code></pre>
 
 </div>
 
