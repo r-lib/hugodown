@@ -37,6 +37,7 @@ test_that("code is linked/highlighted", {
 })
 
 test_that("output gets unicode and colour", {
+  skip_on_os("windows")
   rmd <- local_file(test_path("output.Rmd"))
   rmarkdown::render(rmd, quiet = TRUE)
   lines <- brio::read_lines(path(path_dir(rmd), "output.md"))
