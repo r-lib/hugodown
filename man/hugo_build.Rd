@@ -4,15 +4,26 @@
 \alias{hugo_build}
 \title{Build site}
 \usage{
-hugo_build(site = ".", build_drafts = FALSE, build_future = FALSE)
+hugo_build(
+  site = ".",
+  dest = NULL,
+  build_drafts = FALSE,
+  build_future = FALSE,
+  clean = FALSE
+)
 }
 \arguments{
 \item{site}{Path to hugo site.}
 
+\item{dest}{Destination directory. If \code{NULL}, the default, will build
+in \code{{site}/public}}
+
 \item{build_drafts, build_future}{Should drafts and future posts be included
 in the built site?}
+
+\item{clean}{Remove files in \verb{public/} that don't exist in the source.}
 }
 \description{
-Build hugo site into \verb{public/} directory. Useful for debugging and some
+Build static html into specified directory. Useful for debugging and some
 deployment scenarios
 }

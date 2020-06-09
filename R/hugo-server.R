@@ -138,22 +138,29 @@ port_active <- function(port) {
 
 #' Build site
 #'
-#' Build hugo site into `public/` directory. Useful for debugging and some
+#' Build static html into specified directory. Useful for debugging and some
 #' deployment scenarios
 #'
 #' @inheritParams hugo_start
+#' @param dest Destination directory. If `NULL`, the default, will build
+#'   in `{site}/public`
 #' @param build_drafts,build_future Should drafts and future posts be included
 #'   in the built site?
+#' @param clean Remove files in `public/` that don't exist in the source.
 #' @export
 hugo_build <- function(site = ".",
+                       dest = NULL,
                        build_drafts = FALSE,
-                       build_future = FALSE) {
+                       build_future = FALSE,
+                       clean = FALSE) {
   path <- site_root(site)
+  dest <- dest %||% path(path, "public")
 
   args <- c(
-    character(),
+    "--destination", dest,
     if (build_drafts) "--buildDrafts",
-    if (build_future) "--buildFuture"
+    if (build_future) "--buildFuture",
+    if (clean) "--cleanDestinationDir"
   )
   hugo_run(path, args)
   invisible()

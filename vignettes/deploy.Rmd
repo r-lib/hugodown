@@ -1,0 +1,40 @@
+---
+title: "Deployment"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Deployment}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This vignette describes the process of deployment, how you get your hugodown website off your local computer and on to the internet for everyone to see. There are two main ways to deploy a hugodown site:
+
+* With GitHub actions to GitHub pages. 
+
+* With [netlify](https://www.netlify.com).
+
+(In either case, I assume you're already familiar with the basics of Git and GitHub. If you're not, you may need to start with [Happy Git and GitHub for the R user](http://happygitwithr.com/) by Jenny Bryan.)
+
+## GitHub pages
+
+You'll need to make two changes to your site:
+
+* Run `file.create("static/.nojekyll")`. This ensures that GitHub pages knows
+  that you're using a regular HTML website, not a jekyll website (jekyll is 
+  GitHub's own blogging system).
+  
+* If you have a custom domain name, create `static/CNAME` containing your
+  domain name (just `tidyverse.org`, not `https://tidyverse.org`). Note
+  that setting a custom domain name in the admin settings on your GitHub repo
+  will not work because it will get blown away.
+
+## Netlify
+
+<https://alison.rbind.io/post/2017-06-12-up-and-running-with-blogdown/#deploy-in-netlify>
