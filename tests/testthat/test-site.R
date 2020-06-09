@@ -18,7 +18,8 @@ test_that("walks up path to find root", {
 })
 
 test_that("can find hugodown config", {
-  expect_equal(site_config(test_path("config-hugodown")), list(test = TRUE))
+  config <- site_config(test_path("config-hugodown"))
+  expect_equal(config, list(test = TRUE, hugo_version = "0.66.0"))
 })
 
 # out of date -------------------------------------------------------------

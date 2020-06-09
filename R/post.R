@@ -53,7 +53,7 @@ use_post <- function(path, kind = NULL, data = list(), site = ".", open = is_int
   )
   data <- utils::modifyList(defaults, data)
 
-  lapply(rmds, rmd_template, data)
+  lapply(rmds, function(path) whisker_template(path, path, data))
 
   index <- dir_ls(dest, pattern = "index")
   usethis::edit_file(index, open = open)
@@ -61,8 +61,8 @@ use_post <- function(path, kind = NULL, data = list(), site = ".", open = is_int
   invisible(dest)
 }
 
-rmd_template <- function(path, data) {
-  file <- brio::read_file(path)
+whisker_template <- function(in_path, out_path, data) {
+  file <- brio::read_file(in_path)
   out <- whisker::whisker.render(file, data)
-  brio::write_lines(out, path)
+  brio::write_lines(out, out_path)
 }
