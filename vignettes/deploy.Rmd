@@ -14,11 +14,17 @@ knitr::opts_chunk$set(
 )
 ```
 
-This vignette describes the process of deployment, how you get your hugodown website off your local computer and on to the internet for everyone to see. There are two main ways to deploy a hugodown site:
+This vignette describes the process of deployment, how you get your hugodown website off your local computer and on to the internet for everyone to see. I recommend three main ways of deploying a hugodown site:
 
 * With GitHub actions to GitHub pages. 
 
 * With [netlify](https://www.netlify.com).
+
+* With RStudio Connect, if you want to publish to a connect server within your
+  company.
+
+There are many other possibilities, but these two cover a wide range of needs, and form the basis for more sophisticated approaches.
+
 
 (In either case, I assume you're already familiar with the basics of Git and GitHub. If you're not, you may need to start with [Happy Git and GitHub for the R user](http://happygitwithr.com/) by Jenny Bryan.)
 
@@ -38,3 +44,8 @@ You'll need to make two changes to your site:
 ## Netlify
 
 <https://alison.rbind.io/post/2017-06-12-up-and-running-with-blogdown/#deploy-in-netlify>
+
+
+## RStudio connect
+
+* Need `relativeURLS=true` in your `config.toml`.
