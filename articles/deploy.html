@@ -105,11 +105,13 @@
 
     
     
-<p>This vignette describes the process of deployment, how you get your hugodown website off your local computer and on to the internet for everyone to see. There are two main ways to deploy a hugodown site:</p>
+<p>This vignette describes the process of deployment, how you get your hugodown website off your local computer and on to the internet for everyone to see. I recommend three main ways of deploying a hugodown site:</p>
 <ul>
 <li><p>With GitHub actions to GitHub pages.</p></li>
 <li><p>With <a href="https://www.netlify.com">netlify</a>.</p></li>
+<li><p>With RStudio Connect, if you want to publish to a connect server within your company.</p></li>
 </ul>
+<p>There are many other possibilities, but these two cover a wide range of needs, and form the basis for more sophisticated approaches.</p>
 <p>(In either case, I assume you’re already familiar with the basics of Git and GitHub. If you’re not, you may need to start with <a href="http://happygitwithr.com/">Happy Git and GitHub for the R user</a> by Jenny Bryan.)</p>
 <div id="github-pages" class="section level2">
 <h2 class="hasAnchor">
@@ -124,6 +126,13 @@
 <h2 class="hasAnchor">
 <a href="#netlify" class="anchor"></a>Netlify</h2>
 <p><a href="https://alison.rbind.io/post/2017-06-12-up-and-running-with-blogdown/#deploy-in-netlify" class="uri">https://alison.rbind.io/post/2017-06-12-up-and-running-with-blogdown/#deploy-in-netlify</a></p>
+</div>
+<div id="rstudio-connect" class="section level2">
+<h2 class="hasAnchor">
+<a href="#rstudio-connect" class="anchor"></a>RStudio connect</h2>
+<ul>
+<li>Need <code>relativeURLS=true</code> in your <code>config.toml</code>.</li>
+</ul>
 </div>
   </div>
 

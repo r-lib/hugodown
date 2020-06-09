@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • hugodown</title>
+<title>Find hugo version needed for current site — hugo_version • hugodown</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,12 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Find hugo version needed for current site — hugo_version" />
+<meta property="og:description" content="Hugo changes rapidly, so it's important to pin your site to a specific
+version and then deliberately update when needed. This function reports
+which of hugo your site correctly uses.
+The primary location of this information is the hugo_version field
+in hugodown.yaml. If that doesn't exist, we also look in netlify.toml." />
 <meta property="og:image" content="https://hugodown.r-lib.org/logo.png" />
 
 
@@ -76,7 +81,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -138,96 +143,37 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Find hugo version needed for current site</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-lib/hugodown/blob/master/R/hugo-version.R'><code>R/hugo-version.R</code></a></small>
+    <div class="hidden name"><code>hugo_version.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Hugo changes rapidly, so it's important to pin your site to a specific
+version and then deliberately update when needed. This function reports
+which of hugo your site correctly uses.</p>
+<p>The primary location of this information is the <code>hugo_version</code> field
+in <code>hugodown.yaml</code>. If that doesn't exist, we also look in <code>netlify.toml</code>.</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>hugo_version</span>(<span class='kw'>site</span> <span class='kw'>=</span> <span class='st'>"."</span>)</pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="create_site_academic.html">create_site_academic()</a></code> </p>
-        </td>
-        <td><p>Create a hugo academic site</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="hugo_build.html">hugo_build()</a></code> </p>
-        </td>
-        <td><p>Build site</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="hugo_install.html">hugo_install()</a></code> </p>
-        </td>
-        <td><p>Install specified version of hugo</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="hugo_start.html">hugo_start()</a></code> <code><a href="hugo_start.html">hugo_stop()</a></code> <code><a href="hugo_start.html">hugo_browse()</a></code> </p>
-        </td>
-        <td><p>Manage the hugo server</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="hugo_version.html">hugo_version()</a></code> </p>
-        </td>
-        <td><p>Find hugo version needed for current site</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="md_document.html">md_document()</a></code> </p>
-        </td>
-        <td><p>An Rmd output format that produces Hugo-flavoured markdown</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="site_outdated.html">site_outdated()</a></code> </p>
-        </td>
-        <td><p>Find <code>.Rmd</code>s that need to be re-rendered.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="use_netlify_toml.html">use_netlify_toml()</a></code> </p>
-        </td>
-        <td><p>Create <code>netlify.toml</code></p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="use_post.html">use_post()</a></code> </p>
-        </td>
-        <td><p>Create a new post</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="use_tidy_post.html">use_tidy_post()</a></code> <code><a href="use_tidy_post.html">use_tidy_thumbnails()</a></code> <code><a href="use_tidy_post.html">tidy_show_meta()</a></code> </p>
-        </td>
-        <td><p>Various helpers for tidyverse.org and similar sites</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>site</th>
+      <td><p>Path to hugo site.</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='hugo_install.html'>hugo_install()</a></code> to install any version of hugo.</p></div>
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>

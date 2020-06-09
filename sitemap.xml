@@ -19,6 +19,9 @@
     <loc>https://hugodown.r-lib.org/reference/hugo_start.html</loc>
   </url>
   <url>
+    <loc>https://hugodown.r-lib.org/reference/hugo_version.html</loc>
+  </url>
+  <url>
     <loc>https://hugodown.r-lib.org/reference/hugodown-package.html</loc>
   </url>
   <url>
@@ -26,6 +29,9 @@
   </url>
   <url>
     <loc>https://hugodown.r-lib.org/reference/site_outdated.html</loc>
+  </url>
+  <url>
+    <loc>https://hugodown.r-lib.org/reference/use_netlify_toml.html</loc>
   </url>
   <url>
     <loc>https://hugodown.r-lib.org/reference/use_post.html</loc>
