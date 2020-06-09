@@ -17,12 +17,15 @@ test_that("can start, restart, and stop server", {
 # build -------------------------------------------------------------------
 
 test_that("default builds into public", {
+  skip_if_no_hugo()
+
   path <- local_dir(test_path("minimal"))
   hugo_build(path)
   expect_true(file_exists(path(path, "public", "index.html")))
 })
 
 test_that("can build into any directory", {
+  skip_if_no_hugo()
   path <- dir_create(file_temp())
 
   hugo_build(test_path("minimal"), path)
