@@ -52,8 +52,17 @@ md_document <- function(fig_width = 7,
   )
 
   input_rmd <- NULL
+  old_options <- NULL
+
   pre_knit <- function(input, ...) {
     input_rmd <<- input
+    old_options <<- options(
+      cli.unicode = TRUE,
+      crayon.enabled = TRUE
+    )
+  }
+  on_exit <- function(...) {
+    options(old_options)
   }
 
   hack_always_allow_html <- function(...) {
@@ -123,6 +132,7 @@ md_document <- function(fig_width = 7,
     post_processor = postprocess,
     pre_knit = pre_knit,
     post_knit = hack_always_allow_html,
+    on_exit = on_exit
   )
 }
 

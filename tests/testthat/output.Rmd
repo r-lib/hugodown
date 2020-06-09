@@ -1,0 +1,8 @@
+---
+output: hugodown::md_document
+---
+
+```{r, echo = FALSE}
+cat(cli::col_blue("blue"))
+cat(cli::symbol$tick)
+```
