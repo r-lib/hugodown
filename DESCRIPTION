@@ -42,7 +42,8 @@ Suggests:
     testthat,
     knitr
 Remotes: 
-    r-lib/downlit
+    r-lib/downlit,
+    rstudio/rmarkdown
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
