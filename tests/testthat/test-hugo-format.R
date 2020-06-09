@@ -35,8 +35,10 @@ test_that("code is linked/highlighted", {
 test_that("output gets unicode and colour", {
   rmd <- local_file(test_path("output.Rmd"))
   rmarkdown::render(rmd, quiet = TRUE)
-  out <- brio::read_lines(path(path_dir(rmd), "output.md"))
-  verify_output(test_path("test-hugo-format-output.txt"), cat_line(out))
+  lines <- brio::read_lines(path(path_dir(rmd), "output.md"))
+
+  expect_match(lines[[9]], "color: #0000BB")
+  expect_match(lines[[10]], "#&gt; \u2714")
 })
 
 test_that("interweaving of code and output generates correct html", {
