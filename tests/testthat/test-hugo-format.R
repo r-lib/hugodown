@@ -10,7 +10,11 @@ test_that("figures placed in figs/ directory", {
 
   figs <- path(path_dir(rmd), "figs")
   expect_true(dir_exists(figs))
-  expect_equal(length(dir_ls(figs)), 1L)
+  expect_equal(length(dir_ls(figs)), 2L)
+
+  # Check we're not converting percentage widths to latex
+  lines <- brio::read_lines(path(path_dir(rmd), "plot.md"))
+  expect_match(lines[[15]], 'width="50%"')
 })
 
 test_that("tables use pipes", {

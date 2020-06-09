@@ -2,6 +2,10 @@
 output: hugodown::md_document
 ---
 
-```{r}
+```{r, echo = FALSE}
+plot(1:5, 1:5)
+```
+
+```{r, echo = FALSE, out.width="50%"}
 plot(1:5, 1:5)
 ```

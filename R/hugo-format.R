@@ -243,6 +243,12 @@ knit_hooks <- function() {
     needs_code(TRUE, x)
   }
   hook_plot <- function(x, options) {
+    # Repair damage done by pretending to be latex
+    if (grepl("linewidth", options$out.width)) {
+      width <- as.numeric(gsub("\\\\linewidth", "", options$out.width))
+      options$out.width <- paste0(width * 100, "%")
+    }
+
     x <- knitr::hook_plot_md(x, options)
     needs_code(FALSE, x)
   }
