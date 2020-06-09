@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>hugodown configuration • hugodown</title>
+<title>Deployment • hugodown</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="hugodown configuration">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Deployment">
 <meta property="og:description" content="hugodown">
 <meta property="og:image" content="https://hugodown.r-lib.org/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -95,61 +95,35 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>hugodown configuration</h1>
+      <h1 data-toc-skip>Deployment</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/r-lib/hugodown/blob/master/vignettes/config.Rmd"><code>vignettes/config.Rmd</code></a></small>
-      <div class="hidden name"><code>config.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/r-lib/hugodown/blob/master/vignettes/deploy.Rmd"><code>vignettes/deploy.Rmd</code></a></small>
+      <div class="hidden name"><code>deploy.Rmd</code></div>
 
     </div>
 
     
     
-<p>There are two types of configuration related to hugodown:</p>
+<p>This vignette describes the process of deployment, how you get your hugodown website off your local computer and on to the internet for everyone to see. There are two main ways to deploy a hugodown site:</p>
 <ul>
-<li><p>hugo configuration, because hugodown assumes certain things to be true about your hugo setup.</p></li>
-<li><p>hugodown specific configuration, which allows you to control over various ways in which hugodown works.</p></li>
+<li><p>With GitHub actions to GitHub pages.</p></li>
+<li><p>With <a href="https://www.netlify.com">netlify</a>.</p></li>
 </ul>
-<div id="hugo-configuration" class="section level2">
+<p>(In either case, I assume you’re already familiar with the basics of Git and GitHub. If you’re not, you may need to start with <a href="http://happygitwithr.com/">Happy Git and GitHub for the R user</a> by Jenny Bryan.)</p>
+<div id="github-pages" class="section level2">
 <h2 class="hasAnchor">
-<a href="#hugo-configuration" class="anchor"></a>Hugo configuration</h2>
-<p>hugodown does not work with every possible hugo site. There is some config that we assume (typically in <code>config.toml</code>, but hugo has a bewildering array of places that this might live instead.)</p>
+<a href="#github-pages" class="anchor"></a>GitHub pages</h2>
+<p>You’ll need to make two changes to your site:</p>
 <ul>
-<li>
-<p>You must use the goldmark markdown renderer, and set <code>unsafe: true</code></p>
-<pre class="toml"><code>[markup]
-  defaultMarkdownHandler = "goldmark"
-  [markup.goldmark.renderer]
-    unsafe = true</code></pre>
-</li>
-<li>
-<p>For best syntax hightlighting results, you must use classes:</p>
-<pre class="toml"><code>pygmentsUseClasses = true</code></pre>
-<p>You then must ensure that your stylesheet defines styles for the CSS classes. You can generate starter css with (e.g):</p>
-<pre><code>hugo gen chromastyles --style=pygments</code></pre>
-<p>Substitute <code>pygments</code> for the [style of your choice][styles], and copy the resulting code into the appropriate CSS file. Unfortunately, the correct location varies by theme, so you’ll need to do a little detective work to figure out the best place to put it.</p>
-</li>
-<li>
-<p>We recommend ignoring knitr intermediates:</p>
-<pre class="toml"><code>ignoreFiles = ['\.Rmd$', '_files$', '_cache$', '\.knit\.md$', '\.utf8\.md$']</code></pre>
-</li>
-<li>
-<p>To use html widgets, you must include the following Go template somewhere in the <code>&lt;head&gt;</code> layout file for your theme. This will help Hugo find the HTML dependencies needed to render the widget in a post. You may find this <a href="https://zwbetz.com/override-a-hugo-theme/">blog post</a> helpful for overriding Hugo layouts.</p>
-<pre><code>{{ range .Params.html_dependencies }}
-  {{ . | safeHTML }}
-{{ end }}</code></pre>
-</li>
-<li><p>To use mathjax, you will need to use a series of [small hacks][yihui-mathjax]. The easiest way is to copy from an existing template, like [tourmaline]. Take note of the [<code>footer_mathjax.html</code>][footer_mathjax] partial, which is then included in the [<code>footer.html</code>][footer]. You’ll also need to include [<code>math_code.js</code>][math_code] in your <code>static/</code> directory. Once that’s done you can use inline math like <code>$math$</code>, and display math like <code>`$$ math $$`</code> (note the extra backtick compared to usual).</p></li>
+<li><p>Run <code><a href="https://rdrr.io/r/base/files.html">file.create("static/.nojekyll")</a></code>. This ensures that GitHub pages knows that you’re using a regular HTML website, not a jekyll website (jekyll is GitHub’s own blogging system).</p></li>
+<li><p>If you have a custom domain name, create <code>static/CNAME</code> containing your domain name (just <code>tidyverse.org</code>, not <code>https://tidyverse.org</code>). Note that setting a custom domain name in the admin settings on your GitHub repo will not work because it will get blown away.</p></li>
 </ul>
 </div>
-<div id="hugodown-configuration" class="section level2">
+<div id="netlify" class="section level2">
 <h2 class="hasAnchor">
-<a href="#hugodown-configuration" class="anchor"></a>hugodown configuration</h2>
-<p>hugodown also has it’s own configuration file, <code>_hugodown.yml</code>. Currently this has one option:</p>
-<ul>
-<li>
-<code>hugo_version</code>: this defines the version of hugo needed by the current site.</li>
-</ul>
+<a href="#netlify" class="anchor"></a>Netlify</h2>
+<p><a href="https://alison.rbind.io/post/2017-06-12-up-and-running-with-blogdown/#deploy-in-netlify" class="uri">https://alison.rbind.io/post/2017-06-12-up-and-running-with-blogdown/#deploy-in-netlify</a></p>
 </div>
   </div>
 

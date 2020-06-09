@@ -47,7 +47,7 @@
 
 
 <meta property="og:title" content="Build site — hugo_build" />
-<meta property="og:description" content="Build hugo site into public/ directory. Useful for debugging and some
+<meta property="og:description" content="Build static html into specified directory. Useful for debugging and some
 deployment scenarios" />
 <meta property="og:image" content="https://hugodown.r-lib.org/logo.png" />
 
@@ -116,6 +116,9 @@ deployment scenarios" />
     <li>
       <a href="../articles/config.html">hugodown configuration</a>
     </li>
+    <li>
+      <a href="../articles/deploy.html">Deployment</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -145,11 +148,17 @@ deployment scenarios" />
     </div>
 
     <div class="ref-description">
-    <p>Build hugo site into <code>public/</code> directory. Useful for debugging and some
+    <p>Build static html into specified directory. Useful for debugging and some
 deployment scenarios</p>
     </div>
 
-    <pre class="usage"><span class='fu'>hugo_build</span>(<span class='kw'>site</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>build_drafts</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>build_future</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>hugo_build</span>(
+  <span class='kw'>site</span> <span class='kw'>=</span> <span class='st'>"."</span>,
+  <span class='kw'>dest</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>build_drafts</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>build_future</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>clean</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -159,9 +168,18 @@ deployment scenarios</p>
       <td><p>Path to hugo site.</p></td>
     </tr>
     <tr>
+      <th>dest</th>
+      <td><p>Destination directory. If <code>NULL</code>, the default, will build
+in <code>{site}/public</code></p></td>
+    </tr>
+    <tr>
       <th>build_drafts, build_future</th>
       <td><p>Should drafts and future posts be included
 in the built site?</p></td>
+    </tr>
+    <tr>
+      <th>clean</th>
+      <td><p>Remove files in <code>public/</code> that don't exist in the source.</p></td>
     </tr>
     </table>
 
