@@ -45,7 +45,7 @@ hugodown does not work with every possible hugo site. There is some config that 
     CSS classes. You can generate starter css with (e.g):
     
     ```
-    hugo gen chromastyles --style=pygments > static/css/pygments.css
+    hugo gen chromastyles --style=pygments > static/css/code-highlight-style.css
     ```
     
     Substitute `pygments` for the [style of your choice][styles]. Unfortunately,
