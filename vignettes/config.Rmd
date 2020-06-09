@@ -52,7 +52,7 @@ hugodown does not work with every possible hugo site. There is some config that 
     the correct location for the custom `pgments.css` file varies by theme, 
     so you'll need to do a little 
     detective work to figure out the best place to save it; where to refer to it 
-    (a customCSS param in the website configuration? a link in a custom layout?);
+    (a `customCSS` param in the website configuration? a link in a custom layout? a magical file name?);
     and what existing CSS for code and `pre` might need amending.
     
     Since downlit that hugodown uses under the hood adds _links_ to code blocks, you 
