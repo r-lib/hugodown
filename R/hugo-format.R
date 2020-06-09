@@ -20,10 +20,10 @@
 #'   `collapse = TRUE`, `comment = "#>`, `fig.align = "center"`, and
 #'   `out.width = "700px"`.
 md_document <- function(fig_width = 7,
-                          fig_asp = 0.618,
-                          fig_retina = 2,
-                          tidyverse_style = TRUE)
-                          {
+                        fig_asp = 0.618,
+                        fig_retina = 2,
+                        tidyverse_style = TRUE
+                        ) {
 
   knitr <- rmarkdown::knitr_options_html(
     fig_height = NULL,
