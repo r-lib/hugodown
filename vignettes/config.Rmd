@@ -14,120 +14,102 @@ knitr::opts_chunk$set(
 )
 ```
 
-There are two types of configuration related to hugodown:
+There are three types of configuration related to hugodown:
 
-* hugo configuration, because hugodown assumes certain things to be true
-  about your hugo setup.
-  
-* hugodown specific configuration, which allows you to control over various
-  ways in which hugodown works.
+-   hugo configuration, because hugodown assumes certain things to be true about your hugo setup.
 
-## Hugo configuration
+-   Syntax highlight css
+
+-   hugodown specific configuration, which allows you to control over various ways in which hugodown works.
+
+## Hugo
 
 hugodown does not work with every possible hugo site. There is some config that we assume (typically in `config.toml`, but hugo has a bewildering array of places that this might live instead.)
 
-*   You must use the goldmark markdown renderer, and set `unsafe: true`
+-   You must use the goldmark markdown renderer, and set `unsafe: true`
 
-    ```toml
+    ``` {.toml}
     [markup]
       defaultMarkdownHandler = "goldmark"
       [markup.goldmark.renderer]
         unsafe = true
     ```
 
-*   For best syntax hightlighting results, you must use classes:
+-   For best syntax hightlighting results, you must use classes:
 
-    ```toml
+    ``` {.toml}
     pygmentsUseClasses = true
     ```
-    
-    Then there is some work to be done on the CSS side, refer to
-    [the section about syntax highlighting configuration](#syntax-highlighting-configuration).
 
-*   We recommend ignoring knitr intermediates:
+    Then you'll need to do some work on CSS side, see [below](#syntax-highlighting) for details.
 
-    ```toml
+-   We recommend ignoring knitr intermediates:
+
+    ``` {.toml}
     ignoreFiles = ['\.Rmd$', '_files$', '_cache$', '\.knit\.md$', '\.utf8\.md$']
     ```
 
-*   To use html widgets, you must include the following Go template somewhere
-    in the `<head>` layout file for your theme. This will help Hugo find the 
-    HTML dependencies needed to render the widget in a post. You may find this 
-    [blog post](https://zwbetz.com/override-a-hugo-theme/) helpful for 
-    overriding Hugo layouts.
-  
-    ```
-    {{ range .Params.html_dependencies }}
-      {{ . | safeHTML }}
-    {{ end }}
-    ```
+-   To use html widgets, you must include the following Go template somewhere in the `<head>` layout file for your theme. This will help Hugo find the HTML dependencies needed to render the widget in a post. You may find this [blog post](https://zwbetz.com/override-a-hugo-theme/) helpful for overriding Hugo layouts.
 
-*   To use mathjax, you will need to use a series of [small hacks][yihui-mathjax]. 
-    The easiest way is to copy from an existing template, like [tourmaline].
-    Take note of the [`footer_mathjax.html`][footer_mathjax] partial, which
-    is then included in the [`footer.html`][footer]. You'll also need to include
-    [`math_code.js`][math_code] in your `static/` directory. Once that's done
-    you can use inline math like `$math$`, and display math like 
-    `` `$$ math $$` `` (note the extra backtick compared to usual).
+        {{ range .Params.html_dependencies }}
+          {{ . | safeHTML }}
+        {{ end }}
 
-## hugodown configuration
+-   To use mathjax, you will need to use a series of [small hacks][yihui-mathjax]. The easiest way is to copy from an existing template, like [tourmaline]. Take note of the [`footer_mathjax.html`][footer\_mathjax] partial, which is then included in the [`footer.html`][footer]. You'll also need to include [`math_code.js`][math\_code] in your `static/` directory. Once that's done you can use inline math like `$math$`, and display math like `` `$$ math $$` `` (note the extra backtick compared to usual).
 
-hugodown also has its own configuration file, `_hugodown.yml`. Currently this has one option:
+## Syntax highlighting {#syntax-highlighting}
 
-* `hugo_version`: this defines the version of hugo needed by the current site.
+The hugo config above causes downlit/hugo to generate output html with the following structure:
 
-## syntax highlighting configuration
-
-You must ensure that your stylesheet defines styles for the
-CSS classes. You can generate starter CSS with (e.g):
-
-```
-hugo gen chromastyles --style=pygments > static/css/code-highlight-style.css
+``` {.html}
+<div class="highlight">
+  <pre class='chroma'><code class='language-r' data-lang='r'>
+    <span class='m'>1</span> <span class='o'>+</span> <span class='m'>1</span>
+    <span class='c'>#&gt; [1] 2</span>
+  </code></pre>
+</div>
 ```
 
-Substitute `pygments` for the [style of your choice][styles]. Unfortunately,
-the correct location for the custom `code-highlight-style.css` file varies by theme, 
-so you'll need to do a little 
-detective work to figure out the best place to save it; where to refer to it 
-(a `customCSS` param in the website configuration? a link in a custom layout? a magical file name?);
-and what existing CSS for code and `pre` might need amending.
-Below we added some tips for that detective work.
+To have that look good on your website, you need to defines styles for the CSS necessary classes. You can generate starter CSS with the code below, substituting `pygments` for the [style of your choice](https://xyproto.github.io/splash/docs/longer/all.html):
 
-Since downlit that hugodown uses under the hood adds _links_ to code blocks, you 
-might also need to tweak CSS for links (if you notice you get wrong vertical alignment 
-    of links in code for instance).
+    hugo gen chromastyles --style=pygments > static/css/highlight.css
+
+This generates a file containing definitions that look like this:
+
+``` {.css}
+/* Background */ .chroma {  }
+/* Other */ .chroma .x {  }
+/* Error */ .chroma .err {  }
+...
+/* Keyword */ .chroma .k { color: #008000; }
+...
+/* LiteralNumber */ .chroma .m { color: #666666 }
+...
+/* Operator */ .chroma .o { color: #666666 }
+```
+
+Unfortunately, the correct location for `highlight.css` file varies by theme, so you'll need to do a little detective work to figure out the best place to put it. Is it:
+
+-   A special file name?
+
+-   A `customCSS` param in the website configuration?
+
+-   A link in a custom layout?
+
+You may also need to do some detective work to figure out how these styles interact with your existing styles, particularly for links within code. Your best bet is to use the [web developer console](https://developer.mozilla.org/en-US/docs/Tools/Web_Console/Opening_the_Web_Console) to figure out what's going wrong. You'll then need to figure out how to tweak `highlight.css` to override these styles. This is a pain, which is why hugodown ships with a couple of themes that are preconfigured.
 
 ### highlight.js inactivation
 
-Many Hugo themes still rely on highlight.js which used to be super handy! 
-Now Hugo has server-side/compiling time/native syntax highlighting. 
-hugodown uses that, and hugodown's special R highlighting is **not** compatible with highlight.js 
-so you have to remove it from the theme. 
+If you are using an old hugo theme that uses highlight.js you may want to convert to server-side syntax highlighting. This is not required (and not important if you only use R code on your blog), but is a good idea if you show a variety of programming languages and want the code style to be as consistent as possible.
 
-From easier to harder, based on the theme you chose:
+From easiest to hardest, based on the theme you chose:
 
-* read how the theme currently handles syntax highlighting 
-(docs might be in the GitHub/GitLab repo README or in the example site... 
-that does not necessarily have search). 
-If the theme docs indicate how to turn off highlight.js, yay, do that!
-* look for "highlight" in existing issues of your theme issue tracker: 
-others might have also asked how to turn it off, 
-and received ideas or posted their tricks.
-* otherwise, look for all occurrences of "highlight" in _the source_ of the theme.
-Note that highlight.js works with JS and CSS so you might have to remove scripts, stylesheets, 
-and/or links to them from layout files.
-Your theme might lack docs about syntax highlighting, but it might still contain docs 
-about customization in general. 
-If not you'll probably need to create custom head/footer where you use the theme head 
-and footer minus references to highlight.js.
+-   Read how the theme currently handles syntax highlighting (docs might be in the GitHub/GitLab repo README or in the example site... that does not necessarily have search). If the theme docs indicate how to turn off highlight.js, yay, do that!
+-   Look for "highlight" in existing issues of your theme issue tracker: others might have also asked how to turn it off, and received ideas or posted their tricks.
+-   Otherwise, look for all occurrences of "highlight" in *the source* of the theme. Note that highlight.js works with JS and CSS so you might have to remove scripts, stylesheets, and/or links to them from layout files. Your theme might lack docs about syntax highlighting, but it might still contain docs about customization in general. If not you'll probably need to create custom head/footer where you use the theme head and footer minus references to highlight.js.
 
-### Further tweaks needed
+## hugodown
 
-If after that something is still off (colors, alignment) use the [web developer console](https://developer.mozilla.org/en-US/docs/Tools/Web_Console/Opening_the_Web_Console) 
-to see what CSS file adds color to code that downlit doesn't put in a span, 
-what CSS file adds "inline-block" as alignment to links of a given class. 
-Then, override them somehow by adding some lines to your `code-highlight-style.css`...
-after checking it is loaded _after_ the guilty stylesheets, otherwise it won't override them.
-with CSS, the last stylesheet wins!
+hugodown also has its own configuration file, `_hugodown.yml`. Currently this has one option:
 
-[styles]: https://xyproto.github.io/splash/docs/longer/all.html
+-   `hugo_version`: this defines the version of hugo needed by the current site.
