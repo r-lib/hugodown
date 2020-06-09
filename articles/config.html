@@ -120,11 +120,11 @@
     unsafe = true</code></pre>
 </li>
 <li>
-<p>For best syntax hightling results, you must use classes:</p>
+<p>For best syntax hightlighting results, you must use classes:</p>
 <pre class="toml"><code>pygmentsUseClasses = true</code></pre>
-<p>And then ensure that your stylesheet defines styles for the appropriate classes. You can generate starter css with (e.g):</p>
-<pre><code>hugo gen chromastyles --style=monokai</code></pre>
-<p>Substitute <code>monokai</code> for the [style of your choice][styles].</p>
+<p>You then must ensure that your stylesheet defines styles for the CSS classes. You can generate starter css with (e.g):</p>
+<pre><code>hugo gen chromastyles --style=pygments</code></pre>
+<p>Substitute <code>pygments</code> for the [style of your choice][styles], and copy the resulting code into the appropriate CSS file. Unfortunately, the correct location varies by theme, so you’ll need to do a little detective work to figure out the best place to put it.</p>
 </li>
 <li>
 <p>We recommend ignoring knitr intermediates:</p>
