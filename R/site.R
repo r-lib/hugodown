@@ -28,27 +28,6 @@ site_config <- function(path = ".") {
   }
 }
 
-site_hugo_version <- function(path = ".") {
-  site <- site_root(path)
-
-  config <- site_config(site)
-  if (!is.null(config$hugo_version)) {
-    return(config$hugo_version)
-  }
-
-  netlify <- path(site, "netlify.toml")
-  if (file_exists(netlify)) {
-    toml <- RcppTOML::parseTOML(netlify)
-    version <- toml$context$production$environment$HUGO_VERSION
-    if (!is.null(version)) {
-      return(version)
-    }
-  }
-
-  # For now, just use the default version
-  hugo_default_get()
-}
-
 #' Find `.Rmd`s that need to be re-rendered.
 #'
 #' [md_document()] adds a hash of the input `.Rmd` in the YAML metdata of

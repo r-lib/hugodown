@@ -12,12 +12,12 @@ hugo_locate <- function(version = hugo_default_get()) {
 
 hugo_run <- function(site, args, ...) {
   path <- site_root(site)
-  hugo <- hugo_locate(site_hugo_version(path))
+  hugo <- hugo_locate(hugo_version(path))
   processx::run(hugo, args, wd = path, ...)
 }
 
 hugo_run_bg <- function(site, args, ...) {
   path <- site_root(site)
-  hugo <- hugo_locate(site_hugo_version(path))
+  hugo <- hugo_locate(hugo_version(path))
   processx::process$new(hugo, args, wd = path, ...)
 }

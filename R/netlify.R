@@ -14,6 +14,6 @@ use_netlify_toml <- function(site = ".") {
   whisker_template(
     path_package("hugodown", "templates", "netlify.toml"),
     path(site, "netlify.toml"),
-    list(hugo_version = site_hugo_version(site))
+    list(hugo_version = hugo_version(site))
   )
 }
