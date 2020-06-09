@@ -259,11 +259,12 @@ knit_hooks <- function() {
     paste0("<div class='highlight'>", x, "</div>")
   }
 
-  evaluate <- function(...) {
+  evaluate <- function(input, ...) {
     # Setting output format to latex ensures that asis outputs are still
     # passed to hook_output
+    Encoding(input) <- "UTF-8"
     knitr::opts_knit$set(out.format = "latex")
-    evaluate::evaluate(...)
+    evaluate::evaluate(input, ...)
   }
 
   list(
