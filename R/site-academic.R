@@ -124,14 +124,19 @@ academic_patch_post_archetype <- function(path) {
 }
 
 academic_write_custom_head <- function(path) {
+  # hugo gen chromastyles --style=github > inst/academic/highlight-light.css
+  # hugo gen chromastyles --style=dracula > inst/academic/highlight-dark.css
+
   dir_create(path(path, "static", "css"))
-  file_copy(path_package("hugodown", "academic", "highlight.css"), path(path, "static", "css"))
+  file_copy(path_package("hugodown", "academic", "highlight-light.css"), path(path, "static", "css"))
+  file_copy(path_package("hugodown", "academic", "highlight-dark.css"), path(path, "static", "css"))
 
   head <- path(path, "layouts", "partials", "custom_head.html")
   dir_create(path_dir(head))
 
   brio::write_lines(c(
-    "<link rel='stylesheet' href='{{ \"css/highlight.css\" | relURL }}'>",
+    "<link rel='stylesheet' href='{{ \"css/highlight-light.css\" | relURL }}' title='hl-light'>",
+    "<link rel='stylesheet' href='{{ \"css/highlight-dark.css\" | relURL }}' title='hl-dark' disabled>",
     "{{ range .Params.html_dependencies }}",
     "  {{ . | safeHTML }}",
     "{{ end }}"
