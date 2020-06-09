@@ -45,13 +45,18 @@ hugodown does not work with every possible hugo site. There is some config that 
     CSS classes. You can generate starter css with (e.g):
     
     ```
-    hugo gen chromastyles --style=pygments
+    hugo gen chromastyles --style=pygments > static/css/pygments.css
     ```
     
-    Substitute `pygments` for the [style of your choice][styles], and 
-    copy the resulting code into the appropriate CSS file. Unfortunately,
-    the correct location varies by theme, so you'll need to do a little 
-    detective work to figure out the best place to put it.
+    Substitute `pygments` for the [style of your choice][styles]. Unfortunately,
+    the correct location for the custom `pgments.css` file varies by theme, 
+    so you'll need to do a little 
+    detective work to figure out the best place to save it and where to refer to it 
+    (a customCSS param in the website configuration? a link in a custom layout?).
+    
+    Since downlit that hugodown uses under the hood adds _links_ to code blocks, you 
+    might also need to tweak CSS for links (if you notice you get wrong vertical alignment 
+    of links in code for instance).
 
 *   We recommend ignoring knitr intermediates:
 
@@ -84,3 +89,5 @@ hugodown does not work with every possible hugo site. There is some config that 
 hugodown also has it's own configuration file, `_hugodown.yml`. Currently this has one option:
 
 * `hugo_version`: this defines the version of hugo needed by the current site.
+
+[styles]: https://xyproto.github.io/splash/docs/longer/all.html
