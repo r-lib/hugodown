@@ -105,27 +105,55 @@
 
     
     
-<p>This vignette describes the process of deployment, how you get your hugodown website off your local computer and on to the internet for everyone to see. I recommend three main ways of deploying a hugodown site:</p>
+<p>This vignette describes the process of deployment, how you get your hugodown website off your local computer and on to the internet for everyone to see. There are many possible ways to deploy a hugodown site. I recommend two:</p>
 <ul>
-<li><p>With GitHub actions to GitHub pages.</p></li>
-<li><p>With <a href="https://www.netlify.com">netlify</a>.</p></li>
+<li><p>With <a href="https://www.netlify.com">netlify</a>, to publish to a website.</p></li>
 <li><p>With RStudio Connect, if you want to publish to a connect server within your company.</p></li>
 </ul>
-<p>There are many other possibilities, but these two cover a wide range of needs, and form the basis for more sophisticated approaches.</p>
 <p>(In either case, I assume you’re already familiar with the basics of Git and GitHub. If you’re not, you may need to start with <a href="http://happygitwithr.com/">Happy Git and GitHub for the R user</a> by Jenny Bryan.)</p>
-<div id="github-pages" class="section level2">
-<h2 class="hasAnchor">
-<a href="#github-pages" class="anchor"></a>GitHub pages</h2>
-<p>You’ll need to make two changes to your site:</p>
-<ul>
-<li><p>Run <code><a href="https://rdrr.io/r/base/files.html">file.create("static/.nojekyll")</a></code>. This ensures that GitHub pages knows that you’re using a regular HTML website, not a jekyll website (jekyll is GitHub’s own blogging system).</p></li>
-<li><p>If you have a custom domain name, create <code>static/CNAME</code> containing your domain name (just <code>tidyverse.org</code>, not <code>https://tidyverse.org</code>). Note that setting a custom domain name in the admin settings on your GitHub repo will not work because it will get blown away.</p></li>
-</ul>
-</div>
 <div id="netlify" class="section level2">
 <h2 class="hasAnchor">
 <a href="#netlify" class="anchor"></a>Netlify</h2>
-<p><a href="https://alison.rbind.io/post/2017-06-12-up-and-running-with-blogdown/#deploy-in-netlify" class="uri">https://alison.rbind.io/post/2017-06-12-up-and-running-with-blogdown/#deploy-in-netlify</a></p>
+<p>(Adapted from <a href="https://alison.rbind.io/post/2017-06-12-up-and-running-with-blogdown/#deploy-in-netlify">A Spoonful of Hugo: The netlify.toml File</a> by Alison Hill, with permission.)</p>
+<p>First, create an account if you don’t already have one:</p>
+<ol style="list-style-type: decimal">
+<li>
+<p>Navigate to <a href="https://www.netlify.com/">Netlify</a> and click on the <em>Sign Up</em> link.</p>
+<p><img src="netlify-landing.png" width="400"></p>
+</li>
+<li>
+<p>Sign up with <em>GitHub</em> to connect your GitHub and Netlify accounts.</p>
+<p><img src="netlify-sign-up.png" width="400"></p>
+<p>If you use a different version control service, select GitLab or BitBucket instead.</p>
+</li>
+</ol>
+<p>Then create a netlify site for your GitHub repo:</p>
+<ol style="list-style-type: decimal">
+<li>
+<p>On the netlify website, go <em>New Site from Git</em> and pick your repo. You’ll be prompted to fill in these fields. They are probably already filled in correctly for you:</p>
+<p><img src="netlify-deploy-settings.png" width="400"></p>
+<p>Leave the advanced settings as is, and click deploy site. (This won’t work but we’ll fix it momentarily.)</p>
+</li>
+</ol>
+<p>Version mismatches are the biggest source of failures when deploying with netlify, so next we need to set up a <code>netlify.toml</code> file that tells netlify exactly what version of hugo to use.</p>
+<ol style="list-style-type: decimal">
+<li><p>Check you have a <code>_hugodown.yaml</code> file that contains <code>hugo_version: 0.66.0</code> or similar. It’s added automatically you created your site with a hugodown helper; you’ll need to add it yourself if you’ve created the site another way.</p></li>
+<li><p>Run <code><a href="../reference/use_netlify_toml.html">hugodown::use_netlify_toml()</a></code>, check the new <code>netlify.toml</code> in, commit, and push to Github.</p></li>
+</ol>
+<p>Now return to <a href="https://app.netlify.com">netlify</a>, and look in the deploy log. You should see entries like:</p>
+<pre><code>10:00:42 PM: Build ready to start
+10:00:43 PM: build-image version: 8e315e54bc4032a32e73290be556cde4f8348c12
+...
+10:00:56 PM: Found netlify.toml. Overriding site configuration
+...
+10:01:02 PM: Installing Hugo 0.68.3
+10:01:02 PM: Hugo Static Site Generator v0.68.3-157669A0 linux/amd64 BuildDate: 2020-03-24T12:05:34Z
+...
+10:01:04 PM: Executing user command: hugo
+10:01:04 PM: Building sites …
+...
+10:01:23 PM: Site is live</code></pre>
+<p>Success!</p>
 </div>
 <div id="rstudio-connect" class="section level2">
 <h2 class="hasAnchor">
@@ -133,6 +161,20 @@
 <ul>
 <li>Need <code>relativeURLS=true</code> in your <code>config.toml</code>.</li>
 </ul>
+</div>
+<div id="other-options" class="section level2">
+<h2 class="hasAnchor">
+<a href="#other-options" class="anchor"></a>Other options</h2>
+<div id="github-pages" class="section level3">
+<h3 class="hasAnchor">
+<a href="#github-pages" class="anchor"></a>GitHub pages</h3>
+<p>You’ll need to make two changes to your site:</p>
+<ul>
+<li><p>Run <code><a href="https://rdrr.io/r/base/files.html">file.create("static/.nojekyll")</a></code>. This ensures that GitHub pages knows that you’re using a regular HTML website, not a jekyll website (jekyll is GitHub’s own blogging system).</p></li>
+<li><p>If you have a custom domain name, create <code>static/CNAME</code> containing your domain name (just <code>tidyverse.org</code>, not <code>https://tidyverse.org</code>). Note that setting a custom domain name in the admin settings on your GitHub repo will not work because it will get blown away.</p></li>
+<li><p>If you don’t have a custom domain, you’ll need <code>relativeURLS=true</code> in your <code>config.toml</code>.</p></li>
+</ul>
+</div>
 </div>
   </div>
 
