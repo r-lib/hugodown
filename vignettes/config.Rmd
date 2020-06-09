@@ -1,8 +1,8 @@
 ---
-title: "hugodown configuration"
+title: "Configuration"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{hugodown configuration}
+  %\VignetteIndexEntry{Configuration}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
