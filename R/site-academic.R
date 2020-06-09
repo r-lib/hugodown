@@ -125,13 +125,13 @@ academic_patch_post_archetype <- function(path) {
 
 academic_write_custom_head <- function(path) {
   dir_create(path(path, "static", "css"))
-  file_copy(path_package("hugodown", "academic", "chroma.css"), path(path, "static", "css"))
+  file_copy(path_package("hugodown", "academic", "highlight.css"), path(path, "static", "css"))
 
   head <- path(path, "layouts", "partials", "custom_head.html")
   dir_create(path_dir(head))
 
   brio::write_lines(c(
-    "<link rel='stylesheet' href='{{ \"css/chroma.css\" | relURL }}'>",
+    "<link rel='stylesheet' href='{{ \"css/highlight.css\" | relURL }}'>",
     "{{ range .Params.html_dependencies }}",
     "  {{ . | safeHTML }}",
     "{{ end }}"
