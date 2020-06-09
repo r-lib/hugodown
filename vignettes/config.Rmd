@@ -51,8 +51,9 @@ hugodown does not work with every possible hugo site. There is some config that 
     Substitute `pygments` for the [style of your choice][styles]. Unfortunately,
     the correct location for the custom `pgments.css` file varies by theme, 
     so you'll need to do a little 
-    detective work to figure out the best place to save it and where to refer to it 
-    (a customCSS param in the website configuration? a link in a custom layout?).
+    detective work to figure out the best place to save it; where to refer to it 
+    (a customCSS param in the website configuration? a link in a custom layout?);
+    and what existing CSS for code and `pre` might need amending.
     
     Since downlit that hugodown uses under the hood adds _links_ to code blocks, you 
     might also need to tweak CSS for links (if you notice you get wrong vertical alignment 
