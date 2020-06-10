@@ -42,11 +42,10 @@ create_site_academic <- function(
   usethis::ui_done("Patching theme for hugodown compatibility")
   academic_patch(path)
 
-  # Can we open config files for editing in new session? Or should we have
-  # edit_config()
   if (open) {
     usethis::proj_activate(path)
   }
+  invisible(path)
 }
 
 academic_download <- function(version = "4.8.0") {
