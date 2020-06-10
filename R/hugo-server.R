@@ -73,7 +73,7 @@ hugo_start <- function(site = ".",
   if (!ok) {
     ps$kill()
     cat(init)
-    abort("Failed to start blogdown")
+    abort("Failed to start Hugo")
   }
 
   # Ensure output pipe doesn't get swamped
