@@ -30,11 +30,15 @@ First, create an account if you don't already have one:
 
 1.  Navigate to [Netlify](https://www.netlify.com/) and click on the *Sign Up* link.
 
-    ![](netlify-landing.png){width="400"}
+    ```{r, echo = FALSE, out.width = "400px"}
+    knitr::include_graphics("netlify-landing.png")
+    ```
 
 2.  Sign up with *GitHub* to connect your GitHub and Netlify accounts.
 
-    ![](netlify-sign-up.png){width="400"}
+    ```{r, echo = FALSE, out.width = "400px"}
+    knitr::include_graphics("netlify-sign-up.png")
+    ```
 
     If you use a different version control service, select GitLab or BitBucket instead.
 
@@ -42,7 +46,9 @@ Then create a netlify site for your GitHub repo:
 
 1.  On the netlify website, go *New Site from Git* and pick your repo. You'll be prompted to fill in these fields. They are probably already filled in correctly for you:
 
-    ![](netlify-deploy-settings.png){width="400"}
+    ```{r, echo = FALSE, out.width = "400px"}
+    knitr::include_graphics("netlify-deploy-settings.png")
+    ```
 
     Leave the advanced settings as is, and click deploy site. (This won't work but we'll fix it momentarily.)
 
