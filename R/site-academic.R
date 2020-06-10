@@ -29,7 +29,8 @@ create_site_academic <- function(
   usethis::ui_silence(old <- usethis::proj_set(path, force = TRUE))
   on.exit(usethis::ui_silence(usethis::proj_set(old)))
 
-  usethis::use_rstudio()
+  use_rstudio_website_proj(path)
+
   usethis::ui_done("Downloading academic theme")
   zip <- curl::curl_download(
     "https://github.com/gcushen/hugo-academic/archive/v4.8.0.zip",
@@ -65,6 +66,7 @@ create_site_academic <- function(
 
   usethis::use_git_ignore(c("resources", "public"))
   file_copy(path_package("hugodown", "academic", "README.md"), path)
+  file_copy(path_package("hugodown", "academic", "index.Rmd"), path)
 
   # Can we open config files for editing in new session? Or should we have
   # edit_config()
@@ -85,6 +87,9 @@ academic_patch_config <- function(path) {
 
   # Use highlight classes
   lines <- line_insert_after(lines, "^ignoreFiles", "pygmentsUseClasses = true")
+
+  # Use relative URLs
+  lines <- line_insert_after(lines, "^pygmentsUseClasses", "relativeURLS = true")
 
   brio::write_lines(lines, path)
 }
@@ -171,3 +176,19 @@ dir_copy_contents <- function(path, new_path) {
     }
   }
 }
+
+# this is a modified version of usethis::use_rstudio() that
+# doesn't assume the user is creating a package
+use_rstudio_website_proj <- function(path, line_ending = c("posix", "windows")) {
+  line_ending <- arg_match(line_ending)
+  line_ending <- c(posix = "Posix", windows = "Windows")[[line_ending]]
+  project_name <- basename(normalizePath(path))
+  rproj_file <- paste0(project_name, ".Rproj")
+  new <- usethis::use_template("template.Rproj",
+                               rproj_file,
+                               data = list(line_ending = line_ending),
+                               package = "hugodown")
+  usethis::use_git_ignore(".Rproj.user")
+}
+
+
