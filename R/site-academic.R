@@ -117,7 +117,7 @@ academic_patch_post_archetype <- function(path) {
     'title: "{{ title }}"',
     fixed = TRUE
   )
-  lines <- line_replace(lines, 'date: {{ .Date }}', 'date: {{ date }}"', fixed = TRUE)
+  lines <- line_replace(lines, 'date: {{ .Date }}', 'date: {{ date }}', fixed = TRUE)
   lines <- line_replace(lines, 'lastmod: {{ .Date }}', 'lastmod: {{ date }}', fixed = TRUE)
 
   brio::write_lines(lines, path)
