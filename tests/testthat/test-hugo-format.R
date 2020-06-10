@@ -62,6 +62,15 @@ test_that("markdown div syntax is converted to native divs", {
   expect_equal(sum(grepl("div", lines, fixed = TRUE)), 2)
 })
 
+test_that("emojis are preserved", {
+  rmd <- local_file(test_path("emoji.Rmd"))
+  rmarkdown::render(rmd, quiet = TRUE)
+  out <- path(path_dir(rmd), "emoji.md")
+
+  lines <- brio::read_lines(out)
+  expect_equal(lines[[7]], ":smile_cat:")
+})
+
 test_that("math is untransformed", {
   rmd <- local_file(test_path("math.Rmd"))
   rmarkdown::render(rmd, quiet = TRUE)
