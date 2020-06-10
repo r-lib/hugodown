@@ -27,7 +27,7 @@ Imports:
     RcppTOML,
     rlang,
     rmarkdown,
-    usethis,
+    usethis (>= 1.6.0),
     whisker,
     withr,
     whoami,
