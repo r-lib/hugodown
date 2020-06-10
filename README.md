@@ -16,7 +16,7 @@ hugodown is an experimental package that aims to facilitate the use of [RMarkdow
   and blogs with multiple contributors. 
   
 * Local previews are pinned to a specific version of hugo. This makes it easier
-  to work with multiple blogs, and protects your from hugu <-> theme 
+  to work with multiple blogs, and protects your from hugo <-> theme 
   version incompatibilities.
   
 * It provides support for getting started with a limited number of themes,
