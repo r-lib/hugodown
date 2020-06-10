@@ -14,13 +14,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-This vignette describes the process of deployment, how you get your hugodown website off your local computer and on to the internet for everyone to see. There are many possible ways to deploy a hugodown site. I recommend two:
+This vignette describes the process of deployment, how you get your hugodown website off your local computer and on to the internet for everyone to see. The easiest workflow for most people is to use [netlify](https://www.netlify.com). I'll describe this process is details, and then give a few pointers for other approahes.
 
--   With [netlify](https://www.netlify.com), to publish to a website.
-
--   With RStudio Connect, if you want to publish to a connect server within your company.
-
-(In either case, I assume you're already familiar with the basics of Git and GitHub. If you're not, you may need to start with [Happy Git and GitHub for the R user](http://happygitwithr.com/) by Jenny Bryan.)
+(I assume you're already familiar with the basics of Git and GitHub. If you're not, you may need to start with [Happy Git and GitHub for the R user](http://happygitwithr.com/) by Jenny Bryan.)
 
 ## Netlify
 
@@ -42,7 +38,7 @@ First, create an account if you don't already have one:
 
     If you use a different version control service, select GitLab or BitBucket instead.
 
-Then create a netlify site for your GitHub repo:
+Next create a netlify site for your GitHub repo:
 
 1.  On the netlify website, go *New Site from Git* and pick your repo. You'll be prompted to fill in these fields. They are probably already filled in correctly for you:
 
@@ -52,7 +48,7 @@ Then create a netlify site for your GitHub repo:
 
     Leave the advanced settings as is, and click deploy site. (This won't work but we'll fix it momentarily.)
 
-Version mismatches are the biggest source of failures when deploying with netlify, so next we need to set up a `netlify.toml` file that tells netlify exactly what version of hugo to use.
+Finally, configure your blog with `netlify.toml`. This prevents the biggest source of pain when deploying with netlify: version mismatches.
 
 1.  Check you have a `_hugodown.yaml` file that contains `hugo_version: 0.66.0` or similar. It's added automatically you created your site with a hugodown helper; you'll need to add it yourself if you've created the site another way.
 
@@ -75,18 +71,18 @@ Now return to [netlify](https://app.netlify.com), and look in the deploy log. Yo
 
 Success!
 
-## RStudio connect
-
--   Need `relativeURLS=true` in your `config.toml`.
-
 ## Other options
+
+### RStudio connect
+
+Get started by publishing the site once; that will enable you to figure out where the site will be published. Then update `baseUrl` in `config.toml` and republish.
 
 ### GitHub pages
 
-You'll need to make two changes to your site:
+You'll need to make a few changes to your site:
 
 -   Run `file.create("static/.nojekyll")`. This ensures that GitHub pages knows that you're using a regular HTML website, not a jekyll website (jekyll is GitHub's own blogging system).
 
--   If you have a custom domain name, create `static/CNAME` containing your domain name (just `tidyverse.org`, not `https://tidyverse.org`). Note that setting a custom domain name in the admin settings on your GitHub repo will not work because it will get blown away.
+-   If you have a custom domain name, create a `static/CNAME` file containing your domain name (e.g. just `tidyverse.org`, not `https://tidyverse.org`). Note that setting a custom domain name in the admin settings on your GitHub repo will not work.
 
--   If you don't have a custom domain, you'll need `relativeURLS=true` in your `config.toml`.
+-   Make sure to set `baseURL` in your `config.toml`
