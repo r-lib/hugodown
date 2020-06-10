@@ -50,7 +50,7 @@ test_that("interweaving of code and output generates correct html", {
   rmd <- local_file(test_path("knit-hooks.Rmd"))
   rmarkdown::render(rmd, quiet = TRUE)
   out <- brio::read_lines(path(path_dir(rmd), "knit-hooks.md"))
-  verify_output(test_path("test-hugo-format-hooks.txt"), cat_line(out))
+  verify_output(test_path("test-md-document-hooks.txt"), cat_line(out))
 })
 
 test_that("markdown div syntax is converted to native divs", {
