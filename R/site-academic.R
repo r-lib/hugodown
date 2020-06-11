@@ -88,9 +88,6 @@ academic_patch_config <- function(path) {
   # Use highlight classes
   lines <- line_insert_after(lines, "^ignoreFiles", "pygmentsUseClasses = true")
 
-  # Use relative URLs
-  lines <- line_insert_after(lines, "^pygmentsUseClasses", "relativeURLS = true")
-
   brio::write_lines(lines, path)
 }
 
