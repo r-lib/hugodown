@@ -1,0 +1,7 @@
+---
+output: hugodown::md_document
+---
+
+```{=html}
+{{< figure src="blabla.png" >}}
+```

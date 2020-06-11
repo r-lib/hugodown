@@ -50,6 +50,11 @@ test_that("emojis are preserved", {
   expect_equal(rmd$lines[[7]], ":smile_cat:")
 })
 
+test_that("shortcodes are preserved", {
+  rmd <- local_render(test_path("shortcode.Rmd"))
+  expect_equal(rmd$lines[[7]], '{{< figure src="blabla.png" >}}')
+})
+
 test_that("math is untransformed", {
   rmd <- local_render(test_path("math.Rmd"))
   expect_equal(rmd$lines[[7]], "$a_1 + b_2$")
