@@ -8,7 +8,7 @@ shortcode <- function(.name, ..., .contents = NULL, .output = c("html", "md"), .
   if (is.null(.contents)) {
     out <- wrap(call)
   } else {
-    out <- paste0(wrap(call), .contents, wrap(paste0("/", name)))
+    out <- paste0(wrap(call), .contents, wrap(paste0("/", .name)))
   }
 
   if (.inline) {
@@ -29,7 +29,7 @@ shortcode_args <- function(...) {
   names <- names2(args)
 
   as_value <- function(x) {
-    if (is.character(x)) {
+    if (is.character(x) && !inherits(x, "AsIs")) {
       encodeString(x, quote = "'")
     } else {
       format(x)
