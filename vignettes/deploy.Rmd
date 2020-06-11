@@ -75,7 +75,7 @@ Success!
 
 ### RStudio connect
 
-Get started by publishing the site once; that will enable you to figure out where the site will be published. Then update `baseUrl` in `config.toml` and republish.
+To get everything set up correctly, you need to publish the site once (with `rmarkdown::publish_site()`), then update `baseUrl` in `config.toml`, then publish again.
 
 ### GitHub pages
 
