@@ -1,0 +1,21 @@
+> embed_gist("spf13", "7896402")
+[1] "```{=html}\n{{< gist 'spf13' '7896402' >}}\n```\n"
+
+> embed_instagram("BWNjjyYFxVx", caption = TRUE)
+[1] "```{=html}\n{{< instagram BWNjjyYFxVx >}}\n```\n"
+
+> embed_instagram("BWNjjyYFxVx", caption = FALSE)
+[1] "```{=html}\n{{< instagram BWNjjyYFxVx hidecaption >}}\n```\n"
+
+> embed_tweet("877500564405444608")
+[1] "```{=html}\n{{< tweet 877500564405444608 >}}\n```\n"
+
+> embed_vimeo("146022717")
+[1] "```{=html}\n{{< vimeo 146022717 >}}\n```\n"
+
+> embed_youtube("w7Ft2ymGmfc", autoplay = FALSE)
+[1] "```{=html}\n{{< youtube id='w7Ft2ymGmfc' >}}\n```\n"
+
+> embed_youtube("w7Ft2ymGmfc", autoplay = TRUE)
+[1] "```{=html}\n{{< youtube id=w7Ft2ymGmfc autoplay='true' >}}\n```\n"
+

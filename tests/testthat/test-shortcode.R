@@ -24,3 +24,20 @@ test_that("handles md and html output", {
     cat(shortcode("name", .output = "html"))
   })
 })
+
+
+test_that("test built-in embed shortcodes", {
+  verify_output(test_path("test-shortcode-embed.txt"), {
+    embed_gist("spf13", "7896402")
+
+    embed_instagram("BWNjjyYFxVx", caption = TRUE)
+    embed_instagram("BWNjjyYFxVx", caption = FALSE)
+
+    embed_tweet("877500564405444608")
+
+    embed_vimeo("146022717")
+
+    embed_youtube("w7Ft2ymGmfc", autoplay = FALSE)
+    embed_youtube("w7Ft2ymGmfc", autoplay = TRUE)
+  })
+})
