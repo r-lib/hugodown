@@ -47,5 +47,5 @@ shortcode_gist <- function(username, id, filename = NULL) {
 }
 
 shortcode_param <- function(name) {
-  shortcode("gist", name, .inline = TRUE)
+  shortcode("param", name, .inline = TRUE)
 }
