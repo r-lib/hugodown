@@ -9,7 +9,9 @@ hugo_build(
   dest = NULL,
   build_drafts = FALSE,
   build_future = FALSE,
-  clean = FALSE
+  clean = FALSE,
+  base_url = NULL,
+  relative_urls = NULL
 )
 }
 \arguments{
@@ -22,6 +24,12 @@ in \code{{site}/public}}
 in the built site?}
 
 \item{clean}{Remove files in \verb{public/} that don't exist in the source.}
+
+\item{base_url}{\verb{<string>} Optionally override the \code{baseURL} setting from
+hugo config.}
+
+\item{relative_urls}{\verb{<bool>} Optionally the override the \code{relativeURL}
+setting from hugo config.}
 }
 \description{
 Build static html into specified directory. Useful for debugging and some
