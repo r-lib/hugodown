@@ -157,7 +157,8 @@
 <div id="rstudio-connect" class="section level3">
 <h3 class="hasAnchor">
 <a href="#rstudio-connect" class="anchor"></a>RStudio connect</h3>
-<p>To get everything set up correctly, you need to publish the site once (with <code><a href="https://rdrr.io/pkg/rmarkdown/man/publish_site.html">rmarkdown::publish_site()</a></code>), then update <code>baseUrl</code> in <code>config.toml</code>, then publish again.</p>
+<p>For most site, <code><a href="https://rdrr.io/pkg/rmarkdown/man/publish_site.html">rmarkdown::publish_site()</a></code> should just work.</p>
+<p>If you deploy your site this way, and it doesn’t look quite right (e.g. missing style sheets) it’s likely because the theme you’re using requires a <code>baseURL</code>. In this case, you’ll need to update your <code>config.toml</code> with the URL for your site and republish.</p>
 </div>
 <div id="github-pages" class="section level3">
 <h3 class="hasAnchor">
