@@ -13,7 +13,7 @@ shortcode(
 )
 }
 \arguments{
-\item{.name}{Nane of the shortcode}
+\item{.name}{Name of the shortcode}
 
 \item{...}{Arguments to the shortcode, supplied either by name or
 position depending on the shortcode. By default, strings will

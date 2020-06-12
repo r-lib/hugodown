@@ -8,7 +8,7 @@
 #' use it inside a function with the same name as the shortcode you want to
 #' wrap. See [embed_gist()] and friends for examples
 #'
-#' @param .name Nane of the shortcode
+#' @param .name Name of the shortcode
 #' @param ... Arguments to the shortcode, supplied either by name or
 #'   position depending on the shortcode. By default, strings will
 #'   automatically be quoted with single quotes. Suppress this quoting
