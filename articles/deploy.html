@@ -105,8 +105,8 @@
 
     
     
-<p>This vignette describes the process of deployment, how you get your hugodown website off your local computer and on to the internet for everyone to see. The easiest workflow for most people is to use <a href="https://www.netlify.com">netlify</a>. I’ll describe this process is details, and then give a few pointers for other approahes.</p>
-<p>(I assume you’re already familiar with the basics of Git and GitHub. If you’re not, you may need to start with <a href="http://happygitwithr.com/">Happy Git and GitHub for the R user</a> by Jenny Bryan.)</p>
+<p>This vignette describes the process of deployment, how you get your hugodown website off your local computer and on to the internet for everyone to see. The easiest workflow for most people is to use <a href="https://www.netlify.com">netlify</a>. I’ll describe this process in details, and then discuss other approaches that require a manual build site.</p>
+<p>(Most of these techiques assume that you’re already familiar with the basics of Git and GitHub. If you’re not, you can try the Dropbox deployment described below, or try reading with <a href="http://happygitwithr.com/">Happy Git and GitHub for the R user</a> by Jenny Bryan.)</p>
 <div id="netlify" class="section level2">
 <h2 class="hasAnchor">
 <a href="#netlify" class="anchor"></a>Netlify</h2>
@@ -151,13 +151,14 @@
 10:01:23 PM: Site is live</code></pre>
 <p>Success!</p>
 </div>
-<div id="other-options" class="section level2">
+<div id="manual-builds" class="section level2">
 <h2 class="hasAnchor">
-<a href="#other-options" class="anchor"></a>Other options</h2>
+<a href="#manual-builds" class="anchor"></a>Manual builds</h2>
+<p>The advantage of netlify is that automatically runs hugo for you; in other deployment scenarios you’ll need to run <code>hugodown::build_site()</code> and publish the <code>public/</code> directory that it creates. The following sections provide some advice for deployment scenarios that need this.</p>
 <div id="rstudio-connect" class="section level3">
 <h3 class="hasAnchor">
 <a href="#rstudio-connect" class="anchor"></a>RStudio connect</h3>
-<p>For most site, <code><a href="https://rdrr.io/pkg/rmarkdown/man/publish_site.html">rmarkdown::publish_site()</a></code> should just work.</p>
+<p>For most sites, <code><a href="https://rdrr.io/pkg/rmarkdown/man/publish_site.html">rmarkdown::publish_site()</a></code> should just work.</p>
 <p>If you deploy your site this way, and it doesn’t look quite right (e.g. missing style sheets) it’s likely because the theme you’re using requires a <code>baseURL</code>. In this case, you’ll need to update your <code>config.toml</code> with the URL for your site and republish.</p>
 </div>
 <div id="github-pages" class="section level3">
@@ -167,8 +168,31 @@
 <ul>
 <li><p>Run <code><a href="https://rdrr.io/r/base/files.html">file.create("static/.nojekyll")</a></code>. This ensures that GitHub pages knows that you’re using a regular HTML website, not a jekyll website (jekyll is GitHub’s own blogging system).</p></li>
 <li><p>If you have a custom domain name, create a <code>static/CNAME</code> file containing your domain name (e.g. just <code>tidyverse.org</code>, not <code>https://tidyverse.org</code>). Note that setting a custom domain name in the admin settings on your GitHub repo will not work.</p></li>
-<li><p>Make sure to set <code>baseURL</code> in your <code>config.toml</code></p></li>
+<li>
+<p>In <code>config.toml</code>:</p>
+<ul>
+<li><p>Set <code>publishDir = "docs/"</code></p></li>
+<li><p>Set <code>baseURL</code> to the url where you site will be published.</p></li>
 </ul>
+</li>
+</ul>
+<p>To deploy:</p>
+<ul>
+<li>Run <code>hugodown::build_site()</code> and check in the rendered <code>docs/</code> directory. (If no <code>docs/</code> directory is created, double check your config above).</li>
+</ul>
+<p>After the first deploy, you’ll need to go the admin page for your repo and select "master branch <code>/docs</code> folder) for source:</p>
+<p><img src="github-setup.png" width="400px"></p>
+</div>
+<div id="site44-dropbox" class="section level3">
+<h3 class="hasAnchor">
+<a href="#site44-dropbox" class="anchor"></a>Site44 (dropbox)</h3>
+<p>If you don’t use Git and GitHub, one deployment option is <a href="https://www.site44.com/">Site44</a>, a service that allows you to publish websites from within Dropbox folders. Site44 creates a <code>Dropbox/Apps/site44</code> directory, and any folders within that directory are published as websites.</p>
+<p>The recommended workflow for deploying hugodown websites to Site44 is to develop your website in a separate project directory, and then, when it’s ready for final publishing, run <code>build_site()</code> then copy the contents of the <code>public</code> directory to the folder for your website.</p>
+</div>
+<div id="amazon-s3" class="section level3">
+<h3 class="hasAnchor">
+<a href="#amazon-s3" class="anchor"></a>Amazon S3</h3>
+<p>If you are a user of Amazon Web Services you can serve your website directly from Amazon S3. This option is a bit more technically involved than GitHub Pages, Netlify, or Site 44. See the article on <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html">Hosting a Static Website on Amazon S3</a> for additional details.</p>
 </div>
 </div>
   </div>

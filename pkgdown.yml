@@ -4,7 +4,7 @@ pkgdown_sha: e3235d58b2c539f6aa34a0be88363c6998c9d5ca
 articles:
   config: config.html
   deploy: deploy.html
-last_built: 2020-06-12T14:58Z
+last_built: 2020-06-12T15:31Z
 urls:
   reference: https://hugodown.r-lib.org/reference
   article: https://hugodown.r-lib.org/articles
