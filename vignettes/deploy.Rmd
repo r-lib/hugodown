@@ -75,7 +75,9 @@ Success!
 
 ### RStudio connect
 
-To get everything set up correctly, you need to publish the site once (with `rmarkdown::publish_site()`), then update `baseUrl` in `config.toml`, then publish again.
+For most site, `rmarkdown::publish_site()` should just work.
+
+If you deploy your site this way, and it doesn't look quite right (e.g. missing style sheets) it's likely because the theme you're using requires a `baseURL`. In this case, you'll need to update your `config.toml` with the URL for your site and republish.
 
 ### GitHub pages
 
