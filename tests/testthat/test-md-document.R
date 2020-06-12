@@ -55,6 +55,12 @@ test_that("math is untransformed", {
   expect_equal(rmd$lines[[7]], "$a_1 + b_2$")
 })
 
+test_that("raw html is preserved", {
+  rmd <- local_render(test_path("raw-html.Rmd"))
+  expect_equal(rmd$lines[[7]], "<raw>")
+  expect_equal(rmd$lines[[9]], "This is <raw>")
+})
+
 test_that("hash added to yaml header", {
   rmd <- local_render(test_path("meta.Rmd"))
 
