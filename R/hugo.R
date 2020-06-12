@@ -10,10 +10,14 @@ hugo_locate <- function(version = hugo_default_get()) {
   path(path, "hugo")
 }
 
-hugo_run <- function(site, args, ...) {
+hugo_run <- function(site, args, config = NULL, ...) {
+  if (length(config) > 0) {
+    names(config) <- paste0("HUGO_", toupper(names(config)))
+  }
+
   path <- site_root(site)
   hugo <- hugo_locate(hugo_version(path))
-  processx::run(hugo, args, wd = path, ...)
+  processx::run(hugo, args, wd = path, env = config, ...)
 }
 
 hugo_run_bg <- function(site, args, ...) {

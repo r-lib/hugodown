@@ -147,12 +147,19 @@ port_active <- function(port) {
 #' @param build_drafts,build_future Should drafts and future posts be included
 #'   in the built site?
 #' @param clean Remove files in `public/` that don't exist in the source.
+#' @param base_url <string> Optionally override the `baseURL` setting from
+#'   hugo config.
+#' @param relative_urls <bool> Optionally the override the `relativeURL` setting
+#'   from hugo config.
 #' @export
 hugo_build <- function(site = ".",
                        dest = NULL,
                        build_drafts = FALSE,
                        build_future = FALSE,
-                       clean = FALSE) {
+                       clean = FALSE,
+                       base_url = NULL,
+                       relative_urls = NULL
+                       ) {
   path <- site_root(site)
   dest <- dest %||% path(path, "public")
 
@@ -162,6 +169,13 @@ hugo_build <- function(site = ".",
     if (build_future) "--buildFuture",
     if (clean) "--cleanDestinationDir"
   )
-  hugo_run(path, args)
+
+  config <- c(
+    character(),
+    baseUrl = if (!is.null(base_url)) base_url,
+    relativeURLs = if (!is.null(relative_urls)) tolower(relative_urls)
+  )
+
+  hugo_run(path, args, config)
   invisible()
 }
