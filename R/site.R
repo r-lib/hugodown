@@ -86,7 +86,22 @@ hugodown_site <- function(input = ".", output_format = NULL) {
 
       # Render the entire site
       if (is.null(input_file)) {
-        hugo_build(input)
+
+        # render outdated rmds
+        lapply(site_outdated(input), function(rmd) {
+          cat("Rendering modified Rmd:", fs::path_rel(rmd, input), "\n")
+          rmarkdown::render(
+            input = rmd,
+            output_format = output_format,
+            envir = envir,
+            quiet = quiet,
+            ...
+          )
+        })
+
+        # build with relative urls so that the site is deployable anywhere
+        hugo_build(input, relative_urls = TRUE)
+
         if (!quiet) {
           cat("Hugo site built:", file.path(input, output_dir))
         }
