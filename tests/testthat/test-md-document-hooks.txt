@@ -10,7 +10,7 @@ Mixed as\_is and coode
 
 <div class="highlight">
 
-<pre class='chroma'><code class='language-r' data-lang='r'><span class='k'>df</span> <span class='o'>&lt;-</span> <span class='nf'>data.frame</span>(x = <span class='m'>1</span>)
+<pre class='chroma'><code class='language-r' data-lang='r'><span class='k'>df</span> <span class='o'>&lt;-</span> <span class='nf'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(x = <span class='m'>1</span>)
 <span class='k'>df</span>
 <span class='c'>#&gt;   x</span>
 <span class='c'>#&gt; 1 1</span>
@@ -30,11 +30,11 @@ All code/output
 <div class="highlight">
 
 <pre class='chroma'><code class='language-r' data-lang='r'><span class='c'># comment</span>
-<span class='nf'>print</span>(<span class='s'>"print"</span>)
+<span class='nf'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='s'>"print"</span>)
 <span class='c'>#&gt; [1] "print"</span>
-<span class='nf'>message</span>(<span class='s'>"message"</span>)
+<span class='nf'><a href='https://rdrr.io/r/base/message.html'>message</a></span>(<span class='s'>"message"</span>)
 <span class='c'>#&gt; message</span>
-<span class='nf'>warning</span>(<span class='s'>"warning"</span>)
+<span class='nf'><a href='https://rdrr.io/r/base/warning.html'>warning</a></span>(<span class='s'>"warning"</span>)
 <span class='c'>#&gt; Warning: warning</span></code></pre>
 
 </div>
