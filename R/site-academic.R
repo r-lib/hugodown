@@ -192,18 +192,16 @@ dir_copy_contents <- function(path, new_path) {
   }
 }
 
-# this is a modified version of usethis::use_rstudio() that
-# doesn't assume the user is creating a package
+# Replace after https://github.com/r-lib/usethis/issues/1153
 use_rstudio_website_proj <- function(path, line_ending = c("posix", "windows")) {
   line_ending <- arg_match(line_ending)
   line_ending <- c(posix = "Posix", windows = "Windows")[[line_ending]]
   project_name <- basename(normalizePath(path))
   rproj_file <- paste0(project_name, ".Rproj")
   new <- usethis::use_template("template.Rproj",
-                               rproj_file,
-                               data = list(line_ending = line_ending),
-                               package = "hugodown")
+    rproj_file,
+    data = list(line_ending = line_ending),
+    package = "hugodown"
+  )
   usethis::use_git_ignore(".Rproj.user")
 }
-
-

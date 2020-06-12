@@ -24,8 +24,9 @@ hugo_run_bg <- function(site, args, ...) {
 
 hugo_config <- function(site = ".") {
   result <- hugo_run(site, "config")
-  if (result$status != 0)
-    stop("Error running hugo config: ", result$stderr)
+  if (result$status != 0) {
+    abort(paste0("Error running hugo config: ", result$stderr))
+  }
 
   lines <- strsplit(result$stdout, "\n", fixed = TRUE)[[1]]
   vars <- regexec("^([A-Za-z0-9_]+)\\s*=\\s*([^\n]+)$", lines)
