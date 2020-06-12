@@ -14,9 +14,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-This vignette describes the process of deployment, how you get your hugodown website off your local computer and on to the internet for everyone to see. The easiest workflow for most people is to use [netlify](https://www.netlify.com). I'll describe this process is details, and then give a few pointers for other approahes.
+This vignette describes the process of deployment, how you get your hugodown website off your local computer and on to the internet for everyone to see. The easiest workflow for most people is to use [netlify](https://www.netlify.com). I'll describe this process in details, and then discuss other approaches that require a manual build site.
 
-(I assume you're already familiar with the basics of Git and GitHub. If you're not, you may need to start with [Happy Git and GitHub for the R user](http://happygitwithr.com/) by Jenny Bryan.)
+(Most of these techiques assume that you're already familiar with the basics of Git and GitHub. If you're not, you can try the Dropbox deployment described below, or try reading with [Happy Git and GitHub for the R user](http://happygitwithr.com/) by Jenny Bryan.)
 
 ## Netlify
 
@@ -71,11 +71,13 @@ Now return to [netlify](https://app.netlify.com), and look in the deploy log. Yo
 
 Success!
 
-## Other options
+## Manual builds
+
+The advantage of netlify is that automatically runs hugo for you; in other deployment scenarios you'll need to run `hugodown::build_site()` and publish the `public/` directory that it creates. The following sections provide some advice for deployment scenarios that need this.
 
 ### RStudio connect
 
-For most site, `rmarkdown::publish_site()` should just work.
+For most sites, `rmarkdown::publish_site()` should just work.
 
 If you deploy your site this way, and it doesn't look quite right (e.g. missing style sheets) it's likely because the theme you're using requires a `baseURL`. In this case, you'll need to update your `config.toml` with the URL for your site and republish.
 
@@ -87,4 +89,28 @@ You'll need to make a few changes to your site:
 
 -   If you have a custom domain name, create a `static/CNAME` file containing your domain name (e.g. just `tidyverse.org`, not `https://tidyverse.org`). Note that setting a custom domain name in the admin settings on your GitHub repo will not work.
 
--   Make sure to set `baseURL` in your `config.toml`
+-   In `config.toml`:
+
+    -   Set `publishDir = "docs/"`
+
+    -   Set `baseURL` to the url where you site will be published.
+
+To deploy:
+
+-   Run `hugodown::build_site()` and check in the rendered `docs/` directory. (If no `docs/` directory is created, double check your config above).
+
+After the first deploy, you'll need to go the admin page for your repo and select \"master branch `/docs` folder) for source:
+
+```{r, echo = FALSE, out.width = "400px"}
+knitr::include_graphics("github-setup.png")
+```
+
+### Site44 (dropbox)
+
+If you don't use Git and GitHub, one deployment option is [Site44](https://www.site44.com/), a service that allows you to publish websites from within Dropbox folders. Site44 creates a `Dropbox/Apps/site44` directory, and any folders within that directory are published as websites.
+
+The recommended workflow for deploying hugodown websites to Site44 is to develop your website in a separate project directory, and then, when it's ready for final publishing, run `build_site()` then copy the contents of the `public` directory to the folder for your website.
+
+### Amazon S3
+
+If you are a user of Amazon Web Services you can serve your website directly from Amazon S3. This option is a bit more technically involved than GitHub Pages, Netlify, or Site 44. See the article on [Hosting a Static Website on Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html) for additional details.
