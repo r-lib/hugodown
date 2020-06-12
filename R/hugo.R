@@ -25,3 +25,34 @@ hugo_run_bg <- function(site, args, ...) {
   hugo <- hugo_locate(hugo_version(path))
   processx::process$new(hugo, args, wd = path, ...)
 }
+
+hugo_config <- function(site = ".", override = NULL) {
+  result <- hugo_run(site, "config", config = override)
+  if (result$status != 0) {
+    abort(paste0("Error running hugo config: ", result$stderr))
+  }
+
+  lines <- strsplit(result$stdout, "\n", fixed = TRUE)[[1]]
+  vars <- regexec("^([A-Za-z0-9_]+)\\s*=\\s*([^\n]+)$", lines)
+  matches <- regmatches(lines, vars)
+
+  config <- lapply(matches, `[[`, 3)
+  names(config) <- lapply(matches, `[[`, 2)
+  config
+}
+
+hugo_config_str <- function(config, key) {
+  value <- config[[tolower(key)]]
+  sub("^\"?(.*?)\"?$", "\\1", value)
+}
+
+hugo_config_bool <- function(config, key) {
+  value <- config[[tolower(key)]]
+  value == "true"
+}
+
+hugo_config_int <- function(config, key) {
+  value <- config[[tolower(key)]]
+  as.integer(value)
+}
+

@@ -28,7 +28,8 @@ create_site_academic <- function(
   dir_create(path)
   usethis::ui_silence(old <- usethis::proj_set(path, force = TRUE))
   on.exit(usethis::ui_silence(usethis::proj_set(old)))
-  usethis::use_rstudio()
+
+  use_rstudio_website_proj(path)
 
   usethis::ui_done("Downloading academic theme")
   theme_dir <- academic_download("4.8.0")
@@ -83,6 +84,7 @@ academic_patch <- function(path) {
 
   usethis::use_git_ignore(c("resources", "public"))
   file_copy(path_package("hugodown", "academic", "README.md"), path)
+  file_copy(path_package("hugodown", "academic", "index.Rmd"), path)
 }
 
 academic_patch_config <- function(path) {
@@ -182,4 +184,15 @@ dir_copy_contents <- function(path, new_path) {
       dir_copy(path, path(new_path, path_file(path)))
     }
   }
+}
+
+# Replace after https://github.com/r-lib/usethis/issues/1153
+use_rstudio_website_proj <- function(path) {
+  project_name <- path_file(path_abs(path))
+  rproj_file <- paste0(project_name, ".Rproj")
+  new <- usethis::use_template("template.Rproj",
+    rproj_file,
+    package = "hugodown"
+  )
+  usethis::use_git_ignore(".Rproj.user")
 }

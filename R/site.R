@@ -68,3 +68,63 @@ rmd_needs_render <- function(path) {
 rmd_hash <- function(path) {
   digest::digest(path, file = TRUE, algo = "xxhash64")
 }
+
+hugodown_site <- function(input = ".", output_format = NULL) {
+  # read config and output directory
+  config <- hugo_config(input)
+  output_dir <- hugo_config_str(config, "publishdir")
+
+  list(
+    # name for site (used as default name for publishing)
+    name = hugo_config_str(config, "title"),
+
+    # output directory (e.g. "public")
+    output_dir = output_dir,
+
+    # render_site callback
+    render = function(input_file, output_format, envir, quiet, ...) {
+
+      # Render the entire site
+      if (is.null(input_file)) {
+
+        # render outdated rmds
+        lapply(site_outdated(input), function(rmd) {
+          cat("Rendering modified Rmd:", fs::path_rel(rmd, input), "\n")
+          rmarkdown::render(
+            input = rmd,
+            output_format = output_format,
+            envir = envir,
+            quiet = quiet,
+            ...
+          )
+        })
+
+        # build with relative urls so that the site is deployable anywhere
+        hugo_build(input, relative_urls = TRUE)
+
+        if (!quiet) {
+          cat("Hugo site built:", file.path(input, output_dir))
+        }
+
+        # render just a single file (this hook is for doing incremental
+        # renders of the site based on a "Knit" in the IDE). Since
+        # hugodown already handles this well w/ just delegate here to
+        # rmarkdown::render.
+      } else {
+        rmarkdown::render(
+          input = input_file,
+          output_format = output_format,
+          envir = envir,
+          quiet = quiet,
+          ...
+        )
+      }
+    },
+
+    # relative path to outputs that require cleaning
+    clean = function() {
+      files <- output_dir
+      files[file.exists(file.path(input, files))]
+    }
+  )
+}
