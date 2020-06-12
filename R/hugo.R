@@ -26,8 +26,8 @@ hugo_run_bg <- function(site, args, ...) {
   processx::process$new(hugo, args, wd = path, ...)
 }
 
-hugo_config <- function(site = ".") {
-  result <- hugo_run(site, "config")
+hugo_config <- function(site = ".", override = NULL) {
+  result <- hugo_run(site, "config", config = override)
   if (result$status != 0) {
     abort(paste0("Error running hugo config: ", result$stderr))
   }
