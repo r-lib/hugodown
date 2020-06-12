@@ -85,12 +85,6 @@ academic_patch <- function(path) {
   usethis::use_git_ignore(c("resources", "public"))
   file_copy(path_package("hugodown", "academic", "README.md"), path)
   file_copy(path_package("hugodown", "academic", "index.Rmd"), path)
-
-  # Can we open config files for editing in new session? Or should we have
-  # edit_config()
-  if (open) {
-    usethis::proj_activate(path)
-  }
 }
 
 academic_patch_config <- function(path) {
