@@ -11,7 +11,22 @@ hugodown is an experimental package that aims to facilitate the use of [RMarkdow
 
 ## Compared to blogdown
 
-Probably the biggest advantage of hugodown over blogdown is that it only re-runs your R code when you explicitly ask for it (by knitting the post). This makes hugodown considerably easier to use for long-running blogs and blogs with multiple contributors. Otherwise, it provides the best of blogdown's [two Rmarkdown variants](https://bookdown.org/yihui/blogdown/output-format.html): `.Rmd` and `.Rmarkdown`. 
+* It only re-runs your R code when you explicitly ask for it (by knitting the 
+  post). This makes hugodown considerably easier to use for long-running blogs 
+  and blogs with multiple contributors. 
+  
+* Local previews are pinned to a specific version of hugo. This makes it easier
+  to work with multiple blogs, and protects your from hugo <-> theme 
+  version incompatibilities.
+  
+* It provides support for getting started with a limited number of themes,
+  automatically making needed tweaks to ensure that html widgets, syntax 
+  highlighting, and math display work out of the box.
+
+* It is more opinonated about hugo configuration; see `vignette("config")` 
+  for details.
+
+Otherwise, it strives to provide the best of blogdown's [two Rmarkdown variants](https://bookdown.org/yihui/blogdown/output-format.html): `.Rmd` and `.Rmarkdown`. 
 
 | Feature               | hugodown `.Rmd` | blogdown `.Rmd` | blogdown `.Rmarkdown` |
 |-----------------------|-----------------|-----------------|-----------------------|
@@ -24,8 +39,6 @@ Probably the biggest advantage of hugodown over blogdown is that it only re-runs
 | Cross-references      | n               | y               | y                     |
 
 The only current limitation is that it does not support within page cross-references to figures, tables, and equations.
-
-hugodown expects certain hugo configuration; see `vignette("config")` for details.
 
 ## Installation
 

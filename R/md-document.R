@@ -47,6 +47,7 @@ md_document <- function(fig_width = 7,
 
   pandoc <- rmarkdown::pandoc_options(
     to = goldmark_format(),
+    from = paste0(rmarkdown::rmarkdown_format(), "+emoji"),
     args = "--wrap=none",
     ext = ".md"
   )
@@ -153,6 +154,7 @@ goldmark_format <- function() {
     "smart",
     "tex_math_dollars",
     "native_divs",
+    "emoji",
     sep = "+"
   )
 }

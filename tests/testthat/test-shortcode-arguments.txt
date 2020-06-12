@@ -1,0 +1,23 @@
+> inline <- (function(...) cat(shortcode(..., .inline = TRUE)))
+> # No arguments
+> inline("name")
+`{{< name >}}`{=html}
+
+> # Position vs name
+> inline("name", 1, 2, 3)
+`{{< name 1 2 3 >}}`{=html}
+
+> inline("name", x = 1, y = 2, z = 3)
+`{{< name x=1 y=2 z=3 >}}`{=html}
+
+> # Quoting
+> inline("name", "x")
+`{{< name 'x' >}}`{=html}
+
+> inline("name", I("'x'"))
+`{{< name 'x' >}}`{=html}
+
+> # Contents
+> inline("name", .contents = "contents")
+`{{< name >}}contents{{< /name >}}`{=html}
+

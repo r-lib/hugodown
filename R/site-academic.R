@@ -32,24 +32,42 @@ create_site_academic <- function(
   use_rstudio_website_proj(path)
 
   usethis::ui_done("Downloading academic theme")
+  theme_dir <- academic_download("4.8.0")
+
+  usethis::ui_done("Copying site components")
+  dir_copy_contents(path(theme_dir, "exampleSite"), path)
+
+  usethis::ui_done("Installing academic theme")
+  academic_install(path, theme_dir)
+
+  usethis::ui_done("Patching theme for hugodown compatibility")
+  academic_patch(path)
+
+  if (open) {
+    usethis::proj_activate(path)
+  }
+  invisible(path)
+}
+
+academic_download <- function(version = "4.8.0") {
   zip <- curl::curl_download(
-    "https://github.com/gcushen/hugo-academic/archive/v4.8.0.zip",
+    paste0("https://github.com/gcushen/hugo-academic/archive/v", version, ".zip"),
     file_temp("hugodown")
   )
   exdir <- file_temp("hugodown")
   utils::unzip(zip, exdir = exdir)
-  exdir <- path(exdir, "hugo-academic-4.8.0")
+  path(exdir, paste0("hugo-academic-", version))
+}
 
-  usethis::ui_done("Copying site components")
-  dir_copy_contents(path(exdir, "exampleSite"), path)
-
-  usethis::ui_done("Installing academic theme")
+academic_install <- function(path, theme_dir) {
   theme_path <- dir_create(path(path, "themes", "academic"))
-  dir_copy_contents(exdir, theme_path)
+  dir_copy_contents(theme_dir, theme_path)
   dir_delete(path(theme_path, "exampleSite"))
+}
 
-  # Patch configuration files
-  usethis::ui_done("Patching configuration files")
+# Patch existing theme ----------------------------------------------------
+
+academic_patch <- function(path) {
   config_path <- file_move(path(path, "config", "_default", "config.toml"), path)
   academic_patch_config(config_path)
   academic_patch_params(path(path, "config", "_default", "params.toml"))
@@ -119,7 +137,7 @@ academic_patch_post_archetype <- function(path) {
     'title: "{{ title }}"',
     fixed = TRUE
   )
-  lines <- line_replace(lines, 'date: {{ .Date }}', 'date: {{ date }}"', fixed = TRUE)
+  lines <- line_replace(lines, 'date: {{ .Date }}', 'date: {{ date }}', fixed = TRUE)
   lines <- line_replace(lines, 'lastmod: {{ .Date }}', 'lastmod: {{ date }}', fixed = TRUE)
 
   brio::write_lines(lines, path)

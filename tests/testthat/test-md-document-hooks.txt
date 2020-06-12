@@ -1,4 +1,4 @@
-> cat_line(out)
+> cat_line(rmd$lines)
 ---
 output: hugodown::md_document
 rmd_hash: 51bc60383311007d

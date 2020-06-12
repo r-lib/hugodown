@@ -1,0 +1,11 @@
+> # type
+> cat(shortcode("name", .output = "md"))
+```{=html}
+{{% name %}}
+```
+
+> cat(shortcode("name", .output = "html"))
+```{=html}
+{{< name >}}
+```
+

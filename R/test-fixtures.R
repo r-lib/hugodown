@@ -5,6 +5,19 @@ local_file <- function(path, env = parent.frame()) {
   file_copy(path, tmp)
 }
 
+local_render <- function(path, env = parent.frame()) {
+  tmp_path <- local_file(path, env = env)
+  rmarkdown::render(tmp_path, quiet = TRUE)
+  out_path <- path_ext_set(tmp_path, "md")
+
+  list(
+    src = path,
+    dst = out_path,
+    dir = path_dir(out_path),
+    lines = brio::read_lines(out_path)
+  )
+}
+
 local_dir <- function(path, env = parent.frame()) {
   tmp <- file_temp("hugodown-")
   withr::defer(dir_delete(tmp), envir = env)
