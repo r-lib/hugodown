@@ -157,7 +157,9 @@ deployment scenarios</p>
   <span class='kw'>dest</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>build_drafts</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>build_future</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>clean</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+  <span class='kw'>clean</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>base_url</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>relative_urls</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -180,6 +182,16 @@ in the built site?</p></td>
     <tr>
       <th>clean</th>
       <td><p>Remove files in <code>public/</code> that don't exist in the source.</p></td>
+    </tr>
+    <tr>
+      <th>base_url</th>
+      <td><p><code>&lt;string&gt;</code> Optionally override the <code>baseURL</code> setting from
+hugo config.</p></td>
+    </tr>
+    <tr>
+      <th>relative_urls</th>
+      <td><p><code>&lt;bool&gt;</code> Optionally the override the <code>relativeURL</code>
+setting from hugo config.</p></td>
     </tr>
     </table>
 
