@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • hugodown</title>
+<title>Generate a hugo shortcode — shortcode • hugodown</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,12 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Generate a hugo shortcode — shortcode" />
+<meta property="og:description" content="Generate a hugo shortcode with appropriate pandoc markup to preserve it as
+is when embedded in an R markdown document.
+Generally, I don't recommend calling this function directly; instead
+use it inside a function with the same name as the shortcode you want to
+wrap. See embed_gist() and friends for examples" />
 <meta property="og:image" content="https://hugodown.r-lib.org/logo.png" />
 
 
@@ -76,7 +81,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -138,108 +143,67 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Generate a hugo shortcode</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-lib/hugodown/blob/master/R/shortcode.R'><code>R/shortcode.R</code></a></small>
+    <div class="hidden name"><code>shortcode.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Generate a hugo shortcode with appropriate pandoc markup to preserve it as
+is when embedded in an R markdown document.</p>
+<p>Generally, I don't recommend calling this function directly; instead
+use it inside a function with the same name as the shortcode you want to
+wrap. See <code><a href='embed_gist.html'>embed_gist()</a></code> and friends for examples</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>shortcode</span>(
+  <span class='no'>.name</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>.contents</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>.output</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"html"</span>, <span class='st'>"md"</span>),
+  <span class='kw'>.inline</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)</pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="create_site_academic.html">create_site_academic()</a></code> </p>
-        </td>
-        <td><p>Create a hugo academic site</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="embed_gist.html">embed_gist()</a></code> <code><a href="embed_gist.html">embed_instagram()</a></code> <code><a href="embed_gist.html">embed_tweet()</a></code> <code><a href="embed_gist.html">embed_vimeo()</a></code> <code><a href="embed_gist.html">embed_youtube()</a></code> </p>
-        </td>
-        <td><p>Generate hugo shortcodes to embed various types of media</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="hugo_build.html">hugo_build()</a></code> </p>
-        </td>
-        <td><p>Build site</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="hugo_install.html">hugo_install()</a></code> </p>
-        </td>
-        <td><p>Install specified version of hugo</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="hugo_start.html">hugo_start()</a></code> <code><a href="hugo_start.html">hugo_stop()</a></code> <code><a href="hugo_start.html">hugo_browse()</a></code> </p>
-        </td>
-        <td><p>Manage the hugo server</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="hugo_version.html">hugo_version()</a></code> </p>
-        </td>
-        <td><p>Find hugo version needed for current site</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="md_document.html">md_document()</a></code> </p>
-        </td>
-        <td><p>An Rmd output format that produces Hugo-flavoured markdown</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="shortcode.html">shortcode()</a></code> </p>
-        </td>
-        <td><p>Generate a hugo shortcode</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="site_outdated.html">site_outdated()</a></code> </p>
-        </td>
-        <td><p>Find <code>.Rmd</code>s that need to be re-rendered.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="use_netlify_toml.html">use_netlify_toml()</a></code> </p>
-        </td>
-        <td><p>Create <code>netlify.toml</code></p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="use_post.html">use_post()</a></code> </p>
-        </td>
-        <td><p>Create a new post</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="use_tidy_post.html">use_tidy_post()</a></code> <code><a href="use_tidy_post.html">use_tidy_thumbnails()</a></code> <code><a href="use_tidy_post.html">tidy_show_meta()</a></code> </p>
-        </td>
-        <td><p>Various helpers for tidyverse.org and similar sites</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>.name</th>
+      <td><p>Name of the shortcode</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Arguments to the shortcode, supplied either by name or
+position depending on the shortcode. By default, strings will
+automatically be quoted with single quotes. Suppress this quoting
+by wrapping the argument in <code><a href='https://rdrr.io/r/base/AsIs.html'>I()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>.contents</th>
+      <td><p>Contents of the shortcode for paired shortcodes.</p></td>
+    </tr>
+    <tr>
+      <th>.output</th>
+      <td><p>Is the output of the shortcode html or markdown? This
+controls whether the shortcode uses <code>&lt;&gt;</code> or <code>%</code>.</p></td>
+    </tr>
+    <tr>
+      <th>.inline</th>
+      <td><p>Is the shortcode designed to be used inline or in its own
+paragraph? Controls whether the shortcode is wrapped in a block or inline
+<a href='https://pandoc.org/MANUAL.html#extension-raw_attribute'>raw attribute</a>.</p></td>
+    </tr>
     </table>
-  </div>
 
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>pkg</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>name</span>) {
+  <span class='fu'>shortcode</span>(<span class='st'>"pkg"</span>, <span class='no'>name</span>, <span class='kw'>.inline</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+}
+<span class='fu'>pkg</span>(<span class='st'>"hugodown"</span>)</div><div class='output co'>#&gt; [1] "`{{&lt; pkg 'hugodown' &gt;}}`{=html}"</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>

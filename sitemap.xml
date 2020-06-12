@@ -7,6 +7,9 @@
     <loc>https://hugodown.r-lib.org/reference/create_site_academic.html</loc>
   </url>
   <url>
+    <loc>https://hugodown.r-lib.org/reference/embed_gist.html</loc>
+  </url>
+  <url>
     <loc>https://hugodown.r-lib.org/reference/hugo_build.html</loc>
   </url>
   <url>
@@ -26,6 +29,9 @@
   </url>
   <url>
     <loc>https://hugodown.r-lib.org/reference/md_document.html</loc>
+  </url>
+  <url>
+    <loc>https://hugodown.r-lib.org/reference/shortcode.html</loc>
   </url>
   <url>
     <loc>https://hugodown.r-lib.org/reference/site_outdated.html</loc>
