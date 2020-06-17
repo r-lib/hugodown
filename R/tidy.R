@@ -13,7 +13,6 @@ use_tidy_post <- function(slug, site = ".", open = is_interactive()) {
 
   post_slug <- paste0("blog/", tolower(slug))
   data <- list(
-    title = unslug(slug),
     pleased = tidy_pleased()
   )
   pieces <- strsplit(slug, "-")[[1]]

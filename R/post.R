@@ -48,6 +48,7 @@ use_post <- function(path, kind = NULL, data = list(), site = ".", open = is_int
   rmds <- dir_ls(dest, glob = "*.Rmd")
   defaults <- list(
     slug = path_file(path),
+    title = unslug(path_file(path)),
     author = whoami::fullname("Your name"),
     date = strftime(Sys.Date(), "%Y-%m-%d")
   )
