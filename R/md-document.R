@@ -231,22 +231,26 @@ knit_hooks <- function() {
 
   # if x is not valid R code, downlit::highlight will return NA
   # In this case, we return x without highlighting.
-  highlight_if_possible <- function(x) {
-    x_highlighted <- downlit::highlight(x, pre_class = NULL)
-    if (is.na(x_highlighted)) x else x_highlighted
+  highlight_if_possible <- function(x, engine) {
+    if (engine != "R") {
+      x
+    } else {
+      x_highlighted <- downlit::highlight(x, pre_class = NULL)
+      if (is.na(x_highlighted)) x else x_highlighted
+    }
   }
   hook_output <- function(type, x, options) {
     if (options$results == "asis") {
       needs_code(FALSE, x)
     } else {
       x <- paste0(x, "\n", collapse = "")
-      if (options$engine == "R") x <- highlight_if_possible(x)
+      x <- highlight_if_possible(x, options$engine)
       needs_code(TRUE, x)
     }
   }
   hook_source <- function(x, options) {
     x <- paste0(x, "\n", collapse = "")
-    if (options$engine == "R") x <- highlight_if_possible(x)
+    x <- highlight_if_possible(x, options$engine)
     x <- paste0(x, "\n")
     needs_code(TRUE, x)
   }
