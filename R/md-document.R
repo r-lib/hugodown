@@ -240,13 +240,13 @@ knit_hooks <- function() {
       needs_code(FALSE, x)
     } else {
       x <- paste0(x, "\n", collapse = "")
-      x <- highlight_if_possible(x)
+      if (options$engine == "R") x <- highlight_if_possible(x)
       needs_code(TRUE, x)
     }
   }
   hook_source <- function(x, options) {
     x <- paste0(x, "\n", collapse = "")
-    x <- highlight_if_possible(x)
+    if (options$engine == "R") x <- highlight_if_possible(x)
     x <- paste0(x, "\n")
     needs_code(TRUE, x)
   }
