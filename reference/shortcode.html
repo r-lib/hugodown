@@ -155,15 +155,15 @@ wrap. See embed_gist() and friends for examples" />
 is when embedded in an R markdown document.</p>
 <p>Generally, I don't recommend calling this function directly; instead
 use it inside a function with the same name as the shortcode you want to
-wrap. See <code><a href='embed_gist.html'>embed_gist()</a></code> and friends for examples</p>
+wrap. See <code>embed_gist()</code> and friends for examples</p>
     </div>
 
     <pre class="usage"><span class='fu'>shortcode</span>(
-  <span class='no'>.name</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>.contents</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>.output</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"html"</span>, <span class='st'>"md"</span>),
-  <span class='kw'>.inline</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+  <span class='kw'>.name</span>,
+  <span class='kw'>...</span>,
+  .contents = <span class='kw'>NULL</span>,
+  .output = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"html"</span>, <span class='st'>"md"</span>),
+  .inline = <span class='fl'>FALSE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -199,8 +199,8 @@ paragraph? Controls whether the shortcode is wrapped in a block or inline
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>pkg</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>name</span>) {
-  <span class='fu'>shortcode</span>(<span class='st'>"pkg"</span>, <span class='no'>name</span>, <span class='kw'>.inline</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+    <pre class="examples"><div class='input'><span class='kw'>pkg</span> <span class='op'>&lt;-</span> <span class='fu'>function</span>(<span class='kw'>name</span>) {
+  <span class='fu'>shortcode</span>(<span class='st'>"pkg"</span>, <span class='kw'>name</span>, .inline = <span class='fl'>TRUE</span>)
 }
 <span class='fu'>pkg</span>(<span class='st'>"hugodown"</span>)</div><div class='output co'>#&gt; [1] "`{{&lt; pkg 'hugodown' &gt;}}`{=html}"</div></pre>
   </div>
