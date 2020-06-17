@@ -27,6 +27,11 @@ test_that("code is linked/highlighted", {
   expect_equal(sum(grepl("[`stats::median()`]", rmd$lines, fixed = TRUE)), 1)
 })
 
+test_that("unparseable code is left as is", {
+  rmd <- local_render(test_path("code-invalid.Rmd"))
+  expect_match(rmd$lines[9], "1 + ", fixed = TRUE)
+})
+
 test_that("output gets unicode and colour", {
   skip_on_os("windows")
 
