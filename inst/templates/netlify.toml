@@ -1,6 +1,6 @@
 [build]
   publish = "public"
-  command = "hugo -d public"
+  command = "hugo"
 
 [build.environment]
   HUGO_VERSION = "{{hugo_version}}"
