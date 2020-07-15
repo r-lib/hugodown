@@ -10,7 +10,8 @@ hugo_locate(version = hugo_default_get())
 \item{version}{The Hugo version to be located}
 }
 \value{
-Path to the Hugo install
+Returns the path to the Hugo installation, or an error if no
+Hugo install is found
 }
 \description{
 Locates a specific Hugo installation
