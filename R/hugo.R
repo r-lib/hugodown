@@ -1,3 +1,9 @@
+#' Locates a specific Hugo installation
+#'
+#' @param version The Hugo version to be located
+#'
+#' @return Path to the Hugo install
+#' @export
 hugo_locate <- function(version = hugo_default_get()) {
   path <- hugo_home(version)
   if (!file_exists(path)) {
