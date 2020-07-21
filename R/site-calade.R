@@ -134,13 +134,13 @@ calade_write_hugodown <- function(path) {
 
 # Writes the readme file
 calade_write_readme <- function(path) {
-  file_copy(path_package("caladown", "calade", "README.md"), path)
+  file_copy(path_package("hugodown", "calade", "README.md"), path)
 }
 
 
 # Writes the sentinel file
 calade_write_sentinel <- function(path) {
-  file_copy(path_package("caladown", "calade", "index.Rmd"), path)
+  file_copy(path_package("hugodown", "calade", "index.Rmd"), path)
 }
 
 
@@ -148,7 +148,7 @@ calade_write_sentinel <- function(path) {
 calade_write_css <- function(path) {
   dir_create(path(path, "static", "css"))
   file_copy(
-    path = path_package("caladown", "calade", "highlight.css"),
+    path = path_package("hugodown", "calade", "highlight.css"),
     new_path = path(path, "static", "css")
   )
 }
@@ -223,7 +223,7 @@ pandoc_check <- function(version = NULL) {
   inst_version <- rmarkdown::pandoc_version()
   version <- as.numeric_version(version)
   if(inst_version < version) {
-    warning("Installation of pandoc is version ", inst_version, ". Caladown sites may fail to build for pandoc versions below ", version)
+    warning("Installation of pandoc is version ", inst_version, ". Calade site may fail to build for pandoc versions below ", version)
   }
 
 }
