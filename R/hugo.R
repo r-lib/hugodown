@@ -10,7 +10,7 @@ hugo_locate <- function(version = hugo_default_get()) {
   if (!file_exists(path)) {
     abort(c(
       paste0("hugo ", version, " not installed"),
-      i = paste0("Do you need to call `hugo_install('", version, "')`?")
+      i = paste0("Do you need to call `hugodown::hugo_install('", version, "')`?")
     ))
   }
 
