@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Deprecated: please use md_document() — hugo_document • hugodown</title>
+<title>Locates a specific Hugo installation — hugo_locate • hugodown</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Deprecated: please use md_document() — hugo_document" />
-<meta property="og:description" content="Deprecated: please use md_document()" />
+<meta property="og:title" content="Locates a specific Hugo installation — hugo_locate" />
+<meta property="og:description" content="Locates a specific Hugo installation" />
 <meta property="og:image" content="https://hugodown.r-lib.org/logo.png" />
 
 
@@ -141,23 +141,30 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Deprecated: please use <code>md_document()</code></h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-lib/hugodown/blob/master/R/md-document.R'><code>R/md-document.R</code></a></small>
-    <div class="hidden name"><code>hugo_document.Rd</code></div>
+    <h1>Locates a specific Hugo installation</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-lib/hugodown/blob/master/R/hugo.R'><code>R/hugo.R</code></a></small>
+    <div class="hidden name"><code>hugo_locate.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Deprecated: please use <code><a href='md_document.html'>md_document()</a></code></p>
+    <p>Locates a specific Hugo installation</p>
     </div>
 
-    <pre class="usage"><span class='fu'>hugo_document</span>(
-  fig_width = <span class='fl'>7</span>,
-  fig_asp = <span class='fl'>0.618</span>,
-  fig_retina = <span class='fl'>2</span>,
-  tidyverse_style = <span class='fl'>TRUE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>hugo_locate</span>(version = <span class='fu'>hugo_default_get</span>())</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>version</th>
+      <td><p>The Hugo version to be located</p></td>
+    </tr>
+    </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Returns the path to the Hugo installation, or an error if no
+Hugo install is found</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

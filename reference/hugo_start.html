@@ -204,9 +204,9 @@ site from memory, but rendering to disk can be helpful for debugging.</p></td>
     
 
 <p>hugodown will attempt to automatically use the correct version of hugo for
-your site (prompting you to call <code>hugo_install()</code> if needed). It looks in
+your site (prompting you to call <code><a href='hugo_install.html'>hugo_install()</a></code> if needed). It looks in
 two places:</p><ul>
-<li><p>If <code>_hugodown.yml</code> is present, it looks for the <code>hugo_version</code> key.</p></li>
+<li><p>If <code>_hugodown.yaml</code> is present, it looks for the <code>hugo_version</code> key.</p></li>
 <li><p>If <code>netlify.toml</code> is present, it looks in
 <code>context$production$environment$HUGO_VERSION</code></p></li>
 </ul>

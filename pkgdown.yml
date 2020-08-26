@@ -1,8 +1,8 @@
 pandoc: 2.7.3
 pkgdown: 1.5.1.9000
-pkgdown_sha: caf7cc74e008e8d0d6e53eeda93cd3cad3545bf2
+pkgdown_sha: 77f909b0138a1d7191ad9bb3cf95e78d8e8d93b9
 articles: []
-last_built: 2020-06-30T16:46Z
+last_built: 2020-08-26T12:36Z
 urls:
   reference: https://hugodown.r-lib.org/reference
   article: https://hugodown.r-lib.org/articles
