@@ -47,7 +47,7 @@ hugodown will attempt to automatically use the correct version of hugo for
 your site (prompting you to call \code{\link[=hugo_install]{hugo_install()}} if needed). It looks in
 two places:
 \itemize{
-\item If \verb{_hugodown.yml} is present, it looks for the \code{hugo_version} key.
+\item If \verb{_hugodown.yaml} is present, it looks for the \code{hugo_version} key.
 \item If \code{netlify.toml} is present, it looks in
 \code{context$production$environment$HUGO_VERSION}
 }
