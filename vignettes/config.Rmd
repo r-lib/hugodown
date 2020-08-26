@@ -110,6 +110,6 @@ From easiest to hardest, based on the theme you chose:
 
 ## hugodown
 
-hugodown also has its own configuration file, `_hugodown.yml`. Currently this has one option:
+hugodown also has its own configuration file, `_hugodown.yaml`. Currently this has one option:
 
 -   `hugo_version`: this defines the version of hugo needed by the current site.

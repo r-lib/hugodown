@@ -5,7 +5,7 @@
 #' your site (prompting you to call [hugo_install()] if needed). It looks in
 #' two places:
 #'
-#' * If `_hugodown.yml` is present, it looks for the `hugo_version` key.
+#' * If `_hugodown.yaml` is present, it looks for the `hugo_version` key.
 #' * If `netlify.toml` is present, it looks in
 #'   `context$production$environment$HUGO_VERSION`
 #'
