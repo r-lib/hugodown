@@ -19,8 +19,8 @@ create_site_calade <- function(
   # (or throw an error if it cannot be found)
   hugo_locate("0.66.0")
 
-  # Check pandoc version. Throw error if none found, warn if below 2.1
-  pandoc_check("2.1")
+  # Require pandoc version 2.1 or greater
+  check_pandoc("2.1")
 
   # During site creation process treat project as the new site
   dir_create(path)
@@ -207,11 +207,11 @@ calade_patch_config <- function(path) {
 
 # Throws error if pandoc is not installed, and warns if pandoc version
 # is too low (needed to ensure calade example site pages knit to md)
-pandoc_check <- function(version = NULL) {
+check_pandoc <- function(version = NULL) {
 
-  # stop if no pandoc
+  # error if no pandoc
   if(!rmarkdown::pandoc_available()) {
-    stop("Could not find a pandoc installation", call. = FALSE)
+    abort("Could not find a pandoc installation")
   }
 
   # return early if no pandoc version check is required
@@ -219,11 +219,16 @@ pandoc_check <- function(version = NULL) {
     return(invisible(NULL))
   }
 
-  # throw warning if pandoc versions too low (preferred to error)
+  # throws error if pandoc version too low
   inst_version <- rmarkdown::pandoc_version()
   version <- as.numeric_version(version)
   if(inst_version < version) {
-    warning("Installation of pandoc is version ", inst_version, ". Calade site may fail to build for pandoc versions below ", version)
+    abort(
+      paste0(
+        "Installation of pandoc is version ", inst_version,
+        ". Calade site may fail to build for pandoc versions below ", version
+      )
+    )
   }
 
 }
