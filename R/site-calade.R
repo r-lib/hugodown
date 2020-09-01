@@ -50,13 +50,9 @@ create_site_calade <- function(
   usethis::ui_done("Patching example site")
   calade_write_hugodown(path)
   calade_write_sentinel(path)
-  calade_write_readme(path)
-  calade_write_css(path)
   calade_rename_default_archetype(path)
   calade_patch_rmd_dir(path(path, "themes", "calade", "archetypes"))
   calade_patch_rmd_dir(path(path, "content"))
-  calade_patch_head_custom(path)
-  calade_patch_config(path)
 
   # Build rmd posts/projects to hugo-flavoured md and then build
   if(knit == TRUE) {
@@ -69,7 +65,6 @@ create_site_calade <- function(
     usethis::proj_activate(path)
   }
 }
-
 
 
 # helpers -----------------------------------------------------------------
@@ -124,84 +119,15 @@ calade_patch_rmd_dir <- function(path) {
   lapply(rmd_files, calade_patch_rmd)
 }
 
-
 # Writes the hugodown yaml file
 calade_write_hugodown <- function(path) {
   opts <- list(hugo_version = "0.66.0")
   yaml::write_yaml(opts, path(path, "_hugodown.yaml"))
 }
 
-
-# Writes the readme file
-calade_write_readme <- function(path) {
-  file_copy(path_package("hugodown", "calade", "README.md"), path)
-}
-
-
 # Writes the sentinel file
 calade_write_sentinel <- function(path) {
   file_copy(path_package("hugodown", "calade", "index.Rmd"), path)
-}
-
-
-# Copies the highlight.css style file across
-calade_write_css <- function(path) {
-  dir_create(path(path, "static", "css"))
-  file_copy(
-    path = path_package("hugodown", "calade", "highlight.css"),
-    new_path = path(path, "static", "css")
-  )
-}
-
-
-# Inserts link to highlight.css file in head_custom.html
-calade_patch_head_custom <- function(path) {
-
-  # (is this necessary?)
-  head <- path(path, "layouts", "partials", "head_custom.html")
-  dir_create(path_dir(head))
-
-  # append to file
-  lines <- brio::read_lines(head)
-  brio::write_lines(c(
-    lines,
-    "",
-    "<!-- css for syntax highlighting -->",
-    "<link rel='stylesheet' href='{{ \"css/highlight.css\" | relURL }}' title='hl'>",
-    "{{ range .Params.html_dependencies }}",
-    "  {{ . | safeHTML }}",
-    "{{ end }}"
-  ), head)
-}
-
-
-# Patches the config.toml file for the example site. Specifically, the
-# config must allow the markdown renderer to pass raw html. Also needs to
-# specify the publishDir
-calade_patch_config <- function(path) {
-
-  config <- path(path, "config.toml")
-  lines <- brio::read_lines(config)
-
-  # append to existing
-  brio::write_lines(c(
-    lines,
-    '',
-    '',
-    '# A hugodown site requires that Hugo be explicitly',
-    '# told how to handle markup. Because hugodown generates',
-    '# the raw HTML for R code chunks, the "unsafe = true"',
-    '# setting is required, or else Hugo will not allow the',
-    '# raw HTML to be passed from the .md file to the .html',
-    '# file. See:',
-    '# https://gohugo.io/getting-started/configuration-markup',
-    '[markup]',
-    '  defaultMarkdownHandler = "goldmark"',
-    '  [markup.goldmark]',
-    '    [markup.goldmark.renderer]',
-    '      unsafe = true',
-    ''
-  ), config)
 }
 
 
