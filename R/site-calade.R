@@ -48,8 +48,9 @@ create_site_calade <- function(
 
   # Patch example site
   usethis::ui_done("Patching example site")
-  calade_write_hugodown(path)
-  calade_write_sentinel(path)
+  yaml::write_yaml(list(hugo_version = "0.66.0"), path(path, "_hugodown.yaml"))
+  file_copy(path_package("hugodown", "calade", "index.Rmd"), path)
+
   calade_rename_default_archetype(path)
   calade_patch_rmd_dir(path(path, "themes", "calade", "archetypes"))
   calade_patch_rmd_dir(path(path, "content"))
@@ -77,7 +78,6 @@ calade_build_post <- function(path) {
   suppressWarnings(rmarkdown::render(path, quiet = TRUE))
 }
 
-
 # Downloads and extracts the Hugo theme
 calade_download_theme <- function() {
   zip <- curl::curl_download(
@@ -90,7 +90,6 @@ calade_download_theme <- function() {
   return(exdir)
 }
 
-
 # Convert md post archetypes to Rmd
 calade_rename_default_archetype <- function(path) {
   dir_path <- path(path, "themes", "calade", "archetypes")
@@ -101,35 +100,18 @@ calade_rename_default_archetype <- function(path) {
   )
 }
 
-
 # Patch the yaml header in an rmd file
 calade_patch_rmd <- function(path) {
   lines <- brio::read_lines(path)
-  lines <- c(lines[1],
-             "output: hugodown::md_document",
-             lines[-1]
-  )
+  lines <- c(lines[1], "output: hugodown::md_document", lines[-1])
   brio::write_lines(lines, path)
 }
-
 
 # Patch all rmd files in a folder
 calade_patch_rmd_dir <- function(path) {
   rmd_files <- dir_ls(path = path, glob = "*.Rmd", recurse = TRUE)
   lapply(rmd_files, calade_patch_rmd)
 }
-
-# Writes the hugodown yaml file
-calade_write_hugodown <- function(path) {
-  opts <- list(hugo_version = "0.66.0")
-  yaml::write_yaml(opts, path(path, "_hugodown.yaml"))
-}
-
-# Writes the sentinel file
-calade_write_sentinel <- function(path) {
-  file_copy(path_package("hugodown", "calade", "index.Rmd"), path)
-}
-
 
 # Throws error if pandoc is not installed, and warns if pandoc version
 # is too low (needed to ensure calade example site pages knit to md)
