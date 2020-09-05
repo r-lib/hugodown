@@ -144,6 +144,12 @@ md_document <- function(fig_width = 7,
 goldmark_format <- function() {
   paste(
     "markdown_strict",
+    'all_symbols_escapable',
+    'fenced_code_blocks',
+    'space_in_atx_header',
+    'intraword_underscores',
+    'lists_without_preceding_blankline',
+    'shortcut_reference_links',
     "pipe_tables",
     "strikeout",
     "autolink_bare_uris",
