@@ -288,6 +288,10 @@ highlight_if_possible <- function(x, engine) {
     x
   } else {
     out <- downlit::highlight(x, pre_class = NULL)
+    # replace curly operator with HTML entities
+    # otherwise Hugo will treat it as a shortcode
+    out <- gsub("\\{\\{", "&#123;&#123;", out)
+    out <- gsub("\\}\\}", "&#125;&#125;", out)
     if (is.na(out)) {
       x
     } else {
