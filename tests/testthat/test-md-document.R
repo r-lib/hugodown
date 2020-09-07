@@ -90,6 +90,10 @@ test_that("html dependencies are captured", {
   expect_true(length(yaml$html_dependencies) > 1)
 })
 
+test_that("curly operator is escaped", {
+  rmd <- local_render(test_path("curly.Rmd"))
+  expect_equal(rmd$lines[[9]], "<pre class='chroma'><code class='language-r' data-lang='r'>&#123;&#123; <span class='k'>curly</span> &#125;&#125;")
+})
 # helpers -----------------------------------------------------------------
 
 test_that("link_inline() works with an nubmer of links", {
