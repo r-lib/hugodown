@@ -140,19 +140,27 @@ md_document <- function(fig_width = 7,
   )
 }
 
-# https://github.com/rstudio/rstudio/blob/master/src/gwt/panmirror/src/editor/src/api/pandoc_format.ts#L335-L359
 goldmark_format <- function() {
   paste(
     "markdown_strict",
+    # https://github.com/rstudio/rstudio/blob/master/src/gwt/panmirror/src/editor/src/api/pandoc_format.ts#L344-L356
+    "all_symbols_escapable",
+    "backtick_code_blocks",
+    "fenced_code_blocks",
+    "space_in_atx_header",
+    "intraword_underscores",
+    "lists_without_preceding_blankline",
+    "shortcut_reference_links",
+    # https://github.com/rstudio/rstudio/blob/master/src/gwt/panmirror/src/editor/src/api/pandoc_format.ts#L380-L392
     "pipe_tables",
     "strikeout",
     "autolink_bare_uris",
     "task_lists",
-    "backtick_code_blocks",
     "definition_lists",
     "footnotes",
     "smart",
     "tex_math_dollars",
+    # custom
     "native_divs",
     "emoji",
     sep = "+"
