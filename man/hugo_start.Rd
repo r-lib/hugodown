@@ -35,6 +35,8 @@ site from memory, but rendering to disk can be helpful for debugging.}
 \code{hugo_start()} starts a hugo server that will automatically re-generate
 the site whenever the input changes. You only need to execute this once
 per session; it continues to run in the background as you work on the site.
+For large sites the hugo server can be slow to start; if it takes longer
+than 30 seconds \code{hugo_start()} throws an error.
 
 \code{hugo_stop()} kills the server. This happens automatically when you exit
 R so you shouldn't normally need to run this.
