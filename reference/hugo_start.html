@@ -50,6 +50,8 @@
 <meta property="og:description" content="hugo_start() starts a hugo server that will automatically re-generate
 the site whenever the input changes. You only need to execute this once
 per session; it continues to run in the background as you work on the site.
+For large sites the hugo server can be slow to start; if it takes longer
+than 30 seconds hugo_start() throws an error.
 hugo_stop() kills the server. This happens automatically when you exit
 R so you shouldn't normally need to run this.
 hugo_browse() opens the site in the RStudio viewer or your web browser." />
@@ -102,12 +104,6 @@ hugo_browse() opens the site in the RStudio viewer or your web browser." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -154,7 +150,9 @@ hugo_browse() opens the site in the RStudio viewer or your web browser." />
     <div class="ref-description">
     <p><code>hugo_start()</code> starts a hugo server that will automatically re-generate
 the site whenever the input changes. You only need to execute this once
-per session; it continues to run in the background as you work on the site.</p>
+per session; it continues to run in the background as you work on the site.
+For large sites the hugo server can be slow to start; if it takes longer
+than 30 seconds <code>hugo_start()</code> throws an error.</p>
 <p><code>hugo_stop()</code> kills the server. This happens automatically when you exit
 R so you shouldn't normally need to run this.</p>
 <p><code>hugo_browse()</code> opens the site in the RStudio viewer or your web browser.</p>
@@ -229,7 +227,7 @@ the version of hugo that you're using for deployment.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>
