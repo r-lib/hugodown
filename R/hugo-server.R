@@ -16,6 +16,8 @@
 #' `hugo_start()` starts a hugo server that will automatically re-generate
 #' the site whenever the input changes. You only need to execute this once
 #' per session; it continues to run in the background as you work on the site.
+#' For large sites the hugo server can be slow to start; if it takes longer
+#' than 30 seconds `hugo_start()` throws an error.
 #'
 #' `hugo_stop()` kills the server. This happens automatically when you exit
 #' R so you shouldn't normally need to run this.
@@ -60,7 +62,7 @@ hugo_start <- function(site = ".",
   now <- proc.time()[[3]]
   ok <- FALSE
 
-  while (proc.time()[[3]] - now < 5) {
+  while (proc.time()[[3]] - now < 30) {
     ps$poll_io(250)
     init <- paste0(init, ps$read_output())
 
