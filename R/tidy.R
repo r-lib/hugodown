@@ -50,10 +50,10 @@ use_tidy_thumbnails <- function(path = NULL) {
   info_wd <- magick::image_info(thumb_wd)
 
   if (info_sq$width != info_sq$height) {
-    abort("'thumb-sq.jpg' is not square")
+    abort("'thumbnail-sq.jpg' is not square")
   }
   if (info_wd$width / (info_wd$height / 200) < 1000) {
-    abort("'thumb-wd.jpg' is too narrow; must be >5 wider than tall")
+    abort("'thumbnail-wd.jpg' is too narrow; must be >5 wider than tall")
   }
 
   magick::image_write(magick::image_scale(thumb_sq, "300x300"), path_sq, quality = 90)
