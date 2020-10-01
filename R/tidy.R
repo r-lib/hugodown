@@ -130,7 +130,7 @@ tidy_pleased <- function() {
 
 active_file <- function(ext = NULL) {
   if (!is_installed("rstudioapi") || !rstudioapi::isAvailable()) {
-    abort("Must supply `path` outside of RSuudio")
+    abort("Must supply `path` outside of RStudio")
   }
 
   path <- rstudioapi::getSourceEditorContext()$path
