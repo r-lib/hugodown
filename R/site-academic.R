@@ -56,7 +56,6 @@ academic_download <- function(version = "4.8.0") {
   )
   exdir <- file_temp("hugodown")
   utils::unzip(zip, exdir = exdir)
-
   path(exdir, paste0("wowchemy-hugo-modules-", version))
 }
 
