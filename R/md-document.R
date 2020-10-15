@@ -265,8 +265,8 @@ knit_hooks <- function() {
 
   hook_chunk <- function(x, options, ...) {
     x <- needs_code(FALSE, x, before = FALSE) # reset for next chunk
-    x <- indent(x, options$indent)
-    paste0("<div class='highlight'>", x, "</div>")
+    x <- paste0("<div class='highlight'>", x, "</div>")
+    indent(x, options$indent)
   }
 
   evaluate <- function(input, ...) {
