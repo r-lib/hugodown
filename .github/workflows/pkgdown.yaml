@@ -32,10 +32,11 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
 
+      - name: Install magick (can be removed once magick binary available)
+        run: brew install imagemagick@6
+
       - name: Install dependencies
         run: |
-          # force binary install of magick
-          install.packages("magick", type = "binary")
           remotes::install_deps(dependencies = TRUE)
           install.packages("pkgdown", type = "binary")
         shell: Rscript {0}
