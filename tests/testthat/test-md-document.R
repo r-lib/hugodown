@@ -92,7 +92,7 @@ test_that("html dependencies are captured", {
 
 test_that("curly operator is escaped", {
   rmd <- local_render(test_path("curly.Rmd"))
-  expect_equal(rmd$lines[[9]], "<pre class='chroma'><code class='language-r' data-lang='r'>&#123;&#123; <span class='k'>curly</span> &#125;&#125;")
+  expect_equal(rmd$lines[[9]], "<pre class='chroma'><code class='language-r' data-lang='r'><span class='o'>&#123;</span><span class='o'>&#123;</span> <span class='nv'>curly</span> <span class='o'>&#125;</span><span class='o'>&#125;</span>")
 })
 # helpers -----------------------------------------------------------------
 
