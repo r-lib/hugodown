@@ -53,6 +53,12 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
+  <a href="index.html">
+    <span class="fas fa fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -104,72 +110,17 @@
 <li><p>It only re-runs your R code when you explicitly ask for it (by knitting the post). This makes hugodown considerably easier to use for long-running blogs and blogs with multiple contributors.</p></li>
 <li><p>Local previews are pinned to a specific version of hugo. This makes it easier to work with multiple blogs, and protects your from hugo &lt;-&gt; theme version incompatibilities.</p></li>
 <li><p>It provides support for getting started with a limited number of themes, automatically making needed tweaks to ensure that html widgets, syntax highlighting, and math display work out of the box.</p></li>
-<li><p>It is more opinonated about hugo configuration; see <code><a href="articles/config.html">vignette("config")</a></code> for details.</p></li>
+<li><p>It does not currently support within page cross-references for figures, tables, and equations.</p></li>
+<li><p>It is more opinionated about hugo configuration; see <code><a href="articles/config.html">vignette("config")</a></code> for details.</p></li>
+<li><p>It is designed around a single Rmarkdown format, <code>.Rmd</code>.</p></li>
 </ul>
-<p>Otherwise, it strives to provide the best of blogdown’s <a href="https://bookdown.org/yihui/blogdown/output-format.html">two Rmarkdown variants</a>: <code>.Rmd</code> and <code>.Rmarkdown</code>.</p>
-<table class="table">
-<thead><tr class="header">
-<th>Feature</th>
-<th>hugodown <code>.Rmd</code>
-</th>
-<th>blogdown <code>.Rmd</code>
-</th>
-<th>blogdown <code>.Rmarkdown</code>
-</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td>Output</td>
-<td><code>.md</code></td>
-<td><code>.html</code></td>
-<td><code>.markdown</code></td>
-</tr>
-<tr class="even">
-<td>Runs R code</td>
-<td>y</td>
-<td>y</td>
-<td>y</td>
-</tr>
-<tr class="odd">
-<td>Table of contents</td>
-<td>y</td>
-<td>n</td>
-<td>y</td>
-</tr>
-<tr class="even">
-<td>Bibliography</td>
-<td>y</td>
-<td>y</td>
-<td>n</td>
-</tr>
-<tr class="odd">
-<td>MathJax</td>
-<td>y</td>
-<td>y</td>
-<td>?</td>
-</tr>
-<tr class="even">
-<td>HTML widgets</td>
-<td>y</td>
-<td>y</td>
-<td>n</td>
-</tr>
-<tr class="odd">
-<td>Cross-references</td>
-<td>n</td>
-<td>y</td>
-<td>y</td>
-</tr>
-</tbody>
-</table>
-<p>The only current limitation is that it does not support within page cross-references to figures, tables, and equations.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>hugodown isn’t available from CRAN yet (and might never be), but you can install the development version from GitHub with:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"r-lib/hugodown"</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"r-lib/hugodown"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
@@ -246,7 +197,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

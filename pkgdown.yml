@@ -1,10 +1,10 @@
 pandoc: 2.7.3
-pkgdown: 1.6.1.9000
-pkgdown_sha: e1e46f2e13c7efdb17bc4eae40bc3779c2b0b517
+pkgdown: 1.6.1
+pkgdown_sha: ~
 articles:
   config: config.html
   deploy: deploy.html
-last_built: 2020-10-15T22:53Z
+last_built: 2020-11-10T21:26Z
 urls:
   reference: https://hugodown.r-lib.org/reference
   article: https://hugodown.r-lib.org/articles
