@@ -35,7 +35,7 @@ jobs:
       - name: Install dependencies
         run: |
           # force binary install of magick
-          install.packages("magick", type = "magick")
+          install.packages("magick", type = "source")
           remotes::install_deps(dependencies = TRUE)
           install.packages("pkgdown", type = "magick")
         shell: Rscript {0}
