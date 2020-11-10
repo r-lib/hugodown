@@ -17,11 +17,13 @@ test_that("can install specified linux/mac version", {
 
   home <- hugo_home("0.55.0", "Linux")
   if (dir_exists(home)) dir_delete(home)
-  hugo_install("0.55.0", "Linux")
+  suppressMessages(hugo_install("0.55.0", "Linux"))
   expect_true(file_exists(path(home, "hugo")))
 
   # Returns early if already installed
-  expect_message(hugo_install("0.55.0", "Linux"), "installed")
+  suppressMessages(
+    expect_message(hugo_install("0.55.0", "Linux"), "installed")
+  )
 })
 
 test_that("can install specified windows version", {
@@ -31,7 +33,7 @@ test_that("can install specified windows version", {
 
   home <- hugo_home("0.55.0", "Windows")
   if (dir_exists(home)) dir_delete(home)
-  hugo_install("0.55.0", "Windows")
+  suppressMessages(hugo_install("0.55.0", "Windows"))
   expect_true(file_exists(path(home, "hugo.exe")))
 })
 

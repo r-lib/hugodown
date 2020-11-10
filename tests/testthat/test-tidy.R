@@ -3,7 +3,9 @@ test_that("tidy_post() adds additional data", {
 
   site <- local_dir(test_path("archetypes"))
   dir_create(path(site, "content", "blog"))
-  test_Rmd <- use_tidy_post("testthat-1-0-0", site = site, open = FALSE)
+  suppressMessages({
+    test_Rmd <- use_tidy_post("testthat-1-0-0", site = site, open = FALSE)
+  })
 
   rmd <- brio::read_lines(path(test_Rmd, "index.Rmd"))
   expect_equal(rmd[[3]], "package: testthat")
