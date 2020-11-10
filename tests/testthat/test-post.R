@@ -24,6 +24,9 @@ test_that("catch common errors", {
   expect_error(use_post("Rmd/test", site = site), "Can't find")
 
   dir_create(path(site, "content", "Rmd"))
-  suppressMessages(use_post("Rmd/test", site = site, open = FALSE))
-  expect_error(use_post("Rmd/test", site = site), "already exists")
+  suppressMessages({
+    use_post("Rmd/test", site = site, open = FALSE)
+    expect_error(use_post("Rmd/test", site = site), "already exists")
+  })
+
 })

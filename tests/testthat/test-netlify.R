@@ -1,6 +1,6 @@
 test_that("multiplication works", {
   path <- local_dir(test_path("config-hugodown"))
-  use_netlify_toml(path)
+  suppressMessages(use_netlify_toml(path))
 
   expect_true(file_exists(path(path, "netlify.toml")))
 
