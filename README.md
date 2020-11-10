@@ -23,22 +23,13 @@ hugodown is an experimental package that aims to facilitate the use of [RMarkdow
   automatically making needed tweaks to ensure that html widgets, syntax 
   highlighting, and math display work out of the box.
 
-* It is more opinonated about hugo configuration; see `vignette("config")` 
+* It does not currently support within page cross-references for figures, 
+  tables, and equations.
+
+* It is more opinionated about hugo configuration; see `vignette("config")` 
   for details.
-
-Otherwise, it strives to provide the best of blogdown's [two Rmarkdown variants](https://bookdown.org/yihui/blogdown/output-format.html): `.Rmd` and `.Rmarkdown`. 
-
-| Feature               | hugodown `.Rmd` | blogdown `.Rmd` | blogdown `.Rmarkdown` |
-|-----------------------|-----------------|-----------------|-----------------------|
-| Output                | `.md`           | `.html`         | `.markdown`           |
-| Runs R code           | y               | y               | y                     |
-| Table of contents     | y               | n               | y                     |
-| Bibliography          | y               | y               | n                     |
-| MathJax               | y               | y               | ?                     |
-| HTML widgets          | y               | y               | n                     |
-| Cross-references      | n               | y               | y                     |
-
-The only current limitation is that it does not support within page cross-references to figures, tables, and equations.
+  
+* It is designed around a single Rmarkdown format, `.Rmd`.
 
 ## Installation
 
