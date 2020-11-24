@@ -14,7 +14,7 @@ site_root <- function(path = ".") {
     path <- path_dir(path)
   }
 
-  abort("Can't find 'config.yml' or 'config.toml'")
+  abort("Can't find 'config.yaml' nor 'config.yml' nor 'config.toml'")
 }
 
 site_config <- function(path = ".") {
