@@ -78,6 +78,9 @@ vanilla_patch <- function(path) {
   file_move(path(post_archetype, "default.md"), path(post_archetype, "default", "index.Rmd"))
   vanilla_patch_post_archetype(path(post_archetype, "default", "index.Rmd"))
 
+  # Patch homepage
+  vanilla_patch_homepage(path(path, "content", "_index.md"))
+
   # Patch <head>
   vanilla_patch_head(path)
 
@@ -126,6 +129,12 @@ vanilla_patch_post_archetype <- function(path) {
   brio::write_lines(lines, path)
 }
 
+vanilla_patch_homepage <- function(path) {
+  lines <- brio::read_lines(path)
+  lines <- line_replace(lines, 'draft: true', 'draft: false', fixed = TRUE)
+  brio::write_lines(lines, path)
+}
+
 vanilla_patch_head <- function(path) {
   # hugo gen chromastyles --style=github > inst/academic/highlight-light.css
   # hugo gen chromastyles --style=dracula > inst/academic/highlight-dark.css
@@ -137,7 +146,7 @@ vanilla_patch_head <- function(path) {
   dir_create(path_dir(head))
   file_move(path(path, "themes", "vanilla-bootstrap-hugo-theme", "layouts", "partials", "head.html"), head)
 
-  head_content <- readLines(head)
+  head_content <- brio::read_lines(head)
 
   brio::write_lines(c(head_content[-length(head_content)],
     "<link rel='stylesheet' href='{{ \"css/highlight-light.css\" | relURL }}'>",
