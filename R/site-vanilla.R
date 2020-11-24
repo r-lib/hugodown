@@ -141,6 +141,7 @@ vanilla_patch_head <- function(path) {
 
   dir_create(path(path, "static", "css"))
   file_copy(path_package("hugodown", "academic", "highlight-light.css"), path(path, "static", "css"))
+  file.create(path(path, "static", "css", "custom.css"))
 
   head <- path(path, "layouts", "partials", "head.html")
   dir_create(path_dir(head))
@@ -149,6 +150,7 @@ vanilla_patch_head <- function(path) {
   head_content <- brio::read_lines(head)
 
   brio::write_lines(c(head_content[-length(head_content)],
+    "<link rel='stylesheet' href='{{ \"css/custom.css\" | relURL }}'>",
     "<link rel='stylesheet' href='{{ \"css/highlight-light.css\" | relURL }}'>",
     "{{ range .Params.html_dependencies }}",
     "  {{ . | safeHTML }}",
