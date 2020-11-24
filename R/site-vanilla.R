@@ -126,22 +126,24 @@ vanilla_patch_post_archetype <- function(path) {
   brio::write_lines(lines, path)
 }
 
-academic_write_custom_head <- function(path) {
+vanilla_patch_head <- function(path) {
   # hugo gen chromastyles --style=github > inst/academic/highlight-light.css
   # hugo gen chromastyles --style=dracula > inst/academic/highlight-dark.css
 
   dir_create(path(path, "static", "css"))
   file_copy(path_package("hugodown", "academic", "highlight-light.css"), path(path, "static", "css"))
-  file_copy(path_package("hugodown", "academic", "highlight-dark.css"), path(path, "static", "css"))
 
-  head <- path(path, "layouts", "partials", "custom_head.html")
+  head <- path(path, "layouts", "partials", "head.html")
   dir_create(path_dir(head))
+  file_move(path(path, "themes", "vanilla-bootstrap-hugo-theme", "layouts", "partials", "head.html"), head)
 
-  brio::write_lines(c(
-    "<link rel='stylesheet' href='{{ \"css/highlight-light.css\" | relURL }}' title='hl-light'>",
-    "<link rel='stylesheet' href='{{ \"css/highlight-dark.css\" | relURL }}' title='hl-dark' disabled>",
+  head_content <- readLines(head)
+
+  brio::write_lines(c(head_content[-length(head_content)],
+    "<link rel='stylesheet' href='{{ \"css/highlight-light.css\" | relURL }}'>",
     "{{ range .Params.html_dependencies }}",
     "  {{ . | safeHTML }}",
-    "{{ end }}"
+    "{{ end }}",
+    "</head>"
   ), head)
 }
