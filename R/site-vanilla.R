@@ -22,14 +22,24 @@ create_site_vanilla <- function(
   path = ".",
   open = is_interactive(),
   rstudio = rstudioapi::isAvailable()) {
+
+  if (open) {
+    usethis::proj_activate(path)
+  }
+  do_create_vanilla(path)
+  invisible(path)
+}
+
+do_create_vanilla <- function(path) {
+  dir_create(path)
+
   # Use latest version
   hugo_locate("0.78.2")
 
-  dir_create(path)
   usethis::ui_silence(old <- usethis::proj_set(path, force = TRUE))
   on.exit(usethis::ui_silence(usethis::proj_set(old)))
 
-  use_rstudio_website_proj(path)
+
 
   usethis::ui_done("Downloading vanilla theme")
   theme_dir <- vanilla_download()
@@ -43,10 +53,6 @@ create_site_vanilla <- function(
   usethis::ui_done("Patching theme for hugodown compatibility")
   vanilla_patch(path)
 
-  if (open) {
-    usethis::proj_activate(path)
-  }
-  invisible(path)
 }
 
 vanilla_download <- function() {

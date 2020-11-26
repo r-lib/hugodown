@@ -1,0 +1,4 @@
+Binding: do_create_vanilla
+Title: hugodown Hugo-Vanilla Website
+OpenFiles: content/_index.md, content/about.md, config.yaml
+
