@@ -23,15 +23,20 @@ create_site_vanilla <- function(
   open = is_interactive(),
   rstudio = rstudioapi::isAvailable()) {
 
+  do_create_vanilla(path)
+
   if (open) {
     usethis::proj_activate(path)
   }
-  do_create_vanilla(path)
+
   invisible(path)
 }
 
 do_create_vanilla <- function(path) {
-  dir_create(path)
+
+  if(!fs::dir_exists(path)) {
+    dir_create(path)
+  }
 
   # Use latest version
   hugo_locate("0.78.2")
