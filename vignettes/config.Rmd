@@ -166,9 +166,11 @@ category: R
 To summarize, here's possible metadata in an `archetypes/post/index.Rmd` archetype.
 
 ```yaml
+---
 output: hugodown::md_document
 date: {{ date }}
 author: {{ author }}
 title: "{{ title }}"
 category: {{ category }}
+---
 ```
