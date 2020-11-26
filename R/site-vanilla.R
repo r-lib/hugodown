@@ -84,6 +84,9 @@ vanilla_patch <- function(path) {
   # Patch <head>
   vanilla_patch_head(path)
 
+  # Patch footer
+  vanilla_patch_footer(path)
+
   usethis::use_git_ignore(c("resources", "public"))
   file_copy(path_package("hugodown", "vanilla", "README.md"), path)
   file_copy(path_package("hugodown", "academic", "index.Rmd"), path)
@@ -157,4 +160,20 @@ vanilla_patch_head <- function(path) {
     "{{ end }}",
     "</head>"
   ), head)
+}
+
+vanilla_patch_footer <- function(path) {
+  footer  <- path(path, "layouts", "partials", "footer.html")
+  dir_create(path_dir(footer ))
+  file_move(path(path, "themes", "vanilla-bootstrap-hugo-theme", "layouts", "partials", "footer.html"), footer )
+  footer_content <- brio::read_lines(footer)
+
+  brio::write_lines(c(footer_content,
+                      brio::read_lines(path_package(
+                        "vanilla", "footer-mathjax-from-graphite.html",
+                        package = "hugodown"
+                        ))
+  ), footer)
+
+  file_copy(path_package("hugodown", "vanilla", "math-code.js"), path(path, "static"))
 }
