@@ -57,7 +57,7 @@ hugodown does not work with every possible hugo site. There is some config that 
           {{ . | safeHTML }}
         {{ end }}
 
--   To use mathjax, you will need to use a series of [small hacks][yihui-mathjax]. The easiest way is to copy from an existing template, like [hugo-graphite](https://github.com/rstudio/hugo-graphite). Take note of the [`footer_mathjax.html`][footer\_mathjax] partial, which is then included in the [`footer.html`][footer]. You'll also need to include [`math_code.js`][math\_code] in your `static/` directory. Once that's done you can use inline math like `$math$`, and display math like `` `$$ math $$` `` (note the extra backtick compared to usual).
+-   To use mathjax, you will need to use a series of [small hacks][yihui-mathjax]. The easiest way is to copy from an existing template, like [hugo-graphite](https://github.com/rstudio/hugo-graphite). Take note of the [`footer_mathjax.html`](https://github.com/rstudio/hugo-graphite/blob/master/layouts/partials/footer_mathjax.html) partial, which is then included in the [`footer.html`](https://github.com/rstudio/hugo-graphite/blob/master/layouts/partials/footer.html). You'll also need to include [`math_code.js`](https://github.com/rstudio/hugo-graphite/blob/master/static/js/math-code.js) in your `static/` directory. Once that's done you can use inline math like `$math$`, and display math like `` `$$ math $$` `` (note the extra backtick compared to usual).
 
 ## Syntax highlighting {#syntax-highlighting}
 
