@@ -14,6 +14,8 @@ knitr::opts_chunk$set(
 )
 ```
 
+You need to read and apply this article if you wish to use hugodown on a website you did not create with a hugodown function `create_site_`.
+
 There are three types of configuration related to hugodown:
 
 -   hugo configuration, because hugodown assumes certain things to be true about your hugo setup.
@@ -110,6 +112,53 @@ From easiest to hardest, based on the theme you chose:
 
 ## hugodown
 
+### Configuration file
+
 hugodown also has its own configuration file, `_hugodown.yaml`. Currently this has one option:
 
 -   `hugo_version`: this defines the version of hugo needed by the current site.
+
+### Archetype
+
+How to tweak your website to be able to use `use_post()` for creating new posts?
+
+[Archetypes](https://gohugo.io/content-management/archetypes/) are templates for pages and posts in Hugo terminology.
+Note that hugodown use leaf bundles i.e. creates posts in a dedicated folder per post, as a file called index.Rmd.
+When you use `use_post("post/foldername/")` hugodown will look for an archetype under:
+
+* `archetypes/post/index.Rmd`
+* or if it doesn't exist, `themes/your-theme-name/archetypes/post/index.Rmd`.
+
+So the archetype is chosen based on the path.
+
+This archetype needs the following line in its YAML:
+
+```yaml
+output: hugodown::md_document
+```
+
+And if you want to make use of default data guessed by hugodown (today's date, your name) add [whisker-markup](https://github.com/edwindj/whisker).
+
+```yaml
+date: {{ date }}
+author: {{ author }}
+```
+
+You can also pass further data via `use_post()` so you can write `use_post("post/my-new-post", data = list(title = "Wow cool", category = "R"))` and if the archetype contains
+
+```yaml
+title: "{{ title }}"
+category: {{ category }}
+```
+
+the new post created will contain
+
+```yaml
+title: "Wow cool"
+category: R
+```
+
+To summarize, if you want to have an archetype for new posts created in the post/ folder 
+
+* create an index.Rmd file under `archetypes/post/index.Rmd`
+* in its metadata you can use `{{ date }}`, `{{ author }}`, `{{ anything }}` to indicate string to be replaced with data from `use_post()` (default data for date and author; data passed by the user for other variables). This uses [whisker](https://github.com/edwindj/whisker).
