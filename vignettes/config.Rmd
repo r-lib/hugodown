@@ -122,29 +122,34 @@ hugodown also has its own configuration file, `_hugodown.yaml`. Currently this h
 
 How to tweak your website to be able to use `use_post()` for creating new posts?
 
-[Archetypes](https://gohugo.io/content-management/archetypes/) are templates for pages and posts in Hugo terminology.
+You need [archetypes](https://gohugo.io/content-management/archetypes) i.e. templates!
+
+In practice you have to add a file called index.Rmd under `archetypes/post/index.Rmd` (one for each folder of post e.g. both `archetypes/post/index.Rmd` and `archetypes/talk/index.Rmd`; unless all your posts live in post/ or unless you define a default archetype under `archetypes/default/index.Rmd`).
 Note that hugodown use leaf bundles i.e. creates posts in a dedicated folder per post, as a file called index.Rmd.
-When you use `use_post("post/foldername/")` hugodown will look for an archetype under:
 
-* `archetypes/post/index.Rmd`
-* or if it doesn't exist, `themes/your-theme-name/archetypes/post/index.Rmd`.
+In hugodown archetypes
 
-So the archetype is chosen based on the path.
+* are found via Hugo so follow Hugo rules for finding which archetype to use for which path. 
+* use whisker so you can add variables to be filled-in.
 
-This archetype needs the following line in its YAML:
+Every archetype e.g. `archetypes/post/index.Rmd` needs this line:
 
 ```yaml
 output: hugodown::md_document
 ```
 
-And if you want to make use of default data guessed by hugodown (today's date, your name) add [whisker-markup](https://github.com/edwindj/whisker).
+Now, `use_post()` will pass default data (date, author, slug) to the archetype, and also any data you enter via the `data` argument e.g. `use_post(data = list(category = "R", title = "yeah yeah"))` --- you can also override default data via the `data` argument if you e.g. don't want today as a date.
+
+To have this data _used_ you need [whisker](https://github.com/edwindj/whiske) syntax in the archetype.
+
+Very basic:
 
 ```yaml
 date: {{ date }}
 author: {{ author }}
 ```
 
-You can also pass further data via `use_post()` so you can write `use_post("post/my-new-post", data = list(title = "Wow cool", category = "R"))` and if the archetype contains
+More: if you write `use_post("post/my-new-post", data = list(title = "Wow cool", category = "R"))` and if the archetype contains
 
 ```yaml
 title: "{{ title }}"
@@ -158,7 +163,12 @@ title: "Wow cool"
 category: R
 ```
 
-To summarize, if you want to have an archetype for new posts created in the post/ folder 
+To summarize, here's possible metadata in an `archetypes/post/index.Rmd` archetype.
 
-* create an index.Rmd file under `archetypes/post/index.Rmd`
-* in its metadata you can use `{{ date }}`, `{{ author }}`, `{{ anything }}` to indicate string to be replaced with data from `use_post()` (default data for date and author; data passed by the user for other variables). This uses [whisker](https://github.com/edwindj/whisker).
+```yaml
+output: hugodown::md_document
+date: {{ date }}
+author: {{ author }}
+title: "{{ title }}"
+category: {{ category }}
+```
