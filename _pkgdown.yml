@@ -3,3 +3,26 @@ url: https://hugodown.r-lib.org
 template:
   params:
     ganalytics: UA-115082821-1
+
+navbar:
+  structure:
+    left:
+    - intro
+    - reference
+    - articles
+    - deployment
+    - news
+    right: github
+  components:
+    reference:
+      text: Reference
+      href: reference/index.html
+    github:
+      icon: fab fa-github fa-lg
+      href: https://github.com/r-lib/hugodown/
+    articles:
+      text: Configuration
+      href: articles/config.html
+    deployment:
+      text: Deployment
+      href: articles/deploy.html
