@@ -121,7 +121,8 @@ hugo_releases <- function() {
       "GET /repos/:owner/:repo/releases",
       owner = "gohugoio",
       repo = "hugo",
-      .limit = if (is.null(version)) 1 else Inf
+      .limit = if (is.null(version)) 1 else Inf,
+      .progress = FALSE
     )
     env_poke(hugodown, "hugo_releases", json)
     json
