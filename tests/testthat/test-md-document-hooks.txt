@@ -11,13 +11,10 @@ rmd_hash: 51bc60383311007d
 
 <pre class='chroma'><code class='language-r' data-lang='r'><span class='nv'>df</span> <span class='o'>&lt;-</span> <span class='nf'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='o'>(</span>x <span class='o'>=</span> <span class='m'>1</span><span class='o'>)</span>
 <span class='nv'>df</span>
-
 <span class='c'>#&gt;   x</span>
 <span class='c'>#&gt; 1 1</span>
 
-
 <span class='nf'>knitr</span><span class='nf'>::</span><span class='nf'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='o'>(</span><span class='nv'>df</span><span class='o'>)</span>
-
 </code></pre>
 
 |   x |
@@ -32,17 +29,11 @@ rmd_hash: 51bc60383311007d
 
 <pre class='chroma'><code class='language-r' data-lang='r'><span class='c'># comment</span>
 <span class='nf'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='o'>(</span><span class='s'>"print"</span><span class='o'>)</span>
-
 <span class='c'>#&gt; [1] "print"</span>
-
 <span class='nf'><a href='https://rdrr.io/r/base/message.html'>message</a></span><span class='o'>(</span><span class='s'>"message"</span><span class='o'>)</span>
-
 <span class='c'>#&gt; message</span>
-
 <span class='kr'><a href='https://rdrr.io/r/base/warning.html'>warning</a></span><span class='o'>(</span><span class='s'>"warning"</span><span class='o'>)</span>
-
-<span class='c'>#&gt; Warning: warning</span>
-</code></pre>
+<span class='c'>#&gt; Warning: warning</span></code></pre>
 
 </div>
 
