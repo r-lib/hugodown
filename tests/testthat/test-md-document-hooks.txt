@@ -5,8 +5,7 @@ rmd_hash: 51bc60383311007d
 
 ---
 
-Mixed as_is and coode
----------------------
+## Mixed as_is and coode
 
 <div class="highlight">
 
@@ -27,8 +26,7 @@ Mixed as_is and coode
 
 </div>
 
-All code/output
----------------
+## All code/output
 
 <div class="highlight">
 
@@ -48,8 +46,7 @@ All code/output
 
 </div>
 
-Chunk with only a figure
-------------------------
+## Chunk with only a figure
 
 <div class="highlight">
 

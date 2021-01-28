@@ -29,12 +29,11 @@ hugo_install <- function(version = NULL, os = hugo_os(), arch = "64bit", extende
   }
 
   message("Downloading ", path_file(release$url), "...")
-  temp <- tempfile()
-  curl::curl_download(release$url, temp)
+  temp <- curl::curl_download(release$url, tempfile())
 
   message("Installing to ", path_dir(home), "...")
   switch(path_ext(release$url),
-    "gz" = utils::untar(temp, exdir = home),
+    "gz" = utils::untar(temp, exdir = home, tar = "internal"),
     "zip" = utils::unzip(temp, exdir = home)
   )
   hugo_default_inc(release$version)
@@ -121,7 +120,8 @@ hugo_releases <- function() {
       "GET /repos/:owner/:repo/releases",
       owner = "gohugoio",
       repo = "hugo",
-      .limit = if (is.null(version)) 1 else Inf
+      .limit = if (is.null(version)) 1 else Inf,
+      .progress = FALSE
     )
     env_poke(hugodown, "hugo_releases", json)
     json

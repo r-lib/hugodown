@@ -19,6 +19,8 @@ jobs:
       - uses: r-lib/actions/setup-r@master
 
       - uses: r-lib/actions/setup-pandoc@master
+        with:
+          pandoc-version: '2.11.2'
 
       - name: Query dependencies
         run: |
