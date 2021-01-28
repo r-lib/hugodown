@@ -241,16 +241,17 @@ knit_hooks <- function() {
     if (options$results == "asis") {
       needs_code(FALSE, x)
     } else {
-      x <- paste0(x, "\n", collapse = "")
       x <- highlight_if_possible(x, options$engine)
-      needs_code(TRUE, x)
+      x <- paste0(x, "\n")
+      x <- needs_code(TRUE, x)
+      x
     }
   }
   hook_source <- function(x, options) {
     x <- paste0(x, "\n", collapse = "")
     x <- highlight_if_possible(x, options$engine)
-    x <- paste0(x, "\n")
-    needs_code(TRUE, x)
+    x <- needs_code(TRUE, x)
+    x
   }
   hook_plot <- function(x, options) {
     # Repair damage done by pretending to be latex
