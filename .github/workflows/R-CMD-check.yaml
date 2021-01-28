@@ -42,7 +42,7 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@master
         with:
-          pandoc-version: '2.11.3'
+          pandoc-version: 2.11.3
 
       - name: Query dependencies
         run: |
