@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   config: config.html
   deploy: deploy.html
-last_built: 2021-01-28T21:13Z
+last_built: 2021-01-28T21:24Z
 urls:
   reference: https://hugodown.r-lib.org/reference
   article: https://hugodown.r-lib.org/articles
