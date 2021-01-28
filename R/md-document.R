@@ -241,8 +241,8 @@ knit_hooks <- function() {
     if (options$results == "asis") {
       needs_code(FALSE, x)
     } else {
+      x <- paste0(x, collapse = "")
       x <- highlight_if_possible(x, options$engine)
-      x <- paste0(x, "\n")
       needs_code(TRUE, x)
     }
   }
