@@ -1,3 +1,16 @@
+first_path <- function(paths) {
+  for (path in paths) {
+    if (file_exists(path)) {
+      return(path)
+    }
+  }
+
+  abort(c(
+    "Can't find any of the following candidate paths",
+    paths
+  ))
+}
+
 # copies from withr
 set_envvar <- function(envs, action = "replace") {
   if (length(envs) == 0) return()

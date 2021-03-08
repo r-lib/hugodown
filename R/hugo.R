@@ -14,7 +14,11 @@ hugo_locate <- function(version = hugo_default_get()) {
     ))
   }
 
-  path_real(path(path, "hugo"))
+  path <- first_path(c(
+    path(path, "hugo"),
+    path(path, "hugo", ext = "exe")
+  ))
+  path_real(path)
 }
 
 hugo_run <- function(site, args, config = NULL, ...) {
