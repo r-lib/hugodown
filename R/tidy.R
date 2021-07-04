@@ -73,11 +73,11 @@ tidy_show_meta <- function(min = 1, site = ".") {
 
   tags <- unlist(lapply(yaml, "[[", "tags"), use.names = FALSE)
   tags_df <- as.data.frame(table(tags), responseName = "n")
-  tags_df <- tags_df[tags_df$n > min, , drop = FALSE]
+  tags_df <- tags_df[tags_df$n >= min, , drop = FALSE]
 
   cats <- unlist(lapply(yaml, "[[", "categories"), use.names = FALSE)
   cats_df <- as.data.frame(table(cats), responseName = "n")
-  cats_df <- cats_df[cats_df$n > min, , drop = FALSE]
+  cats_df <- cats_df[cats_df$n >= min, , drop = FALSE]
 
   cat_line("## Categories")
   cat_line("* ", cats_df$cats, " (", cats_df$n, ")")
