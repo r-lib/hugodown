@@ -12,14 +12,14 @@ embed_gist(username, id, filename = NULL)
 
 embed_instagram(id, caption = TRUE)
 
-embed_tweet(id)
+embed_tweet(id, username = "")
 
 embed_vimeo(id)
 
 embed_youtube(id, autoplay = FALSE)
 }
 \arguments{
-\item{username}{GitHub user name}
+\item{username}{GitHub/Twitter user name}
 
 \item{id}{A string giving the object id. You'll usually find this by
 inspecting the URL:

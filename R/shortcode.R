@@ -83,7 +83,7 @@ shortcode_args <- function(...) {
 #' `R embed_tweet("877500564405444608")`
 #' ```
 #'
-#' @param username GitHub user name
+#' @param username GitHub/Twitter user name
 #' @param id A string giving the object id. You'll usually find this by
 #'  inspecting the URL:
 #'  * gist: `https://gist.github.com/spf13/7896402` -> `7896402`
@@ -105,9 +105,9 @@ embed_instagram <- function(id, caption = TRUE) {
 }
 #' @export
 #' @rdname embed_gist
-embed_tweet <- function(id) {
+embed_tweet <- function(id, username = NULL) {
   stopifnot(is.character(id))
-  shortcode("tweet", I(id))
+  shortcode("tweet", username = username, id = id)
 }
 #' @export
 #' @rdname embed_gist
