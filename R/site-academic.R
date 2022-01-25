@@ -51,7 +51,7 @@ create_site_academic <- function(
 
 academic_download <- function(version = "4.8.0") {
   zip <- curl::curl_download(
-    paste0("https://github.com/wowchemy/wowchemy-hugo-modules/archive/v", version, ".zip"),
+    paste0("https://github.com/wowchemy/wowchemy-hugo-modules/archive/refs/tags/v", version, ".zip"),
     file_temp("hugodown")
   )
   exdir <- file_temp("hugodown")
