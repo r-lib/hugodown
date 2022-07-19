@@ -32,6 +32,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -44,23 +46,17 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hugodown</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -77,7 +73,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/r-lib/hugodown/">
+  <a href="https://github.com/r-lib/hugodown/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -98,23 +94,23 @@
       <h1 data-toc-skip>Deployment</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/r-lib/hugodown/blob/master/vignettes/deploy.Rmd"><code>vignettes/deploy.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/r-lib/hugodown/blob/HEAD/vignettes/deploy.Rmd" class="external-link"><code>vignettes/deploy.Rmd</code></a></small>
       <div class="hidden name"><code>deploy.Rmd</code></div>
 
     </div>
 
     
     
-<p>This vignette describes the process of deployment, how you get your hugodown website off your local computer and on to the internet for everyone to see. The easiest workflow for most people is to use <a href="https://www.netlify.com">netlify</a>. I’ll describe this process in details, and then discuss other approaches that require a manual build site.</p>
-<p>(Most of these techiques assume that you’re already familiar with the basics of Git and GitHub. If you’re not, you can try the Dropbox deployment described below, or try reading with <a href="http://happygitwithr.com/">Happy Git and GitHub for the R user</a> by Jenny Bryan.)</p>
-<div id="netlify" class="section level2">
-<h2 class="hasAnchor">
-<a href="#netlify" class="anchor"></a>Netlify</h2>
-<p>(Adapted from <a href="https://alison.rbind.io/post/2017-06-12-up-and-running-with-blogdown/#deploy-in-netlify">A Spoonful of Hugo: The netlify.toml File</a> by Alison Hill, with permission.)</p>
+<p>This vignette describes the process of deployment, how you get your hugodown website off your local computer and on to the internet for everyone to see. The easiest workflow for most people is to use <a href="https://www.netlify.com" class="external-link">netlify</a>. I’ll describe this process in details, and then discuss other approaches that require a manual build site.</p>
+<p>(Most of these techiques assume that you’re already familiar with the basics of Git and GitHub. If you’re not, you can try the Dropbox deployment described below, or try reading with <a href="http://happygitwithr.com/" class="external-link">Happy Git and GitHub for the R user</a> by Jenny Bryan.)</p>
+<div class="section level2">
+<h2 id="netlify">Netlify<a class="anchor" aria-label="anchor" href="#netlify"></a>
+</h2>
+<p>(Adapted from <a href="https://alison.rbind.io/post/2017-06-12-up-and-running-with-blogdown/#deploy-in-netlify" class="external-link">A Spoonful of Hugo: The netlify.toml File</a> by Alison Hill, with permission.)</p>
 <p>First, create an account if you don’t already have one:</p>
 <ol style="list-style-type: decimal">
 <li>
-<p>Navigate to <a href="https://www.netlify.com/">Netlify</a> and click on the <em>Sign Up</em> link.</p>
+<p>Navigate to <a href="https://www.netlify.com/" class="external-link">Netlify</a> and click on the <em>Sign Up</em> link.</p>
 <p><img src="netlify-landing.png" width="400px"></p>
 </li>
 <li>
@@ -136,7 +132,7 @@
 <li><p>Check you have a <code>_hugodown.yaml</code> file that contains <code>hugo_version: 0.66.0</code> or similar. It’s added automatically you created your site with a hugodown helper; you’ll need to add it yourself if you’ve created the site another way.</p></li>
 <li><p>Run <code><a href="../reference/use_netlify_toml.html">hugodown::use_netlify_toml()</a></code>, check the new <code>netlify.toml</code> in, commit, and push to Github.</p></li>
 </ol>
-<p>Now return to <a href="https://app.netlify.com">netlify</a>, and look in the deploy log. You should see entries like:</p>
+<p>Now return to <a href="https://app.netlify.com" class="external-link">netlify</a>, and look in the deploy log. You should see entries like:</p>
 <pre><code>10:00:42 PM: Build ready to start
 10:00:43 PM: build-image version: 8e315e54bc4032a32e73290be556cde4f8348c12
 ...
@@ -151,22 +147,22 @@
 10:01:23 PM: Site is live</code></pre>
 <p>Success!</p>
 </div>
-<div id="manual-builds" class="section level2">
-<h2 class="hasAnchor">
-<a href="#manual-builds" class="anchor"></a>Manual builds</h2>
+<div class="section level2">
+<h2 id="manual-builds">Manual builds<a class="anchor" aria-label="anchor" href="#manual-builds"></a>
+</h2>
 <p>The advantage of netlify is that automatically runs hugo for you; in other deployment scenarios you’ll need to run <code>hugodown::build_site()</code> and publish the <code>public/</code> directory that it creates. The following sections provide some advice for deployment scenarios that need this.</p>
-<div id="rstudio-connect" class="section level3">
-<h3 class="hasAnchor">
-<a href="#rstudio-connect" class="anchor"></a>RStudio connect</h3>
-<p>For most sites, <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/publish_site.html">rmarkdown::publish_site()</a></code> should just work.</p>
+<div class="section level3">
+<h3 id="rstudio-connect">RStudio connect<a class="anchor" aria-label="anchor" href="#rstudio-connect"></a>
+</h3>
+<p>For most sites, <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/publish_site.html" class="external-link">rmarkdown::publish_site()</a></code> should just work.</p>
 <p>If you deploy your site this way, and it doesn’t look quite right (e.g. missing style sheets) it’s likely because the theme you’re using requires a <code>baseURL</code>. In this case, you’ll need to update your <code>config.toml</code> with the URL for your site and republish.</p>
 </div>
-<div id="github-pages" class="section level3">
-<h3 class="hasAnchor">
-<a href="#github-pages" class="anchor"></a>GitHub pages</h3>
+<div class="section level3">
+<h3 id="github-pages">GitHub pages<a class="anchor" aria-label="anchor" href="#github-pages"></a>
+</h3>
 <p>You’ll need to make a few changes to your site:</p>
 <ul>
-<li><p>Run <code><a href="https://rdrr.io/r/base/files.html">file.create("static/.nojekyll")</a></code>. This ensures that GitHub pages knows that you’re using a regular HTML website, not a jekyll website (jekyll is GitHub’s own blogging system).</p></li>
+<li><p>Run <code>file.create("static/.nojekyll")</code>. This ensures that GitHub pages knows that you’re using a regular HTML website, not a jekyll website (jekyll is GitHub’s own blogging system).</p></li>
 <li><p>If you have a custom domain name, create a <code>static/CNAME</code> file containing your domain name (e.g. just <code>tidyverse.org</code>, not <code>https://tidyverse.org</code>). Note that setting a custom domain name in the admin settings on your GitHub repo will not work.</p></li>
 <li>
 <p>In <code>config.toml</code>:</p>
@@ -183,16 +179,16 @@
 <p>After the first deploy, you’ll need to go the admin page for your repo and select "master branch <code>/docs</code> folder) for source:</p>
 <p><img src="github-setup.png" width="400px"></p>
 </div>
-<div id="site44-dropbox" class="section level3">
-<h3 class="hasAnchor">
-<a href="#site44-dropbox" class="anchor"></a>Site44 (dropbox)</h3>
-<p>If you don’t use Git and GitHub, one deployment option is <a href="https://www.site44.com/">Site44</a>, a service that allows you to publish websites from within Dropbox folders. Site44 creates a <code>Dropbox/Apps/site44</code> directory, and any folders within that directory are published as websites.</p>
+<div class="section level3">
+<h3 id="site44-dropbox">Site44 (dropbox)<a class="anchor" aria-label="anchor" href="#site44-dropbox"></a>
+</h3>
+<p>If you don’t use Git and GitHub, one deployment option is <a href="https://www.site44.com/" class="external-link">Site44</a>, a service that allows you to publish websites from within Dropbox folders. Site44 creates a <code>Dropbox/Apps/site44</code> directory, and any folders within that directory are published as websites.</p>
 <p>The recommended workflow for deploying hugodown websites to Site44 is to develop your website in a separate project directory, and then, when it’s ready for final publishing, run <code>build_site()</code> then copy the contents of the <code>public</code> directory to the folder for your website.</p>
 </div>
-<div id="amazon-s3" class="section level3">
-<h3 class="hasAnchor">
-<a href="#amazon-s3" class="anchor"></a>Amazon S3</h3>
-<p>If you are a user of Amazon Web Services you can serve your website directly from Amazon S3. This option is a bit more technically involved than GitHub Pages, Netlify, or Site 44. See the article on <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html">Hosting a Static Website on Amazon S3</a> for additional details.</p>
+<div class="section level3">
+<h3 id="amazon-s3">Amazon S3<a class="anchor" aria-label="anchor" href="#amazon-s3"></a>
+</h3>
+<p>If you are a user of Amazon Web Services you can serve your website directly from Amazon S3. This option is a bit more technically involved than GitHub Pages, Netlify, or Site 44. See the article on <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html" class="external-link">Hosting a Static Website on Amazon S3</a> for additional details.</p>
 </div>
 </div>
   </div>
@@ -208,11 +204,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="http://hadley.nz">Hadley Wickham</a>.</p>
+  <p></p>
+<p>Developed by Hadley Wickham.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
@@ -220,6 +218,8 @@
 
   
 
+
+  
 
   </body>
 </html>

@@ -32,6 +32,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -44,23 +46,17 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hugodown</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -77,7 +73,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/r-lib/hugodown/">
+  <a href="https://github.com/r-lib/hugodown/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -98,7 +94,7 @@
       <h1 data-toc-skip>Configuration</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/r-lib/hugodown/blob/master/vignettes/config.Rmd"><code>vignettes/config.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/r-lib/hugodown/blob/HEAD/vignettes/config.Rmd" class="external-link"><code>vignettes/config.Rmd</code></a></small>
       <div class="hidden name"><code>config.Rmd</code></div>
 
     </div>
@@ -111,9 +107,9 @@
 <li><p>Syntax highlight css</p></li>
 <li><p>hugodown specific configuration, which allows you to control over various ways in which hugodown works.</p></li>
 </ul>
-<div id="hugo" class="section level2">
-<h2 class="hasAnchor">
-<a href="#hugo" class="anchor"></a>Hugo</h2>
+<div class="section level2">
+<h2 id="hugo">Hugo<a class="anchor" aria-label="anchor" href="#hugo"></a>
+</h2>
 <p>hugodown does not work with every possible hugo site. There is some config that we assume (typically in <code>config.toml</code>, but hugo has a bewildering array of places that this might live instead.)</p>
 <ul>
 <li>
@@ -125,7 +121,7 @@
 </li>
 <li>
 <p>For best syntax hightlighting results, you must use classes:</p>
-<pre class="toml"><code>pygmentsUseClasses = true</code></pre>
+<pre class="toml"><code><span><span class="va">pygmentsUseClasses</span> <span class="op">=</span> <span class="va">true</span></span></code></pre>
 <p>Then you’ll need to do some work on CSS side, see <a href="#syntax-highlighting">below</a> for details.</p>
 </li>
 <li>
@@ -133,7 +129,7 @@
 <pre class="toml"><code>ignoreFiles = ['\.Rmd$', '_files$', '_cache$', '\.knit\.md$', '\.utf8\.md$']</code></pre>
 </li>
 <li>
-<p>To use html widgets, you must include the following Go template somewhere in the <code>&lt;head&gt;</code> layout file for your theme. This will help Hugo find the HTML dependencies needed to render the widget in a post. You may find this <a href="https://zwbetz.com/override-a-hugo-theme/">blog post</a> helpful for overriding Hugo layouts.</p>
+<p>To use html widgets, you must include the following Go template somewhere in the <code>&lt;head&gt;</code> layout file for your theme. This will help Hugo find the HTML dependencies needed to render the widget in a post. You may find this <a href="https://zwbetz.com/override-a-hugo-theme/" class="external-link">blog post</a> helpful for overriding Hugo layouts.</p>
 <pre><code>{{ range .Params.html_dependencies }}
   {{ . | safeHTML }}
 {{ end }}</code></pre>
@@ -141,9 +137,9 @@
 <li><p>To use mathjax, you will need to use a series of [small hacks][yihui-mathjax]. The easiest way is to copy from an existing template, like [tourmaline]. Take note of the [<code>footer_mathjax.html</code>][footer_mathjax] partial, which is then included in the [<code>footer.html</code>][footer]. You’ll also need to include [<code>math_code.js</code>][math_code] in your <code>static/</code> directory. Once that’s done you can use inline math like <code>$math$</code>, and display math like <code>`$$ math $$`</code> (note the extra backtick compared to usual).</p></li>
 </ul>
 </div>
-<div id="syntax-highlighting" class="section level2">
-<h2 class="hasAnchor">
-<a href="#syntax-highlighting" class="anchor"></a>Syntax highlighting</h2>
+<div class="section level2">
+<h2 id="syntax-highlighting">Syntax highlighting<a class="anchor" aria-label="anchor" href="#syntax-highlighting"></a>
+</h2>
 <p>The hugo config above causes downlit/hugo to generate output html with the following structure:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">"highlight"</span><span class="kw">&gt;</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a>  <span class="kw">&lt;pre</span><span class="ot"> class=</span><span class="st">'chroma'</span><span class="kw">&gt;&lt;code</span><span class="ot"> class=</span><span class="st">'language-r'</span><span class="ot"> data-lang=</span><span class="st">'r'</span><span class="kw">&gt;</span></span>
@@ -151,7 +147,7 @@
 <span id="cb5-4"><a href="#cb5-4"></a>    <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">'c'</span><span class="kw">&gt;</span>#<span class="dv">&amp;gt;</span> [1] 2<span class="kw">&lt;/span&gt;</span></span>
 <span id="cb5-5"><a href="#cb5-5"></a>  <span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></span>
 <span id="cb5-6"><a href="#cb5-6"></a><span class="kw">&lt;/div&gt;</span></span></code></pre></div>
-<p>To have that look good on your website, you need to defines styles for the CSS necessary classes. You can generate starter CSS with the code below, substituting <code>pygments</code> for the <a href="https://xyproto.github.io/splash/docs/longer/all.html">style of your choice</a>:</p>
+<p>To have that look good on your website, you need to defines styles for the CSS necessary classes. You can generate starter CSS with the code below, substituting <code>pygments</code> for the <a href="https://xyproto.github.io/splash/docs/longer/all.html" class="external-link">style of your choice</a>:</p>
 <pre><code>hugo gen chromastyles --style=pygments &gt; static/css/highlight.css</code></pre>
 <p>This generates a file containing definitions that look like this:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">/* Background */</span> <span class="fu">.chroma</span> {  }</span>
@@ -169,10 +165,10 @@
 <li><p>A <code>customCSS</code> param in the website configuration?</p></li>
 <li><p>A link in a custom layout?</p></li>
 </ul>
-<p>You may also need to do some detective work to figure out how these styles interact with your existing styles, particularly for links within code. Your best bet is to use the <a href="https://developer.mozilla.org/en-US/docs/Tools/Web_Console/Opening_the_Web_Console">web developer console</a> to figure out what’s going wrong. You’ll then need to figure out how to tweak <code>highlight.css</code> to override these styles. This is a pain, which is why hugodown ships with a couple of themes that are preconfigured.</p>
-<div id="highlight-js-inactivation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#highlight-js-inactivation" class="anchor"></a>highlight.js inactivation</h3>
+<p>You may also need to do some detective work to figure out how these styles interact with your existing styles, particularly for links within code. Your best bet is to use the <a href="https://developer.mozilla.org/en-US/docs/Tools/Web_Console/Opening_the_Web_Console" class="external-link">web developer console</a> to figure out what’s going wrong. You’ll then need to figure out how to tweak <code>highlight.css</code> to override these styles. This is a pain, which is why hugodown ships with a couple of themes that are preconfigured.</p>
+<div class="section level3">
+<h3 id="highlight-js-inactivation">highlight.js inactivation<a class="anchor" aria-label="anchor" href="#highlight-js-inactivation"></a>
+</h3>
 <p>If you are using an old hugo theme that uses highlight.js you may want to convert to server-side syntax highlighting. This is not required (and not important if you only use R code on your blog), but is a good idea if you show a variety of programming languages and want the code style to be as consistent as possible.</p>
 <p>From easiest to hardest, based on the theme you chose:</p>
 <ul>
@@ -182,9 +178,9 @@
 </ul>
 </div>
 </div>
-<div id="hugodown" class="section level2">
-<h2 class="hasAnchor">
-<a href="#hugodown" class="anchor"></a>hugodown</h2>
+<div class="section level2">
+<h2 id="hugodown">hugodown<a class="anchor" aria-label="anchor" href="#hugodown"></a>
+</h2>
 <p>hugodown also has its own configuration file, <code>_hugodown.yaml</code>. Currently this has one option:</p>
 <ul>
 <li>
@@ -204,11 +200,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="http://hadley.nz">Hadley Wickham</a>.</p>
+  <p></p>
+<p>Developed by Hadley Wickham.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
@@ -216,6 +214,8 @@
 
   
 
+
+  
 
   </body>
 </html>
