@@ -60,6 +60,8 @@ md_document <- function(fig_width = 7,
     input_rmd <<- input
     old_options <<- options(
       cli.unicode = TRUE,
+      cli.num_colors = 8L,
+      cli.dynamic = FALSE,
       crayon.enabled = TRUE
     )
     old_env <- set_envvar(c(RSTUDIO = 0))

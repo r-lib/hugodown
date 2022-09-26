@@ -8,7 +8,7 @@
 [1] "```{=html}\n{{< instagram BWNjjyYFxVx hidecaption >}}\n```\n"
 
 > embed_tweet("877500564405444608")
-[1] "```{=html}\n{{< tweet 877500564405444608 >}}\n```\n"
+[1] "```{=html}\n{{< tweet id='877500564405444608' >}}\n```\n"
 
 > embed_vimeo("146022717")
 [1] "```{=html}\n{{< vimeo 146022717 >}}\n```\n"
