@@ -42,7 +42,7 @@ test_that("output gets unicode and colour", {
 
 test_that("interweaving of code and output generates correct html", {
   rmd <- local_render(test_path("knit-hooks.Rmd"))
-  verify_output(test_path("test-md-document-hooks.txt"), cat_line(rmd$lines))
+  expect_snapshot_output(cat_line(rmd$lines))
 })
 
 test_that("markdown div syntax is converted to native divs", {
