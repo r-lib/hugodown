@@ -28,6 +28,7 @@ Imports:
     whisker,
     whoami,
     withr,
+    xml2,
     yaml
 Suggests: 
     covr,

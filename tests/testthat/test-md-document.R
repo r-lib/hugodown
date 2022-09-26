@@ -36,8 +36,10 @@ test_that("output gets unicode and colour", {
   skip_on_os("windows")
 
   rmd <- local_render(test_path("output.Rmd"))
-  expect_match(rmd$lines[[9]], "color: #0000BB")
-  expect_match(rmd$lines[[9]], "#&gt; \u2714")
+  code <- xpath_xml(rmd$xml, "//pre//code/span")
+
+  expect_equal(xpath_attr(code[[1]], "./span/span", "style"), "color: #0000BB;")
+  expect_equal(xpath_text(code[[2]], "."), "#> \u2714")
 })
 
 test_that("interweaving of code and output generates correct html", {
@@ -47,21 +49,22 @@ test_that("interweaving of code and output generates correct html", {
 
 test_that("markdown div syntax is converted to native divs", {
   rmd <- local_render(test_path("div.Rmd"))
-  expect_equal(sum(grepl("div", rmd$lines, fixed = TRUE)), 2)
+  expect_equal(xpath_attr(rmd$xml, "//div", "class"), "special")
 })
 
 test_that("emojis are preserved", {
   rmd <- local_render(test_path("emoji.Rmd"))
-  expect_equal(rmd$lines[[7]], ":smile_cat:")
+  expect_equal(xpath_text(rmd$xml, trim = TRUE), ":smile_cat:")
 })
 
 test_that("math is untransformed", {
   rmd <- local_render(test_path("math.Rmd"))
-  expect_equal(rmd$lines[[7]], "$a_1 + b_2$")
+  expect_equal(xpath_text(rmd$xml, trim = TRUE), "$a_1 + b_2$")
 })
 
 test_that("raw html is preserved", {
   rmd <- local_render(test_path("raw-html.Rmd"))
+
   expect_equal(rmd$lines[[7]], "<raw>")
   expect_equal(rmd$lines[[9]], "This is <raw>")
 })
@@ -92,7 +95,9 @@ test_that("html dependencies are captured", {
 
 test_that("curly operator is escaped", {
   rmd <- local_render(test_path("curly.Rmd"))
-  expect_snapshot_output(cat(rmd$lines[[9]]))
+
+  expect_match(rmd$lines[[9]], "&#123;")
+  expect_match(rmd$lines[[9]], "&#125;")
 })
 # helpers -----------------------------------------------------------------
 

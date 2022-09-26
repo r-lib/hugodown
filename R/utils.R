@@ -39,3 +39,20 @@ set_envvar <- function(envs, action = "replace") {
 
   invisible(old)
 }
+
+
+# helpers for testing -----------------------------------------------------
+
+xpath_xml <- function(x, xpath = ".") {
+  x <- xml2::xml_find_all(x, xpath)
+  structure(x, class = c("pkgdown_xml", class(x)))
+}
+xpath_attr <- function(x, xpath, attr) {
+  gsub("\r", "", xml2::xml_attr(xml2::xml_find_all(x, xpath), attr), fixed = TRUE)
+}
+xpath_text <- function(x, xpath = ".", trim = FALSE) {
+  xml2::xml_text(xml2::xml_find_all(x, xpath), trim = trim)
+}
+xpath_length <- function(x, xpath = ".") {
+  length(xml2::xml_find_all(x, xpath))
+}

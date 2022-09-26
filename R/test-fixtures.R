@@ -10,11 +10,15 @@ local_render <- function(path, env = parent.frame()) {
   rmarkdown::render(tmp_path, quiet = TRUE)
   out_path <- path_ext_set(tmp_path, "md")
 
+  lines <- brio::read_lines(out_path)
+  xml <- paste("<html>", paste0(lines[-(1:5)], collapse = "\n"), "</html>")
+
   list(
     src = path,
     dst = out_path,
     dir = path_dir(out_path),
-    lines = brio::read_lines(out_path)
+    lines = lines,
+    xml = xml2::read_html(xml)
   )
 }
 
