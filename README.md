@@ -3,7 +3,7 @@
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![R build status](https://github.com/r-lib/hugodown/workflows/R-CMD-check/badge.svg)](https://github.com/r-lib/hugodown/actions)
+[![R-CMD-check](https://github.com/r-lib/hugodown/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/r-lib/hugodown/actions/workflows/R-CMD-check.yaml)
 [![Codecov test coverage](https://codecov.io/gh/r-lib/hugodown/branch/master/graph/badge.svg)](https://codecov.io/gh/r-lib/hugodown?branch=master)
 <!-- badges: end -->
 
