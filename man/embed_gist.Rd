@@ -12,7 +12,7 @@ embed_gist(username, id, filename = NULL)
 
 embed_instagram(id, caption = TRUE)
 
-embed_tweet(id, username = "")
+embed_tweet(id, username = NULL)
 
 embed_vimeo(id)
 
@@ -41,8 +41,10 @@ inspecting the URL:
 These are wrappers that make it easy to generate
 \href{https://gohugo.io/content-management/shortcodes/}{hugo shortcodes} that
 make it easy to embed various types of media into your pages. You use from
-inline R code like:\preformatted{This tweet announced the release of hugo 0.24:
+inline R code like:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{This tweet announced the release of hugo 0.24:
 
 `R embed_tweet("877500564405444608")`
-}
+}\if{html}{\out{</div>}}
 }
