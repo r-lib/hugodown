@@ -37,7 +37,7 @@ test_that("output gets unicode and colour", {
 
   rmd <- local_render(test_path("output.Rmd"))
   expect_match(rmd$lines[[9]], "color: #0000BB")
-  expect_match(rmd$lines[[10]], "#&gt; \u2714")
+  expect_match(rmd$lines[[9]], "#&gt; \u2714")
 })
 
 test_that("interweaving of code and output generates correct html", {
