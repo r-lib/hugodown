@@ -88,7 +88,7 @@
 
       
 
-      </header><script src="config_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Configuration</h1>
@@ -114,19 +114,19 @@
 <ul>
 <li>
 <p>You must use the goldmark markdown renderer, and set <code>unsafe: true</code></p>
-<pre class="toml"><code>[markup]
-  defaultMarkdownHandler = "goldmark"
-  [markup.goldmark.renderer]
-    unsafe = true</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode toml"><code class="sourceCode toml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="dt">markup</span><span class="kw">]</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">defaultMarkdownHandler</span> <span class="op">=</span> <span class="st">"goldmark"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">[</span><span class="dt">markup</span><span class="kw">.</span><span class="dt">goldmark</span><span class="kw">.</span><span class="dt">renderer</span><span class="kw">]</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">unsafe</span> <span class="op">=</span> <span class="cn">true</span></span></code></pre></div>
 </li>
 <li>
 <p>For best syntax hightlighting results, you must use classes:</p>
-<pre class="toml"><code><span><span class="va">pygmentsUseClasses</span> <span class="op">=</span> <span class="va">true</span></span></code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode toml"><code class="sourceCode toml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">pygmentsUseClasses</span> <span class="op">=</span> <span class="cn">true</span></span></code></pre></div>
 <p>Then you’ll need to do some work on CSS side, see <a href="#syntax-highlighting">below</a> for details.</p>
 </li>
 <li>
 <p>We recommend ignoring knitr intermediates:</p>
-<pre class="toml"><code>ignoreFiles = ['\.Rmd$', '_files$', '_cache$', '\.knit\.md$', '\.utf8\.md$']</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode toml"><code class="sourceCode toml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">ignoreFiles</span> <span class="op">=</span> <span class="op">[</span><span class="st">'</span><span class="vs">\.Rmd$</span><span class="st">'</span><span class="op">,</span> <span class="st">'</span><span class="vs">_files$</span><span class="st">'</span><span class="op">,</span> <span class="st">'</span><span class="vs">_cache$</span><span class="st">'</span><span class="op">,</span> <span class="st">'</span><span class="vs">\.knit\.md$</span><span class="st">'</span><span class="op">,</span> <span class="st">'</span><span class="vs">\.utf8\.md$</span><span class="st">'</span><span class="op">]</span></span></code></pre></div>
 </li>
 <li>
 <p>To use html widgets, you must include the following Go template somewhere in the <code>&lt;head&gt;</code> layout file for your theme. This will help Hugo find the HTML dependencies needed to render the widget in a post. You may find this <a href="https://zwbetz.com/override-a-hugo-theme/" class="external-link">blog post</a> helpful for overriding Hugo layouts.</p>
@@ -141,24 +141,24 @@
 <h2 id="syntax-highlighting">Syntax highlighting<a class="anchor" aria-label="anchor" href="#syntax-highlighting"></a>
 </h2>
 <p>The hugo config above causes downlit/hugo to generate output html with the following structure:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">"highlight"</span><span class="kw">&gt;</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="kw">&lt;pre</span><span class="ot"> class=</span><span class="st">'chroma'</span><span class="kw">&gt;&lt;code</span><span class="ot"> class=</span><span class="st">'language-r'</span><span class="ot"> data-lang=</span><span class="st">'r'</span><span class="kw">&gt;</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a>    <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">'m'</span><span class="kw">&gt;</span>1<span class="kw">&lt;/span&gt;</span> <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">'o'</span><span class="kw">&gt;</span>+<span class="kw">&lt;/span&gt;</span> <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">'m'</span><span class="kw">&gt;</span>1<span class="kw">&lt;/span&gt;</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a>    <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">'c'</span><span class="kw">&gt;</span>#<span class="dv">&amp;gt;</span> [1] 2<span class="kw">&lt;/span&gt;</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a>  <span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="kw">&lt;/div&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">"highlight"</span><span class="kw">&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;pre</span> <span class="er">class</span><span class="ot">=</span><span class="st">'chroma'</span><span class="kw">&gt;&lt;code</span> <span class="er">class</span><span class="ot">=</span><span class="st">'language-r'</span> <span class="er">data-lang</span><span class="ot">=</span><span class="st">'r'</span><span class="kw">&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;span</span> <span class="er">class</span><span class="ot">=</span><span class="st">'m'</span><span class="kw">&gt;</span>1<span class="kw">&lt;/span&gt;</span> <span class="kw">&lt;span</span> <span class="er">class</span><span class="ot">=</span><span class="st">'o'</span><span class="kw">&gt;</span>+<span class="kw">&lt;/span&gt;</span> <span class="kw">&lt;span</span> <span class="er">class</span><span class="ot">=</span><span class="st">'m'</span><span class="kw">&gt;</span>1<span class="kw">&lt;/span&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;span</span> <span class="er">class</span><span class="ot">=</span><span class="st">'c'</span><span class="kw">&gt;</span>#<span class="dv">&amp;gt;</span> [1] 2<span class="kw">&lt;/span&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/div&gt;</span></span></code></pre></div>
 <p>To have that look good on your website, you need to defines styles for the CSS necessary classes. You can generate starter CSS with the code below, substituting <code>pygments</code> for the <a href="https://xyproto.github.io/splash/docs/longer/all.html" class="external-link">style of your choice</a>:</p>
 <pre><code>hugo gen chromastyles --style=pygments &gt; static/css/highlight.css</code></pre>
 <p>This generates a file containing definitions that look like this:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">/* Background */</span> <span class="fu">.chroma</span> {  }</span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="co">/* Other */</span> <span class="fu">.chroma</span> <span class="fu">.x</span> {  }</span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="co">/* Error */</span> <span class="fu">.chroma</span> <span class="fu">.err</span> {  }</span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="fu">...</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="co">/* Keyword */</span> <span class="fu">.chroma</span> <span class="fu">.k</span> { <span class="kw">color</span>: <span class="cn">#008000</span><span class="op">;</span> }</span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="fu">...</span></span>
-<span id="cb7-7"><a href="#cb7-7"></a><span class="co">/* LiteralNumber */</span> <span class="fu">.chroma</span> <span class="fu">.m</span> { <span class="kw">color</span>: <span class="cn">#666666</span> }</span>
-<span id="cb7-8"><a href="#cb7-8"></a><span class="fu">...</span></span>
-<span id="cb7-9"><a href="#cb7-9"></a><span class="co">/* Operator */</span> <span class="fu">.chroma</span> <span class="fu">.o</span> { <span class="kw">color</span>: <span class="cn">#666666</span> }</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* Background */</span> <span class="fu">.chroma</span> {  }</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">/* Other */</span> <span class="fu">.chroma</span> <span class="fu">.x</span> {  }</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">/* Error */</span> <span class="fu">.chroma</span> <span class="fu">.err</span> {  }</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">...</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">/* Keyword */</span> <span class="fu">.chroma</span> <span class="fu">.k</span> { <span class="kw">color</span>: <span class="cn">#008000</span><span class="op">;</span> }</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">...</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">/* LiteralNumber */</span> <span class="fu">.chroma</span> <span class="fu">.m</span> { <span class="kw">color</span>: <span class="cn">#666666</span> }</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">...</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">/* Operator */</span> <span class="fu">.chroma</span> <span class="fu">.o</span> { <span class="kw">color</span>: <span class="cn">#666666</span> }</span></code></pre></div>
 <p>Unfortunately, the correct location for <code>highlight.css</code> file varies by theme, so you’ll need to do a little detective work to figure out the best place to put it. Is it:</p>
 <ul>
 <li><p>A special file name?</p></li>
