@@ -11,9 +11,11 @@
     <div class="highlight">
     
     <pre class='chroma'><code class='language-r' data-lang='r'><span><span class='nv'>df</span> <span class='o'>&lt;-</span> <span class='nf'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='o'>(</span>x <span class='o'>=</span> <span class='m'>1</span><span class='o'>)</span></span>
-    <span><span class='nv'>df</span></span><span><span class='c'>#&gt;   x</span></span>
+    <span><span class='nv'>df</span></span>
+    <span><span class='c'>#&gt;   x</span></span>
     <span><span class='c'>#&gt; 1 1</span></span><span></span>
-    <span><span class='nf'>knitr</span><span class='nf'>::</span><span class='nf'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='o'>(</span><span class='nv'>df</span><span class='o'>)</span></span></code></pre>
+    <span><span class='nf'>knitr</span><span class='nf'>::</span><span class='nf'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='o'>(</span><span class='nv'>df</span><span class='o'>)</span></span>
+    </code></pre>
     
     |   x |
     |----:|
@@ -26,7 +28,10 @@
     <div class="highlight">
     
     <pre class='chroma'><code class='language-r' data-lang='r'><span><span class='c'># comment</span></span>
-    <span><span class='nf'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='o'>(</span><span class='s'>"print"</span><span class='o'>)</span></span><span><span class='c'>#&gt; [1] "print"</span></span><span><span class='nf'><a href='https://rdrr.io/r/base/message.html'>message</a></span><span class='o'>(</span><span class='s'>"message"</span><span class='o'>)</span></span><span><span class='c'>#&gt; message</span></span><span><span class='kr'><a href='https://rdrr.io/r/base/warning.html'>warning</a></span><span class='o'>(</span><span class='s'>"warning"</span><span class='o'>)</span></span><span><span class='c'>#&gt; Warning: warning</span></span></code></pre>
+    <span><span class='nf'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='o'>(</span><span class='s'>"print"</span><span class='o'>)</span></span>
+    <span><span class='c'>#&gt; [1] "print"</span></span><span><span class='nf'><a href='https://rdrr.io/r/base/message.html'>message</a></span><span class='o'>(</span><span class='s'>"message"</span><span class='o'>)</span></span>
+    <span><span class='c'>#&gt; message</span></span><span><span class='kr'><a href='https://rdrr.io/r/base/warning.html'>warning</a></span><span class='o'>(</span><span class='s'>"warning"</span><span class='o'>)</span></span>
+    <span><span class='c'>#&gt; Warning: warning</span></span></code></pre>
     
     </div>
     

@@ -23,6 +23,11 @@ test_that("tables use pipes", {
 test_that("code is linked/highlighted", {
   rmd <- local_render(test_path("code.Rmd"))
 
+  expect_equal(
+    xpath_text(rmd$xml, "(//pre)[1]"),
+    "1 + 1\n#> [1] 2"
+  )
+
   expect_equal(sum(grepl("<pre", rmd$lines, fixed = TRUE)), 2)
   expect_equal(sum(grepl("[`stats::median()`]", rmd$lines, fixed = TRUE)), 1)
 })
