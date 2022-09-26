@@ -19,7 +19,7 @@ md_document(
 \item{fig_retina}{Scaling to perform for retina displays. Defaults to
 \code{NULL} which performs no scaling. A setting of 2 will work for all
 widely used retina displays, but will also result in the output of
-\code{<img>} tags rather than markdown images due to the need to set the
+\verb{<img>} tags rather than markdown images due to the need to set the
 width of the image explicitly.}
 
 \item{tidyverse_style}{Use tidyverse knitr conventions? This sets

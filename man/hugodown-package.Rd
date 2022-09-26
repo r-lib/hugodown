@@ -6,11 +6,9 @@
 \alias{hugodown-package}
 \title{hugodown: Make websites with hugo and RMarkdown}
 \description{
-\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-hugodown is a minimal version of blogdown that
-    only supports hugo, and more clearly delineates the roles of RMarkdown
-    (turning .Rmd into .md) and hugo (turning .md into .html).
+hugodown is a minimal version of blogdown that only supports hugo, and more clearly delineates the roles of RMarkdown (turning .Rmd into .md) and hugo (turning .md into .html).
 }
 \seealso{
 Useful links:
