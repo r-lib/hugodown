@@ -25,7 +25,7 @@ test_that("code is linked/highlighted", {
 
   expect_equal(
     xpath_text(rmd$xml, "(//pre)[1]"),
-    "1 + 1\n#> [1] 2"
+    "1 + 1\n#> [1] 2\n"
   )
 
   expect_equal(sum(grepl("<pre", rmd$lines, fixed = TRUE)), 2)
@@ -44,7 +44,7 @@ test_that("output gets unicode and colour", {
   code <- xpath_xml(rmd$xml, "//pre//code/span")
 
   expect_equal(xpath_attr(code[[1]], "./span/span", "style"), "color: #0000BB;")
-  expect_equal(xpath_text(code[[2]], "."), "#> \u2714")
+  expect_equal(xpath_text(code[[3]], "."), "#> \u2714")
 })
 
 test_that("interweaving of code and output generates correct html", {
