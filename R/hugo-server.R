@@ -50,7 +50,7 @@ hugo_start <- function(site = ".",
     "--buildDrafts",
     "--buildFuture",
     if (auto_navigate) "--navigateToChanged",
-    if (render_to_disk) "--renderToDisk"
+    hugo_render_location(render_to_disk)
   )
   ps <- hugo_run_bg(path, args, stdout = "|", stderr = "2>&1")
   if (!ps$is_alive()) {
@@ -180,4 +180,27 @@ hugo_build <- function(site = ".",
 
   hugo_run(path, args, config)
   invisible()
+}
+
+hugo_render_location <- function(render_to_disk) {
+  hugo_version <- tryCatch(
+    hugo_version(),
+    error = function(e) hugo_release()[["version"]]
+  )
+  # https://discourse.gohugo.io/t/upgrading-to-go1-22-1-hugo-0-124-1-causes-multiple-errors/49013/8
+  # "With v0.123.0 and later, Hugo’s development server renders to disk in the public directory"
+
+  newer_hugo <- (utils::compareVersion("0.123.0", hugo_version) <= 0)
+
+  if (!newer_hugo) {
+    if (render_to_disk) {
+      return("--renderToDisk")
+    } else {
+      return("")
+    }
+  }
+
+  if (!render_to_disk) {
+    "--renderToMemory"
+  }
 }
